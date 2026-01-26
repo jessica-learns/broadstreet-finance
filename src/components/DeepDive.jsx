@@ -1,0 +1,77 @@
+import React, { useState } from 'react';
+import { Card } from './ui/Card';
+import { NeumorphicButton } from './ui/Button';
+import { Badge } from './ui/Badge';
+import { Sparkles, BookOpen, Share2, Download, ArrowRight } from 'lucide-react';
+
+export function DeepDive() {
+    const [generating, setGenerating] = useState(false);
+    const [ticker, setTicker] = useState('NVDA');
+
+    return (
+        <Card className="rounded-[32px] relative overflow-hidden">
+            {/* Decorator Background */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+
+            <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-4">
+                    <div className="p-3 bg-surface shadow-neumorph rounded-2xl text-primary">
+                        <BookOpen size={24} />
+                    </div>
+                    <div>
+                        <h2 className="text-2xl font-bold text-primary">Deep Dive Report</h2>
+                        <p className="text-secondary text-sm font-medium">Powered by Broadstreet AI x NotebookLM</p>
+                    </div>
+                </div>
+                <div className="flex gap-3">
+                    <NeumorphicButton className="p-3">
+                        <Share2 size={18} />
+                    </NeumorphicButton>
+                    <NeumorphicButton className="p-3">
+                        <Download size={18} />
+                    </NeumorphicButton>
+                </div>
+            </div>
+
+            {/* Report Content Placeholder */}
+            <div className="space-y-6">
+                {/* Ticker Selector Helper */}
+                <div className="flex gap-4 p-1 bg-surface shadow-neumorph-pressed rounded-2xl transition-all focus-within:ring-2 focus-within:ring-primary/20">
+                    <input
+                        type="text"
+                        value={ticker}
+                        onChange={(e) => setTicker(e.target.value)}
+                        className="flex-1 bg-transparent border-none outline-none px-4 py-3 text-primary font-bold placeholder:text-secondary/50 tracking-wide"
+                        placeholder="Enter ticker or research question..."
+                    />
+                    <button
+                        onClick={() => setGenerating(true)}
+                        disabled={generating}
+                        className="px-6 py-2 bg-primary text-white rounded-xl font-semibold shadow-lg shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                    >
+                        <Sparkles size={16} className={generating ? "animate-spin" : ""} />
+                        <span>{generating ? "Deep Diving..." : "Generate Report"}</span>
+                    </button>
+                </div>
+
+                {/* Report Section */}
+                <div className="p-6 bg-surface shadow-neumorph rounded-3xl border border-white/50">
+                    <div className="flex justify-between items-start mb-4">
+                        <Badge variant="navy">Analyst Note</Badge>
+                        <span className="text-xs text-secondary font-bold uppercase tracking-wider">Generated 2m ago</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-primary mb-3">Supply Chain Constraints in CoWoS Pricing</h3>
+                    <p className="text-secondary leading-relaxed mb-6">
+                        Latest channel checks indicate TSMC's CoWoS capacity remains the primary bottleneck for H100 delivery.
+                        NotebookLM analysis of Q3 transcripts suggests a 15% pricing power increase for packaging vendors...
+                    </p>
+
+                    <div className="flex items-center gap-2 text-accent font-bold text-sm hover:underline cursor-pointer">
+                        <span>View Sources (4 Notebooks)</span>
+                        <ArrowRight size={16} />
+                    </div>
+                </div>
+            </div>
+        </Card>
+    );
+}
