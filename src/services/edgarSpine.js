@@ -322,40 +322,34 @@ export async function getFinancialTruth(ticker) {
                         const sentences = sectionText.match(/[A-Z][^.!?]{30,}[.!?]/g);
 
                         if (sentences && sentences.length > 0) {
-                            // Find a sentence that describes the business
+                            // Collect multiple valid sentences up to ~600 chars
+                            const collectedSentences = [];
+                            let totalLength = 0;
+
                             for (const sentence of sentences) {
                                 const lower = sentence.toLowerCase();
+
                                 // Skip boilerplate sentences
                                 if (lower.includes('table of contents')) continue;
                                 if (lower.includes('page intentionally')) continue;
                                 if (lower.includes('see item')) continue;
+                                if (lower.includes('form 10-k')) continue;
+                                if (lower.includes('annual report')) continue;
                                 if (/^\s*\d/.test(sentence)) continue;
+                                if (sentence.length < 40) continue;
 
-                                // Prefer sentences with business description keywords
-                                const isDescriptive =
-                                    lower.includes(' is a ') ||
-                                    lower.includes(' are a ') ||
-                                    lower.includes(' provides ') ||
-                                    lower.includes(' develops ') ||
-                                    lower.includes(' designs ') ||
-                                    lower.includes(' manufactures ') ||
-                                    lower.includes(' offers ') ||
-                                    lower.includes(' delivers ') ||
-                                    lower.includes(' company ') ||
-                                    lower.includes(' business ') ||
-                                    lower.includes(' products ') ||
-                                    lower.includes(' solutions ') ||
-                                    lower.includes(' platform ');
-
-                                if (isDescriptive && sentence.length > 50) {
-                                    bestSnippet = sentence;
-                                    break;
+                                // Add sentence if we have room
+                                if (totalLength + sentence.length < 650) {
+                                    collectedSentences.push(sentence);
+                                    totalLength += sentence.length + 1;
                                 }
+
+                                // Stop after collecting enough
+                                if (totalLength > 500) break;
                             }
 
-                            // If no descriptive sentence found, take first valid sentence
-                            if (!bestSnippet && sentences[0].length > 50) {
-                                bestSnippet = sentences[0];
+                            if (collectedSentences.length > 0) {
+                                bestSnippet = collectedSentences.join(' ');
                             }
                         }
 
