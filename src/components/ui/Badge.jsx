@@ -3,10 +3,10 @@ import { cn } from '../../lib/utils';
 
 export function Badge({ variant = 'default', className, children }) {
     const variants = {
-        default: "bg-surface text-secondary shadow-neumorph",
-        navy: "bg-primary text-white shadow-xl shadow-primary/30 border border-primary/10",
-        accent: "bg-accent text-white shadow-xl shadow-accent/30 border border-accent/10",
-        outline: "border-2 border-accent text-accent bg-transparent",
+        default: "bg-surface text-secondary shadow-neumorph-sm",
+        primary: "bg-primary text-white",
+        accent: "bg-accent text-white",
+        outline: "border border-primary/20 text-primary bg-transparent",
     };
 
     return (
