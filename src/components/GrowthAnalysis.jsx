@@ -75,12 +75,12 @@ export function GrowthAnalysis() {
         <>
             {/* Chart 1: Revenue (Absolute) */}
             <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
-                <div className="mb-3">
-                    <h3 className="text-xs font-black text-secondary uppercase tracking-widest">Revenue</h3>
+                <div className="mb-3 text-center">
+                    <h3 className="text-xs font-black text-primary uppercase tracking-widest">Revenue</h3>
                 </div>
                 <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={revenueAbsoluteData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                        <BarChart data={revenueAbsoluteData} margin={{ top: 5, right: 5, left: -20, bottom: 15 }}>
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v.toFixed(0)}B`} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `$${v.toFixed(1)}B`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
@@ -96,12 +96,12 @@ export function GrowthAnalysis() {
 
             {/* Chart 2: Revenue Growth */}
             <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
-                <div className="mb-3">
-                    <h3 className="text-xs font-black text-secondary uppercase tracking-widest">Revenue Growth</h3>
+                <div className="mb-3 text-center">
+                    <h3 className="text-xs font-black text-primary uppercase tracking-widest">Revenue Growth</h3>
                 </div>
                 <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={revenueGrowthData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                        <BarChart data={revenueGrowthData} margin={{ top: 5, right: 5, left: -20, bottom: 15 }}>
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
@@ -118,14 +118,14 @@ export function GrowthAnalysis() {
 
             {/* Chart 3: Margin Trajectory */}
             <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
-                <div className="mb-3">
-                    <h3 className="text-xs font-black text-secondary uppercase tracking-widest">Margin Levels</h3>
+                <div className="mb-3 text-center">
+                    <h3 className="text-xs font-black text-primary uppercase tracking-widest">Margin Levels</h3>
                 </div>
                 <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={chartData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
+                        <LineChart data={chartData} margin={{ top: 5, right: 5, left: 0, bottom: 20 }}>
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
-                            <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(0)}%`} domain={['auto', 'auto']} />
+                            <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(0)}%`} domain={['auto', 'auto']} tickCount={5} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
                             <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeOpacity={0.4} strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
                             <Line type="monotone" dataKey="opMargin" name="Operating" stroke="#0ea5e9" strokeOpacity={0.7} strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
@@ -137,12 +137,12 @@ export function GrowthAnalysis() {
 
             {/* Chart 4: Margin Change (in percentage points) */}
             <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
-                <div className="mb-3">
-                    <h3 className="text-xs font-black text-secondary uppercase tracking-widest">Margin Change</h3>
+                <div className="mb-3 text-center">
+                    <h3 className="text-xs font-black text-primary uppercase tracking-widest">Margin Change</h3>
                 </div>
                 <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={marginDeltas} margin={{ top: 5, right: 5, left: 5, bottom: 0 }}>
+                        <BarChart data={marginDeltas} margin={{ top: 5, right: 5, left: 5, bottom: 15 }}>
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(1)}%`} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(2)}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
