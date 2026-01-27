@@ -72,7 +72,7 @@ export function TickerInput() {
                     <div className="border-t border-primary/5 pt-4 mb-4">
                         <div className="text-center mb-3">
                             <div className="text-[11px] font-black text-secondary uppercase tracking-widest">Latest Quarter</div>
-                            {latestPeriod && <div className="text-sm font-black text-primary uppercase">{latestPeriod}</div>}
+                            {latestPeriod && <div className="text-sm font-black text-accent uppercase">{latestPeriod}</div>}
                         </div>
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
