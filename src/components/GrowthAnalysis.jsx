@@ -27,10 +27,10 @@ const NeumorphicTooltip = ({ active, payload, label, formatter }) => {
     return null;
 };
 
-const formatQuarter = (period) => {
+const formatPeriod = (period) => {
     const [year, month] = period.split('-');
-    const q = Math.ceil(parseInt(month) / 3);
-    return `Q${q}'${year.slice(2)}`;
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return `${months[parseInt(month) - 1]}'${year.slice(2)}`;
 };
 
 // Mini Sparkline component
@@ -163,7 +163,7 @@ export function GrowthAnalysis() {
                                         tick={chartAxisStyle}
                                         axisLine={false}
                                         tickLine={false}
-                                        tickFormatter={formatQuarter}
+                                        tickFormatter={formatPeriod}
                                     />
                                     <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
                                     <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
@@ -191,7 +191,7 @@ export function GrowthAnalysis() {
                                         tick={chartAxisStyle}
                                         axisLine={false}
                                         tickLine={false}
-                                        tickFormatter={formatQuarter}
+                                        tickFormatter={formatPeriod}
                                     />
                                     <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(0)}%`} domain={['auto', 'auto']} />
                                     <Tooltip content={<NeumorphicTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
@@ -216,7 +216,7 @@ export function GrowthAnalysis() {
                                         tick={chartAxisStyle}
                                         axisLine={false}
                                         tickLine={false}
-                                        tickFormatter={formatQuarter}
+                                        tickFormatter={formatPeriod}
                                     />
                                     <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v > 0 ? '+' : ''}${v}`} />
                                     <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v} bps`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
