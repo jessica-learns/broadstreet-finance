@@ -4,10 +4,10 @@ import { cn } from '../lib/utils';
 import { ShieldAlert } from 'lucide-react';
 
 const risks = [
-    { label: "Japan Yield Curve Control", status: "red" },
-    { label: "Taiwan Strait Activity", status: "yellow" },
-    { label: "Eurozone Credit Spreads", status: "green" },
-    { label: "US Initial Jobless Claims", status: "green" },
+    { label: "Japan Yield Curve Control", status: "high" },
+    { label: "Taiwan Strait Activity", status: "medium" },
+    { label: "Eurozone Credit Spreads", status: "low" },
+    { label: "US Initial Jobless Claims", status: "low" },
 ];
 
 export function RiskRadar() {
@@ -26,9 +26,9 @@ export function RiskRadar() {
                         <span className="text-sm font-bold text-slate-600">{risk.label}</span>
                         <div className={cn(
                             "w-3 h-3 rounded-full",
-                            risk.status === 'red' && "bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.6)] animate-pulse",
-                            risk.status === 'yellow' && "bg-yellow-400",
-                            risk.status === 'green' && "bg-primary"
+                            risk.status === 'high' && "bg-accent/80",
+                            risk.status === 'medium' && "bg-secondary",
+                            risk.status === 'low' && "bg-primary/30"
                         )} />
                     </div>
                 ))}
