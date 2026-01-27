@@ -278,71 +278,167 @@ export async function getFinancialTruth(ticker) {
                 CONSTRAINT_KEYWORDS.forEach(word => {
                     const regex = new RegExp(word, 'g');
                     const matches = lowerText.match(regex);
-                    if (matches) keywordCount += matches.length;
-                });
+                    // Extract business description from Item 1
+                    if (docText) {
+                        // Step 1: Clean HTML thoroughly
+                        let text = docText
+                            .replace(/&#\d+;/g, ' ')           // Numeric HTML entities (&#160; etc)
+                            .replace(/&nbsp;/g, ' ')            // Non-breaking spaces
+                            .replace(/&amp;/g, '&')             // Ampersands
+                            .replace(/&[a-z]+;/gi, ' ')         // Other named entities
+                            .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')  // Remove style blocks
+                            .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '') // Remove script blocks
+                            .replace(/<[^>]*>/g, ' ')           // Remove all HTML tags
+                            .replace(/\s+/g, ' ')               // Normalize whitespace
+                            .trim();
 
-                // Extract first 200 chars as business description
-                if (docText) {
-                    const textContent = docText.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-                    businessDescription = textContent.length > 200
-                        ? textContent.slice(0, 197) + '...'
-                        : textContent;
+                        // Step 2: Find the ACTUAL Item 1 Business section (not table of contents)
+                        // TOC entries look like: "Item 1. Business    13"
+                        // Real section looks like: "Item 1. Business [paragraph of text]"
+
+                        // Split on "Item 1" variations and find the one with substantial content
+                        const sections = text.split(/item\s*1[.\s]+business/i);
+
+                        let bestSnippet = '';
+
+                        for (let i = 1; i < sections.length; i++) {
+                            const section = sections[i].trim();
+
+                            // Skip if this looks like TOC (starts with numbers or "Item 1A" within 50 chars)
+                            const first50 = section.slice(0, 50);
+                            if (/^\s*\d{1,3}\s/.test(first50)) continue;  // Starts with page number
+                            if (/item\s*1[a-c]/i.test(first50)) continue; // TOC listing
+
+                            // Get text until next Item section
+                            const nextItemMatch = section.search(/item\s*1[a-c]|item\s*2/i);
+                            const sectionText = nextItemMatch > 0
+                                ? section.slice(0, nextItemMatch)
+                                : section.slice(0, 1000);
+
+                            // Look for a real sentence (starts with capital, has verb patterns)
+                            const sentences = sectionText.match(/[A-Z][^.!?]{30,}[.!?]/g);
+
+                            if (sentences && sentences.length > 0) {
+                                // Find a sentence that describes the business
+                                for (const sentence of sentences) {
+                                    const lower = sentence.toLowerCase();
+                                    // Skip boilerplate sentences
+                                    if (lower.includes('table of contents')) continue;
+                                    if (lower.includes('page intentionally')) continue;
+                                    if (lower.includes('see item')) continue;
+                                    if (/^\s*\d/.test(sentence)) continue;
+
+                                    // Prefer sentences with business description keywords
+                                    const isDescriptive =
+                                        lower.includes(' is a ') ||
+                                        lower.includes(' are a ') ||
+                                        lower.includes(' provides ') ||
+                                        lower.includes(' develops ') ||
+                                        lower.includes(' designs ') ||
+                                        lower.includes(' manufactures ') ||
+                                        lower.includes(' offers ') ||
+                                        lower.includes(' delivers ') ||
+                                        lower.includes(' company ') ||
+                                        lower.includes(' business ') ||
+                                        lower.includes(' products ') ||
+                                        lower.includes(' solutions ') ||
+                                        lower.includes(' platform ');
+
+                                    if (isDescriptive && sentence.length > 50) {
+                                        bestSnippet = sentence;
+                                        break;
+                                    }
+                                }
+
+                                // If no descriptive sentence found, take first valid sentence
+                                if (!bestSnippet && sentences[0].length > 50) {
+                                    bestSnippet = sentences[0];
+                                }
+                            }
+
+                            if (bestSnippet) break;
+                        }
+
+                        // Step 3: Fallback - search entire doc for company description patterns
+                        if (!bestSnippet || bestSnippet.length < 50) {
+                            const companyPatterns = [
+                                /NVIDIA[^.]*is\s+a[n]?\s+[^.]{30,200}\./i,
+                                /(?:the\s+)?company\s+(?:is|was)\s+[^.]{30,200}\./i,
+                                /we\s+are\s+a[n]?\s+[^.]{30,200}\./i,
+                                /(?:designs?|develops?|manufactures?|provides?)\s+[^.]{30,150}(?:products?|solutions?|services?|platforms?)[^.]*\./i
+                            ];
+
+                            for (const pattern of companyPatterns) {
+                                const match = text.match(pattern);
+                                if (match && match[0].length > 50) {
+                                    bestSnippet = match[0];
+                                    break;
+                                }
+                            }
+                        }
+
+                        // Step 4: Final cleanup and truncation
+                        if (bestSnippet) {
+                            bestSnippet = bestSnippet.replace(/\s+/g, ' ').trim();
+                            businessDescription = bestSnippet.length > 280
+                                ? bestSnippet.slice(0, 277) + '...'
+                                : bestSnippet;
+                        }
+                    }
+                } catch (e) {
+                    console.warn("Failed to fetch/parse 10-K text", e);
                 }
             }
-        } catch (e) {
-            console.warn("Failed to fetch/parse 10-K text", e);
+
+            if (keywordCount > 5) {
+                if (isRisingCapex) sentiment = "Fixing It (High Conviction)";
+                else sentiment = "Low Conviction";
+            } else {
+                if (capexIntensity > 0.15) sentiment = "Capital Intensive";
+                else sentiment = "Steady State";
+            }
+
+            // Return final structure
+            const result = {
+                ticker,
+                metrics: {
+                    capexIntensity,
+                    operatingMargin: chartData[chartData.length - 1]?.opMargin || 0,
+                    revenue: chartData[chartData.length - 1]?.revenue || 0,
+                    grossMargin: chartData[chartData.length - 1]?.grossMargin || 0,
+                    netMargin: chartData[chartData.length - 1]?.netMargin || 0,
+                },
+                evidence: {
+                    keywordCount,
+                    latest10K: form10kIndex !== -1,
+                    sentiment,
+                    isRisingCapex,
+                    businessDescription,
+                },
+                chartData,
+                marginDeltas,
+                revenueGrowthData,
+                revenueAbsoluteData,
+                fetchedAt: Date.now(),
+            };
+
+            // Cache before returning
+            cache.companyData.set(ticker, { data: result, expiry: Date.now() + COMPANY_DATA_TTL });
+
+            return result;
         }
-    }
-
-    if (keywordCount > 5) {
-        if (isRisingCapex) sentiment = "Fixing It (High Conviction)";
-        else sentiment = "Low Conviction";
-    } else {
-        if (capexIntensity > 0.15) sentiment = "Capital Intensive";
-        else sentiment = "Steady State";
-    }
-
-    // Return final structure
-    const result = {
-        ticker,
-        metrics: {
-            capexIntensity,
-            operatingMargin: chartData[chartData.length - 1]?.opMargin || 0,
-            revenue: chartData[chartData.length - 1]?.revenue || 0,
-            grossMargin: chartData[chartData.length - 1]?.grossMargin || 0,
-            netMargin: chartData[chartData.length - 1]?.netMargin || 0,
-        },
-        evidence: {
-            keywordCount,
-            latest10K: form10kIndex !== -1,
-            sentiment,
-            isRisingCapex,
-            businessDescription,
-        },
-        chartData,
-        marginDeltas,
-        revenueGrowthData,
-        revenueAbsoluteData,
-        fetchedAt: Date.now(),
-    };
-
-    // Cache before returning
-    cache.companyData.set(ticker, { data: result, expiry: Date.now() + COMPANY_DATA_TTL });
-
-    return result;
-}
 
 export function invalidateCache(ticker = null) {
-    if (ticker) {
-        cache.companyData.delete(ticker);
-    } else {
-        cache.companyData.clear();
-    }
-}
+            if (ticker) {
+                cache.companyData.delete(ticker);
+            } else {
+                cache.companyData.clear();
+            }
+        }
 
-export function getCacheStatus() {
-    return {
-        tickerMapCached: !!cache.tickerMap,
-        cachedTickers: Array.from(cache.companyData.keys()),
-    };
-}
+        export function getCacheStatus() {
+            return {
+                tickerMapCached: !!cache.tickerMap,
+                cachedTickers: Array.from(cache.companyData.keys()),
+            };
+        }
