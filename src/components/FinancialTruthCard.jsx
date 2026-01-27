@@ -82,22 +82,56 @@ export function FinancialTruthCard({ ticker }) {
                 <div className="flex-1 flex flex-col space-y-8 relative z-10">
 
                     {/* Hero Grid: High Signal Metrics */}
+                    {/* Hero Grid: High Signal Metrics */}
                     <div className="grid grid-cols-4 gap-4">
+                        {/* Revenue */}
                         <div className="p-6 rounded-3xl bg-surface shadow-neumorph">
-                            <div className="text-[10px] text-secondary font-bold uppercase tracking-wider mb-2">Revenue</div>
-                            <div className="text-2xl font-black text-primary">{fmtB(latestQ.revenue)}</div>
+                            <div className="text-xs text-secondary font-bold uppercase tracking-wider mb-2">Revenue</div>
+                            <div className="text-2xl font-black text-primary mb-1">{fmtB(latestQ.revenue)}</div>
+                            {previousQ && (
+                                <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.growth >= 0 ? "text-emerald-600" : "text-red-500"}`}>
+                                    {latestQ.growth > 0 ? "▲" : latestQ.growth < 0 ? "▼" : ""}
+                                    {Math.abs(latestQ.growth * 100).toFixed(1)}% QoQ
+                                </div>
+                            )}
                         </div>
+
+                        {/* Gross Margin */}
                         <div className="p-6 rounded-3xl bg-surface shadow-neumorph">
-                            <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-2">Gross</div>
-                            <div className="text-2xl font-black text-slate-700">{fmtP(latestQ.grossMargin)}</div>
+                            <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-2">Gross</div>
+                            <div className="text-2xl font-black text-slate-700 mb-1">{fmtP(latestQ.grossMargin)}</div>
+                            {previousQ && (
+                                <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.grossMargin >= previousQ.grossMargin ? "text-emerald-600" : "text-red-500"}`}>
+                                    {latestQ.grossMargin >= previousQ.grossMargin ? "▲" : "▼"}
+                                    {Math.abs((latestQ.grossMargin - previousQ.grossMargin) * 10000).toFixed(0)} bps QoQ
+                                </div>
+                            )}
                         </div>
+
+                        {/* Operating Margin */}
                         <div className="p-6 rounded-3xl bg-surface shadow-neumorph">
-                            <div className="text-[10px] text-secondary font-bold uppercase tracking-wider mb-2">Operating</div>
-                            <div className="text-2xl font-black text-primary">{fmtP(latestQ.opMargin)}</div>
+                            <div className="text-xs text-secondary font-bold uppercase tracking-wider mb-2">Operating</div>
+                            <div className="text-2xl font-black text-primary mb-1">{fmtP(latestQ.opMargin)}</div>
+                            {previousQ && (
+                                <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.opMargin >= previousQ.opMargin ? "text-emerald-600" : "text-red-500"}`}>
+                                    {latestQ.opMargin >= previousQ.opMargin ? "▲" : "▼"}
+                                    {Math.abs((latestQ.opMargin - previousQ.opMargin) * 10000).toFixed(0)} bps QoQ
+                                </div>
+                            )}
                         </div>
+
+                        {/* Net Margin */}
                         <div className="p-6 rounded-3xl bg-surface shadow-neumorph flex flex-col justify-between">
-                            <div className="text-[10px] text-secondary font-bold uppercase tracking-wider mb-2">Net</div>
-                            <div className="text-2xl font-black text-primary">{fmtP(latestQ.netMargin)}</div>
+                            <div>
+                                <div className="text-xs text-secondary font-bold uppercase tracking-wider mb-2">Net</div>
+                                <div className="text-2xl font-black text-primary mb-1">{fmtP(latestQ.netMargin)}</div>
+                                {previousQ && (
+                                    <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.netMargin >= previousQ.netMargin ? "text-emerald-600" : "text-red-500"}`}>
+                                        {latestQ.netMargin >= previousQ.netMargin ? "▲" : "▼"}
+                                        {Math.abs((latestQ.netMargin - previousQ.netMargin) * 10000).toFixed(0)} bps QoQ
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
 
@@ -105,7 +139,7 @@ export function FinancialTruthCard({ ticker }) {
                     <div className="flex-1 min-h-[250px] w-full relative group">
                         {/* KPI Title */}
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity bg-surface/50 backdrop-blur-md border border-white/50 rounded-full py-1 px-4 shadow-sm">
-                            <span className="text-[10px] font-bold uppercase tracking-widest text-secondary">
+                            <span className="text-xs font-bold uppercase tracking-widest text-secondary">
                                 Revenue (Bars) vs Margins (Lines)
                             </span>
                         </div>
@@ -146,34 +180,34 @@ export function FinancialTruthCard({ ticker }) {
                                     content={({ active, payload, label }) => {
                                         if (active && payload && payload.length) {
                                             return (
-                                                <div className="bg-surface/90 backdrop-blur-xl shadow-2xl border border-white/50 rounded-xl p-4 text-xs min-w-[180px]">
-                                                    <div className="font-bold text-primary mb-3 text-sm border-b border-primary/5 pb-2">{label}</div>
+                                                <div className="bg-surface/95 backdrop-blur-xl shadow-2xl border border-white/50 rounded-2xl p-6 text-sm min-w-[220px]">
+                                                    <div className="font-bold text-primary mb-4 text-base border-b border-primary/10 pb-3">{label}</div>
 
                                                     {/* Revenue Section */}
-                                                    <div className="flex justify-between items-center mb-3">
-                                                        <span className="text-secondary font-medium">Revenue</span>
-                                                        <span className="font-bold text-sky-500 text-sm">{fmtB(payload[0].value)}</span>
+                                                    <div className="flex justify-between items-center mb-4">
+                                                        <span className="text-secondary font-medium text-sm">Revenue</span>
+                                                        <span className="font-bold text-primary text-base">{fmtB(payload[0].value)}</span>
                                                     </div>
 
                                                     {/* Margins Section */}
-                                                    <div className="space-y-1.5">
-                                                        <div className="flex justify-between items-center text-slate-500">
-                                                            <span>Gross</span>
-                                                            <span className="font-bold text-slate-700">{fmtP(payload.find(p => p.dataKey === 'grossMargin')?.value || 0)}</span>
+                                                    <div className="space-y-3">
+                                                        <div className="flex justify-between items-center">
+                                                            <span className="text-secondary font-medium">Gross</span>
+                                                            <span className="font-bold text-primary text-sm">{fmtP(payload[0].payload.grossMargin)}</span>
                                                         </div>
-                                                        <div className="flex justify-between items-center text-primary">
-                                                            <span>Operating</span>
-                                                            <span className="font-bold text-primary">{fmtP(payload.find(p => p.dataKey === 'opMargin')?.value || 0)}</span>
+                                                        <div className="flex justify-between items-center">
+                                                            <span className="text-secondary font-medium">Operating</span>
+                                                            <span className="font-bold text-primary text-sm">{fmtP(payload[0].payload.opMargin)}</span>
                                                         </div>
-                                                        <div className="flex justify-between items-center text-orange-500">
-                                                            <span className="font-bold">Net</span>
-                                                            <span className="font-bold text-orange-600">{fmtP(payload.find(p => p.dataKey === 'netMargin')?.value || 0)}</span>
+                                                        <div className="flex justify-between items-center">
+                                                            <span className="text-secondary font-medium">Net</span>
+                                                            <span className="font-bold text-primary text-sm">{fmtP(payload[0].payload.netMargin)}</span>
                                                         </div>
-                                                        {payload[1] && (
-                                                            <div className="flex justify-between items-center text-secondary">
-                                                                <span className="font-medium">Growth (QoQ)</span>
-                                                                <span className={`font-bold text-sm ${payload[1].value >= 0 ? 'text-primary' : 'text-red-500'}`}>
-                                                                    {payload[1].value > 0 ? '+' : ''}{(payload[1].value * 100).toFixed(1)}%
+                                                        {payload[0].payload.growth !== undefined && (
+                                                            <div className="flex justify-between items-center pt-3 border-t border-primary/5 mt-3">
+                                                                <span className="text-secondary font-medium">Growth (QoQ)</span>
+                                                                <span className={`font-bold text-base ${payload[0].payload.growth >= 0 ? 'text-primary' : 'text-slate-500'}`}>
+                                                                    {payload[0].payload.growth > 0 ? '+' : ''}{(payload[0].payload.growth * 100).toFixed(1)}%
                                                                 </span>
                                                             </div>
                                                         )}
@@ -250,15 +284,15 @@ export function FinancialTruthCard({ ticker }) {
                         <div className="flex gap-4">
                             <div className="flex items-center gap-1.5 grayscale opacity-60">
                                 <div className="w-2 h-0.5 bg-slate-400" />
-                                <span className="text-[10px] font-bold uppercase text-secondary">Gross</span>
+                                <span className="text-xs font-bold uppercase text-secondary">Gross</span>
                             </div>
                             <div className="flex items-center gap-1.5">
                                 <div className="w-2 h-0.5 bg-sky-500" />
-                                <span className="text-[10px] font-bold uppercase text-sky-600">Op</span>
+                                <span className="text-xs font-bold uppercase text-sky-600">Op</span>
                             </div>
                             <div className="flex items-center gap-1.5">
                                 <div className="w-2 h-1 rounded-full bg-orange-500" />
-                                <span className="text-[10px] font-bold uppercase text-orange-600">Net</span>
+                                <span className="text-xs font-bold uppercase text-orange-600">Net</span>
                             </div>
                         </div>
                     </div>
