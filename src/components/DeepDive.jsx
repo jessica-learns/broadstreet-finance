@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
-import { Card } from './ui/Card';
-import { NeumorphicButton } from './ui/Button';
-import { Badge } from './ui/Badge';
-import { Sparkles, BookOpen, Share2, Download, ArrowRight } from 'lucide-react';
+import { useDashboard } from '../context/DashboardContext';
 
 export function DeepDive() {
-    const [generating, setGenerating] = useState(false);
-    const [ticker, setTicker] = useState('NVDA');
+    const { selectedTicker, fetchStock, loading } = useDashboard();
+    const [localTicker, setLocalTicker] = useState(selectedTicker);
+
+    // Sync local ticker if selectedTicker changes externally
+    React.useEffect(() => {
+        setLocalTicker(selectedTicker);
+    }, [selectedTicker]);
+
+    const handleGenerate = () => {
+        if (localTicker !== selectedTicker) {
+            fetchStock(localTicker);
+        }
+    };
 
     return (
         <Card className="rounded-[32px] relative overflow-hidden">
@@ -39,19 +46,19 @@ export function DeepDive() {
                 <div className="flex gap-4 p-2 bg-surface shadow-neumorph-pressed rounded-full transition-all focus-within:ring-2 focus-within:ring-primary/20">
                     <input
                         type="text"
-                        value={ticker}
-                        onChange={(e) => setTicker(e.target.value)}
+                        value={localTicker}
+                        onChange={(e) => setLocalTicker(e.target.value)}
                         className="flex-1 bg-transparent border-none outline-none px-4 py-2 text-primary font-bold placeholder:text-secondary/50 tracking-wide text-sm"
                         placeholder="Enter ticker or research question..."
                     />
                     <NeumorphicButton
                         variant="solid"
-                        onClick={() => setGenerating(true)}
-                        disabled={generating}
+                        onClick={handleGenerate}
+                        disabled={loading}
                         className="flex items-center gap-2 px-3 py-1.5 text-xs hover:scale-105 active:scale-95 transition-transform duration-200"
                     >
-                        <Sparkles size={16} className={generating ? "animate-spin" : ""} />
-                        <span>{generating ? "Deep Diving..." : "Generate Report"}</span>
+                        <Sparkles size={16} className={loading ? "animate-spin" : ""} />
+                        <span>{loading ? "Deep Diving..." : "Generate Report"}</span>
                     </NeumorphicButton>
                 </div>
 

@@ -1,34 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Card } from './ui/Card';
 import { Badge } from './ui/Badge';
-import { getFinancialTruth } from '../services/edgarSpine';
 import { ComposedChart, Bar, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Loader2, AlertTriangle, CheckCircle2 } from 'lucide-react';
+import { useDashboard } from '../context/DashboardContext';
 
-export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 0.8 }) {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
+    const { selectedTicker: ticker, stockData, loading, error } = useDashboard();
 
-    useEffect(() => {
-        if (!ticker || ticker.length < 2) return;
-
-        async function fetchData() {
-            setLoading(true);
-            setError(null);
-            try {
-                const result = await getFinancialTruth(ticker);
-                setData(result);
-            } catch (e) {
-                console.error(e);
-                setError("Could not fetch SEC data. Ticker might be invalid or SEC API rate limited.");
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        fetchData();
-    }, [ticker]);
+    const data = stockData;
 
     if (!ticker) return null;
 

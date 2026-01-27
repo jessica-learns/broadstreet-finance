@@ -1,7 +1,4 @@
-import React from 'react';
-import { Card } from './ui/Card';
-import { ArrowUpRight } from 'lucide-react';
-import { cn } from '../lib/utils';
+import { useDashboard } from '../context/DashboardContext';
 
 const dummyData = [
     { id: 1, theme: "Semiconductor Equip", ticker: "NVDA", cps: 92, mrg: "+12%", opp: 8.4 },
@@ -11,7 +8,9 @@ const dummyData = [
     { id: 5, theme: "Lithium Supply", ticker: "ALB", cps: 62, mrg: "-2%", opp: 5.1 },
 ];
 
-export function ThemeLeaderboard({ onSelectTicker, currentTicker }) {
+export function ThemeLeaderboard() {
+    const { selectedTicker, fetchStock } = useDashboard();
+
     return (
         <Card className="h-fit rounded-[32px] flex flex-col">
             <div className="flex justify-between items-center mb-6">
@@ -33,10 +32,10 @@ export function ThemeLeaderboard({ onSelectTicker, currentTicker }) {
                         {dummyData.map((item) => (
                             <tr
                                 key={item.id}
-                                onClick={() => onSelectTicker?.(item.ticker)}
+                                onClick={() => fetchStock(item.ticker)}
                                 className={cn(
                                     "group transition-all duration-300 hover:-translate-y-1 hover:shadow-neumorph-hover rounded-2xl cursor-pointer",
-                                    currentTicker === item.ticker ? "bg-white/60 shadow-neumorph-sm border border-white/80" : ""
+                                    selectedTicker === item.ticker ? "bg-white/60 shadow-neumorph-sm border border-white/80" : ""
                                 )}>
                                 <td className="py-3 pl-4 rounded-l-xl">
                                     <div className="flex flex-col">

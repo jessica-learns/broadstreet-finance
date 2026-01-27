@@ -13,13 +13,20 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // Helper: Pad CIK to 10 digits
 const padCik = (cik) => cik.toString().padStart(10, '0');
 
-// Layer 1: Fetch Ticker Map (CACHED)
-let cachedTickerMap = null;
+const cache = {
+    tickerMap: null,
+    tickerMapExpiry: 0,
+    companyData: new Map(), // ticker -> { data, expiry }
+};
 
+const TICKER_MAP_TTL = 24 * 60 * 60 * 1000; // 24 hours
+const COMPANY_DATA_TTL = 5 * 60 * 1000; // 5 minutes
+
+// Layer 1: Fetch Ticker Map (CACHED)
 async function fetchTickerMap() {
-    if (cachedTickerMap) {
+    if (cache.tickerMap && Date.now() < cache.tickerMapExpiry) {
         console.log("SEC: Using cached ticker map");
-        return cachedTickerMap;
+        return cache.tickerMap;
     }
 
     try {
@@ -30,7 +37,9 @@ async function fetchTickerMap() {
         Object.values(data).forEach(company => {
             lookup[company.ticker] = padCik(company.cik_str);
         });
-        cachedTickerMap = lookup;
+
+        cache.tickerMap = lookup;
+        cache.tickerMapExpiry = Date.now() + TICKER_MAP_TTL;
         return lookup;
     } catch (error) {
         console.warn("Failed to fetch ticker map, using fallback for NVDA:", error);
@@ -90,6 +99,13 @@ const matchMetric = (series, targetEnd) => series.find(item => item.end === targ
 
 // Main Spine Function
 export async function getFinancialTruth(ticker) {
+    // Check cache
+    const cached = cache.companyData.get(ticker);
+    if (cached && Date.now() < cached.expiry) {
+        console.log(`SEC: Using cached data for ${ticker}`);
+        return cached.data;
+    }
+
     await delay(200); // Rate Limit
 
     // 1. Identity
@@ -177,6 +193,22 @@ export async function getFinancialTruth(ticker) {
         });
     }
 
+    // New computed data
+    const marginDeltas = chartData.slice(1).map((q, i) => {
+        const prev = chartData[i];
+        return {
+            period: q.period,
+            grossDelta: Math.round((q.grossMargin - prev.grossMargin) * 10000),
+            opDelta: Math.round((q.opMargin - prev.opMargin) * 10000),
+            netDelta: Math.round((q.netMargin - prev.netMargin) * 10000),
+        };
+    });
+
+    const revenueGrowthData = chartData.map(q => ({
+        period: q.period,
+        growth: Math.round(q.growth * 1000) / 10,
+    }));
+
     // --- LOGIC: VERDICT (Uses Annual/LTM proxy for stability) ---
     // We use the most recent "Annual-like" or Quarterly snapshot for the gauge
     const latestRev = revenueSeriesAnnual[0]?.val || 0;
@@ -256,12 +288,10 @@ export async function getFinancialTruth(ticker) {
     }
 
     // Return final structure
-    return {
+    const result = {
         ticker,
         metrics: {
             capexIntensity,
-            // Use the latest QUARTERLY margins for the text readout, or annual? 
-            // Let's use the latest Quarter from chart data for freshness
             operatingMargin: chartData[chartData.length - 1]?.opMargin || 0,
             revenue: chartData[chartData.length - 1]?.revenue || 0,
             grossMargin: chartData[chartData.length - 1]?.grossMargin || 0,
@@ -273,6 +303,29 @@ export async function getFinancialTruth(ticker) {
             sentiment,
             isRisingCapex
         },
-        chartData
+        chartData,
+        marginDeltas,
+        revenueGrowthData,
+        fetchedAt: Date.now(),
+    };
+
+    // Cache before returning
+    cache.companyData.set(ticker, { data: result, expiry: Date.now() + COMPANY_DATA_TTL });
+
+    return result;
+}
+
+export function invalidateCache(ticker = null) {
+    if (ticker) {
+        cache.companyData.delete(ticker);
+    } else {
+        cache.companyData.clear();
+    }
+}
+
+export function getCacheStatus() {
+    return {
+        tickerMapCached: !!cache.tickerMap,
+        cachedTickers: Array.from(cache.companyData.keys()),
     };
 }
