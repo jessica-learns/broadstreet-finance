@@ -63,22 +63,18 @@ export function GrowthAnalysis() {
         <div className="space-y-6">
             {/* Section Header */}
             <div className="px-2">
-                <h2 className="text-xl font-bold text-primary tracking-tight">{selectedTicker} Growth Analysis</h2>
-                <p className="text-xs text-secondary font-medium uppercase tracking-widest mt-1">
-                    Revenue Trajectory · Margin Dynamics · Sequential Changes
-                </p>
+                <h2 className="text-lg font-bold text-primary tracking-tight">{selectedTicker} Growth Analysis</h2>
             </div>
 
             {/* Three Charts Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
 
                 {/* Chart 1: Revenue Growth Rate */}
-                <Card className="rounded-[24px] p-6 shadow-neumorph-sm">
+                <Card className="rounded-[24px] p-4 shadow-neumorph-sm">
                     <div className="mb-4">
                         <h3 className="text-sm font-bold text-primary">Revenue Growth</h3>
-                        <p className="text-[10px] text-secondary uppercase tracking-wider mt-0.5">QoQ % Change</p>
                     </div>
-                    <div className="h-[180px]">
+                    <div className="h-[140px]">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={revenueGrowthData} margin={{ top: 10, right: 5, left: -15, bottom: 0 }}>
                                 <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} />
@@ -96,12 +92,11 @@ export function GrowthAnalysis() {
                 </Card>
 
                 {/* Chart 2: Margin Trajectory */}
-                <Card className="rounded-[24px] p-6 shadow-neumorph-sm">
+                <Card className="rounded-[24px] p-4 shadow-neumorph-sm">
                     <div className="mb-4">
                         <h3 className="text-sm font-bold text-primary">Margin Trajectory</h3>
-                        <p className="text-[10px] text-secondary uppercase tracking-wider mt-0.5">Gross · Operating · Net</p>
                     </div>
-                    <div className="h-[180px]">
+                    <div className="h-[140px]">
                         <ResponsiveContainer width="100%" height="100%">
                             <LineChart data={chartData} margin={{ top: 10, right: 5, left: -15, bottom: 0 }}>
                                 <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} />
@@ -113,21 +108,14 @@ export function GrowthAnalysis() {
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
-                    {/* Mini Legend */}
-                    <div className="flex justify-center gap-4 mt-3 pt-3 border-t border-primary/5">
-                        <div className="flex items-center gap-1.5"><div className="w-2 h-0.5 bg-[#0ea5e9]/40 rounded-full" /><span className="text-[10px] font-bold text-secondary uppercase">Gross</span></div>
-                        <div className="flex items-center gap-1.5"><div className="w-2 h-0.5 bg-[#0ea5e9]/70 rounded-full" /><span className="text-[10px] font-bold text-secondary uppercase">Op</span></div>
-                        <div className="flex items-center gap-1.5"><div className="w-2 h-0.5 bg-[#0ea5e9] rounded-full" /><span className="text-[10px] font-bold text-primary uppercase">Net</span></div>
-                    </div>
                 </Card>
 
                 {/* Chart 3: Sequential Margin Change */}
-                <Card className="rounded-[24px] p-6 shadow-neumorph-sm">
+                <Card className="rounded-[24px] p-4 shadow-neumorph-sm">
                     <div className="mb-4">
                         <h3 className="text-sm font-bold text-primary">Margin Change</h3>
-                        <p className="text-[10px] text-secondary uppercase tracking-wider mt-0.5">Basis Points QoQ</p>
                     </div>
-                    <div className="h-[180px]">
+                    <div className="h-[140px]">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={marginDeltas} margin={{ top: 10, right: 5, left: -15, bottom: 0 }}>
                                 <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} />
@@ -139,12 +127,6 @@ export function GrowthAnalysis() {
                                 <Bar dataKey="netDelta" name="Net Δ" fill="#0ea5e9" radius={[2, 2, 0, 0]} maxBarSize={16} />
                             </BarChart>
                         </ResponsiveContainer>
-                    </div>
-                    {/* Mini Legend */}
-                    <div className="flex justify-center gap-3 mt-3 pt-3 border-t border-primary/5">
-                        <div className="flex items-center gap-1"><div className="w-2 h-2 bg-[#0ea5e9]/40 rounded-sm" /><span className="text-[9px] font-bold text-secondary uppercase">Gross</span></div>
-                        <div className="flex items-center gap-1"><div className="w-2 h-2 bg-[#0ea5e9]/70 rounded-sm" /><span className="text-[9px] font-bold text-secondary uppercase">Op</span></div>
-                        <div className="flex items-center gap-1"><div className="w-2 h-2 bg-[#0ea5e9] rounded-sm" /><span className="text-[9px] font-bold text-primary uppercase">Net</span></div>
                     </div>
                 </Card>
             </div>
