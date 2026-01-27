@@ -9,6 +9,8 @@ import { DeepDive } from './components/DeepDive';
 import { RiskRadar } from './components/RiskRadar';
 import { EvidenceFeed } from './components/EvidenceFeed';
 
+import { TickerInput } from './components/TickerInput';
+
 function App() {
   return (
     <DashboardProvider>
@@ -16,17 +18,25 @@ function App() {
         <div className="max-w-[1400px] mx-auto">
           <Header />
           <div className="space-y-8">
-            {/* Upper Section */}
+            {/* Growth Analysis Section - Full Width */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              <TickerInput />
+              <div className="lg:col-span-3">
+                <GrowthAnalysis />
+              </div>
+            </div>
+
+            {/* Main Content Section */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               <div className="lg:col-span-4 flex flex-col gap-8">
                 <ThemeLeaderboard />
                 <TopMovers />
               </div>
-              <div className="lg:col-span-8 flex flex-col gap-8">
-                <GrowthAnalysis />
+              <div className="lg:col-span-8">
                 <FinancialTruthCard />
               </div>
             </div>
+
             {/* Lower Section */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               <div className="lg:col-span-4">
