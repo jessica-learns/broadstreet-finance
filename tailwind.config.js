@@ -7,25 +7,30 @@ export default {
     theme: {
         extend: {
             colors: {
-                background: "#EFEEF3",
-                surface: "#EFEEF3",
-                primary: "#1A2B4C", // Deep Navy
-                secondary: "#64748B", // Slate 500 equivalent for secondary text
-                accent: "#FFB347", // Soft Amber
-                "accent-glow": "rgba(255, 179, 71, 0.4)",
+                background: "#EFEEF3", // Soft Base Grey
+                surface: "#EFEEF3",    // Same as bg, depth comes from shadows
+                primary: "#0f172a",    // Deep Navy (Text & Active Elements)
+                secondary: "#64748B",  // Slate 500 (Muted Text)
+                accent: "#0f172a",     // Using Navy as the primary accent now
+                "accent-glow": "rgba(15, 23, 42, 0.15)", // Subtle shadow for accent
+                success: "#10b981",    // Emerald
+                danger: "#ef4444",     // Red
             },
             fontFamily: {
                 sans: ["Inter", "sans-serif"],
             },
             boxShadow: {
-                neumorph: "6px 6px 12px #C5C9D2, -6px -6px 12px #FFFFFF",
-                "neumorph-pressed": "inset 4px 4px 8px #C5C9D2, inset -4px -4px 8px #FFFFFF",
-                glow: "0px 4px 20px rgba(255, 179, 71, 0.4)",
+                // Soft Light Neumorphism
+                neumorph: "9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.8)",
+                "neumorph-pressed": "inset 6px 6px 10px 0 rgba(163,177,198, 0.7), inset -6px -6px 10px 0 rgba(255,255,255, 0.8)",
+                "neumorph-hover": "12px 12px 20px rgb(163,177,198,0.7), -12px -12px 20px rgba(255,255,255, 0.9)",
+                glow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
             },
             borderRadius: {
                 xl: "1rem",
                 "2xl": "1.5rem",
                 "3xl": "2rem", // For cards (32px)
+                full: "9999px", // For pills
             },
         },
     },

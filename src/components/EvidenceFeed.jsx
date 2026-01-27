@@ -1,4 +1,4 @@
-import React from 'react';
+import { Badge } from './ui/Badge';
 import { Card } from './ui/Card';
 import { FileText } from 'lucide-react';
 
@@ -11,7 +11,7 @@ const evidence = [
 
 export function EvidenceFeed() {
     return (
-        <Card className="rounded-[32px]">
+        <Card className="rounded-[32px] h-fit">
             <div className="flex items-center space-x-3 mb-6">
                 <div className="p-2 bg-surface shadow-neumorph rounded-full text-secondary">
                     <FileText size={20} />
@@ -23,9 +23,9 @@ export function EvidenceFeed() {
                 {evidence.map((item, idx) => (
                     <div key={idx} className="bg-surface shadow-neumorph rounded-2xl p-4 transition-transform hover:-translate-y-1 cursor-pointer">
                         <div className="flex justify-between items-start mb-2">
-                            <span className="inline-block px-2 py-0.5 rounded-md bg-primary text-white text-[10px] font-bold tracking-wider">
+                            <Badge variant="navy" className="tracking-wider font-bold">
                                 {item.ticker}
-                            </span>
+                            </Badge>
                             <span className="text-[10px] text-secondary font-medium">{item.date}</span>
                         </div>
                         <p className="text-sm font-medium text-primary leading-snug">

@@ -12,7 +12,7 @@ const risks = [
 
 export function RiskRadar() {
     return (
-        <Card className="rounded-[32px] mb-6">
+        <Card className="rounded-[32px] mb-6 h-fit">
             <div className="flex items-center space-x-3 mb-6">
                 <div className="p-2 bg-surface shadow-neumorph rounded-full text-primary">
                     <ShieldAlert size={20} />
@@ -28,7 +28,7 @@ export function RiskRadar() {
                             "w-3 h-3 rounded-full",
                             risk.status === 'red' && "bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.6)] animate-pulse",
                             risk.status === 'yellow' && "bg-yellow-400",
-                            risk.status === 'green' && "bg-emerald-400"
+                            risk.status === 'green' && "bg-primary"
                         )} />
                     </div>
                 ))}

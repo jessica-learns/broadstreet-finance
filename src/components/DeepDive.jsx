@@ -36,22 +36,23 @@ export function DeepDive() {
             {/* Report Content Placeholder */}
             <div className="space-y-6">
                 {/* Ticker Selector Helper */}
-                <div className="flex gap-4 p-1 bg-surface shadow-neumorph-pressed rounded-2xl transition-all focus-within:ring-2 focus-within:ring-primary/20">
+                <div className="flex gap-4 p-2 bg-surface shadow-neumorph-pressed rounded-full transition-all focus-within:ring-2 focus-within:ring-primary/20">
                     <input
                         type="text"
                         value={ticker}
                         onChange={(e) => setTicker(e.target.value)}
-                        className="flex-1 bg-transparent border-none outline-none px-4 py-3 text-primary font-bold placeholder:text-secondary/50 tracking-wide"
+                        className="flex-1 bg-transparent border-none outline-none px-4 py-2 text-primary font-bold placeholder:text-secondary/50 tracking-wide text-sm"
                         placeholder="Enter ticker or research question..."
                     />
-                    <button
+                    <NeumorphicButton
+                        variant="solid"
                         onClick={() => setGenerating(true)}
                         disabled={generating}
-                        className="px-6 py-2 bg-primary text-white rounded-xl font-semibold shadow-lg shadow-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="flex items-center gap-2 px-3 py-1.5 text-xs hover:scale-105 active:scale-95 transition-transform duration-200"
                     >
                         <Sparkles size={16} className={generating ? "animate-spin" : ""} />
                         <span>{generating ? "Deep Diving..." : "Generate Report"}</span>
-                    </button>
+                    </NeumorphicButton>
                 </div>
 
                 {/* Report Section */}
