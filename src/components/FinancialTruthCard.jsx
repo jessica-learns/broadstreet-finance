@@ -277,6 +277,16 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                         </ResponsiveContainer>
                     </div>
 
+                    {/* Business Description */}
+                    {data?.evidence?.businessDescription && (
+                        <div className="mt-6 pt-6 border-t border-primary/5">
+                            <div className="text-[10px] font-black text-secondary uppercase tracking-widest mb-2">About {ticker}</div>
+                            <p className="text-sm text-secondary leading-relaxed">
+                                {data.evidence.businessDescription}
+                            </p>
+                        </div>
+                    )}
+
                     {/* Legend / Verdict Footer */}
                     <div className="pt-4 border-t border-primary/5 flex items-center justify-between">
                         {/* Dynamic Verdict Text */}
