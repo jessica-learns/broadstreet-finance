@@ -13,7 +13,7 @@ export function EvidenceFeed() {
     return (
         <Card className="rounded-[32px] h-fit">
             <div className="flex items-center space-x-3 mb-6">
-                <div className="p-2 bg-surface shadow-neumorph rounded-full text-secondary">
+                <div className="p-2 bg-surface shadow-neumorph-sm rounded-full text-slate-500">
                     <FileText size={20} />
                 </div>
                 <h3 className="text-lg font-bold text-primary">Fresh Evidence</h3>
@@ -21,12 +21,12 @@ export function EvidenceFeed() {
 
             <div className="space-y-4">
                 {evidence.map((item, idx) => (
-                    <div key={idx} className="bg-surface shadow-neumorph rounded-2xl p-4 transition-transform hover:-translate-y-1 cursor-pointer">
+                    <div key={idx} className="bg-surface shadow-neumorph-sm rounded-2xl p-4 transition-all duration-300 hover:shadow-neumorph hover:-translate-y-1 cursor-pointer">
                         <div className="flex justify-between items-start mb-2">
                             <Badge variant="navy" className="tracking-wider font-bold">
                                 {item.ticker}
                             </Badge>
-                            <span className="text-[10px] text-secondary font-medium">{item.date}</span>
+                            <span className="text-[10px] text-slate-500 font-bold">{item.date}</span>
                         </div>
                         <p className="text-sm font-medium text-primary leading-snug">
                             {item.summary}

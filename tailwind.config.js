@@ -11,8 +11,10 @@ export default {
                 surface: "#EFEEF3",    // Same as bg, depth comes from shadows
                 primary: "#0f172a",    // Deep Navy (Text & Active Elements)
                 secondary: "#64748B",  // Slate 500 (Muted Text)
-                accent: "#0f172a",     // Using Navy as the primary accent now
-                "accent-glow": "rgba(15, 23, 42, 0.15)", // Subtle shadow for accent
+                accent: "#0ea5e9",     // Sky Blue 500 (Actionable Elements)
+                signal: "#0ea5e9",     // Positive momentum
+                warning: "#f97316",    // Net Margin / Warning
+                "accent-glow": "rgba(14, 165, 233, 0.15)", // Subtle shadow for accent
                 success: "#10b981",    // Emerald
                 danger: "#ef4444",     // Red
             },
@@ -20,10 +22,13 @@ export default {
                 sans: ["Inter", "sans-serif"],
             },
             boxShadow: {
-                // Soft Light Neumorphism
-                neumorph: "9px 9px 16px rgb(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.8)",
-                "neumorph-pressed": "inset 6px 6px 10px 0 rgba(163,177,198, 0.7), inset -6px -6px 10px 0 rgba(255,255,255, 0.8)",
-                "neumorph-hover": "12px 12px 20px rgb(163,177,198,0.7), -12px -12px 20px rgba(255,255,255, 0.9)",
+                // Refined Neumorphic Elevation Scale
+                "neumorph-subtle": "4px 4px 8px rgba(163,177,198,0.35), -4px -4px 8px rgba(255,255,255,0.5)",
+                neumorph: "6px 6px 12px rgba(163,177,198,0.5), -6px -6px 12px rgba(255,255,255,0.7)",
+                "neumorph-sm": "3px 3px 6px rgba(163,177,198,0.4), -3px -3px 6px rgba(255,255,255,0.6)",
+                "neumorph-elevated": "10px 10px 20px rgba(163,177,198,0.6), -10px -10px 20px rgba(255,255,255,0.8)",
+                "neumorph-pressed": "inset 3px 3px 6px rgba(163,177,198,0.5), inset -3px -3px 6px rgba(255,255,255,0.7)",
+                "neumorph-hover": "8px 8px 16px rgba(163,177,198,0.6), -8px -8px 16px rgba(255,255,255,0.8)",
                 glow: "0px 10px 20px rgba(0, 0, 0, 0.1)",
             },
             borderRadius: {

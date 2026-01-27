@@ -12,10 +12,10 @@ export function Header() {
             <div className="bg-surface rounded-full shadow-neumorph px-6 py-4 flex items-center justify-between">
                 {/* Left: Profile/Brand */}
                 <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-surface shadow-neumorph flex items-center justify-center text-primary font-bold">
+                    <div className="w-10 h-10 rounded-full bg-surface shadow-neumorph-sm flex items-center justify-center text-primary font-black">
                         B
                     </div>
-                    <span className="font-semibold text-primary tracking-tight">BROADSTREET</span>
+                    <span className="font-bold text-primary tracking-tight">BROADSTREET</span>
                 </div>
 
                 {/* Center: Context/Search */}
@@ -25,7 +25,7 @@ export function Header() {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[65%] h-full bg-white blur-[40px] rounded-full pointer-events-none opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
 
                     {/* Floating Search Bar - Navy Pill */}
-                    <div className="relative bg-slate-800 shadow-xl shadow-slate-900/10 rounded-full px-6 py-4 flex items-center text-white ring-1 ring-white/10 input-ring transition-all duration-300 group-hover:scale-[1.01] overflow-hidden">
+                    <div className="relative bg-[#0f172a] shadow-xl shadow-slate-900/10 rounded-full px-6 py-4 flex items-center text-white ring-1 ring-white/10 input-ring transition-all duration-300 group-hover:scale-[1.01] overflow-hidden">
 
                         <Search size={18} className="mr-3 text-white/50" />
                         <input
@@ -35,7 +35,7 @@ export function Header() {
                         />
                         {/* Right Action Icon in Search */}
                         <div className="ml-2 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors">
-                            <span className="text-white text-xs font-bold">⌘K</span>
+                            <span className="text-white text-xs font-bold font-mono">⌘K</span>
                         </div>
                     </div>
                 </div>
@@ -45,10 +45,10 @@ export function Header() {
                     <NeumorphicButton className="p-3 w-10 h-10 flex items-center justify-center font-normal">
                         <Bell size={18} />
                     </NeumorphicButton>
-                    <div className="flex items-center gap-3 pl-4 border-l border-gray-300/50">
+                    <div className="flex items-center gap-3 pl-4 border-l border-slate-300">
                         <div className="text-right hidden sm:block">
-                            <div className="text-xs font-bold text-primary">Jessica Croll</div>
-                            <div className="text-xs text-secondary font-medium">Portfolio Manager</div>
+                            <div className="text-xs font-black text-primary">Jessica Croll</div>
+                            <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Portfolio Manager</div>
                         </div>
                         <NeumorphicButton className="p-1 w-10 h-10 flex items-center justify-center font-normal">
                             <User size={18} />

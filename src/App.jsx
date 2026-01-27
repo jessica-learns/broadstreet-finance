@@ -8,6 +8,8 @@ import { EvidenceFeed } from './components/EvidenceFeed';
 import { FinancialTruthCard } from './components/FinancialTruthCard';
 
 function App() {
+  const [ticker, setTicker] = React.useState('NVDA');
+
   return (
     <div className="min-h-screen bg-background p-6 md:p-10 font-sans selection:bg-accent/30">
       <div className="max-w-[1400px] mx-auto">
@@ -18,13 +20,13 @@ function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             {/* Left Box */}
             <div className="lg:col-span-4 flex flex-col gap-8">
-              <ThemeLeaderboard />
+              <ThemeLeaderboard onSelectTicker={setTicker} currentTicker={ticker} />
               <TopMovers />
             </div>
 
             {/* Right Box (Hero Chart) - Stretches to match height of Left Box */}
             <div className="lg:col-span-8">
-              <FinancialTruthCard ticker="NVDA" />
+              <FinancialTruthCard ticker={ticker} />
             </div>
           </div>
 

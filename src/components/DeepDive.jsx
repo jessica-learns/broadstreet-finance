@@ -15,12 +15,12 @@ export function DeepDive() {
 
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
-                    <div className="p-3 bg-surface shadow-neumorph rounded-2xl text-primary">
+                    <div className="p-3 bg-surface shadow-neumorph-sm rounded-2xl text-primary">
                         <BookOpen size={24} />
                     </div>
                     <div>
                         <h2 className="text-2xl font-bold text-primary">Deep Dive Report</h2>
-                        <p className="text-secondary text-sm font-medium">Powered by Broadstreet AI x NotebookLM</p>
+                        <p className="text-slate-600 text-sm font-semibold">Powered by Broadstreet AI x NotebookLM</p>
                     </div>
                 </div>
                 <div className="flex gap-3">
@@ -56,18 +56,18 @@ export function DeepDive() {
                 </div>
 
                 {/* Report Section */}
-                <div className="p-6 bg-surface shadow-neumorph rounded-3xl border border-white/50">
+                <div className="p-6 bg-surface shadow-neumorph-sm rounded-3xl border border-white/50 group/report hover:shadow-neumorph transition-all duration-300 cursor-pointer">
                     <div className="flex justify-between items-start mb-4">
                         <Badge variant="navy">Analyst Note</Badge>
-                        <span className="text-xs text-secondary font-bold uppercase tracking-wider">Generated 2m ago</span>
+                        <span className="text-xs text-slate-500 font-black uppercase tracking-widest">Generated 2m ago</span>
                     </div>
                     <h3 className="text-xl font-bold text-primary mb-3">Supply Chain Constraints in CoWoS Pricing</h3>
-                    <p className="text-secondary leading-relaxed mb-6">
+                    <p className="text-slate-600 leading-relaxed mb-6 font-medium">
                         Latest channel checks indicate TSMC's CoWoS capacity remains the primary bottleneck for H100 delivery.
                         NotebookLM analysis of Q3 transcripts suggests a 15% pricing power increase for packaging vendors...
                     </p>
 
-                    <div className="flex items-center gap-2 text-accent font-bold text-sm hover:underline cursor-pointer">
+                    <div className="flex items-center gap-2 text-accent font-bold text-sm group-hover/report:underline">
                         <span>View Sources (4 Notebooks)</span>
                         <ArrowRight size={16} />
                     </div>

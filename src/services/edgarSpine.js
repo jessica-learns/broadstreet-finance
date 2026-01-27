@@ -1,7 +1,7 @@
 // Layer 1: Universe & Identity
-const SEC_TICKER_URL = '/api/sec-files/files/company_tickers.json';
-const SEC_FACTS_URL = (cik) => `/api/sec/api/xbrl/companyfacts/CIK${cik}.json`;
-const SEC_SUBMISSIONS_URL = (cik) => `/api/sec/submissions/CIK${cik}.json`;
+const SEC_TICKER_URL = import.meta.env.DEV ? '/api/sec-files/files/company_tickers.json' : 'https://www.sec.gov/files/company_tickers.json';
+const SEC_FACTS_URL = (cik) => import.meta.env.DEV ? `/api/sec/api/xbrl/companyfacts/CIK${cik}.json` : `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`;
+const SEC_SUBMISSIONS_URL = (cik) => import.meta.env.DEV ? `/api/sec/submissions/CIK${cik}.json` : `https://data.sec.gov/submissions/CIK${cik}.json`;
 
 const CONSTRAINT_KEYWORDS = [
     'shortage', 'backlog', 'capacity', 'supply chain', 'bottleneck'
@@ -13,8 +13,15 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // Helper: Pad CIK to 10 digits
 const padCik = (cik) => cik.toString().padStart(10, '0');
 
-// Layer 1: Fetch Ticker Map
+// Layer 1: Fetch Ticker Map (CACHED)
+let cachedTickerMap = null;
+
 async function fetchTickerMap() {
+    if (cachedTickerMap) {
+        console.log("SEC: Using cached ticker map");
+        return cachedTickerMap;
+    }
+
     try {
         const response = await fetch(SEC_TICKER_URL);
         if (!response.ok) throw new Error("Ticker map fetch failed");
@@ -23,6 +30,7 @@ async function fetchTickerMap() {
         Object.values(data).forEach(company => {
             lookup[company.ticker] = padCik(company.cik_str);
         });
+        cachedTickerMap = lookup;
         return lookup;
     } catch (error) {
         console.warn("Failed to fetch ticker map, using fallback for NVDA:", error);

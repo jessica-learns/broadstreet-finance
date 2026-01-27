@@ -4,14 +4,14 @@ import { ArrowUpRight } from 'lucide-react';
 import { cn } from '../lib/utils';
 
 const dummyData = [
-    { id: 1, theme: "Semiconductor Equip", cps: 92, mrg: "+12%", opp: 8.4 },
-    { id: 2, theme: "Power Gen & Grid", cps: 88, mrg: "+8%", opp: 7.9 },
-    { id: 3, theme: "Advanced Packaging", cps: 85, mrg: "+15%", opp: 7.6 },
-    { id: 4, theme: "Data Center Cooling", cps: 74, mrg: "+5%", opp: 6.2 },
-    { id: 5, theme: "Lithium Supply", cps: 62, mrg: "-2%", opp: 5.1 },
+    { id: 1, theme: "Semiconductor Equip", ticker: "NVDA", cps: 92, mrg: "+12%", opp: 8.4 },
+    { id: 2, theme: "Power Gen & Grid", ticker: "GE", cps: 88, mrg: "+8%", opp: 7.9 },
+    { id: 3, theme: "Advanced Packaging", ticker: "AMAT", cps: 85, mrg: "+15%", opp: 7.6 },
+    { id: 4, theme: "Data Center Cooling", ticker: "VRT", cps: 74, mrg: "+5%", opp: 6.2 },
+    { id: 5, theme: "Lithium Supply", ticker: "ALB", cps: 62, mrg: "-2%", opp: 5.1 },
 ];
 
-export function ThemeLeaderboard() {
+export function ThemeLeaderboard({ onSelectTicker, currentTicker }) {
     return (
         <Card className="h-fit rounded-[32px] flex flex-col">
             <div className="flex justify-between items-center mb-6">
@@ -33,21 +33,25 @@ export function ThemeLeaderboard() {
                         {dummyData.map((item) => (
                             <tr
                                 key={item.id}
+                                onClick={() => onSelectTicker?.(item.ticker)}
                                 className={cn(
-                                    "group transition-all duration-300 hover:-translate-y-1 hover:shadow-neumorph rounded-2xl cursor-pointer",
-                                    item.id === 1 ? "bg-surface" : ""
+                                    "group transition-all duration-300 hover:-translate-y-1 hover:shadow-neumorph-hover rounded-2xl cursor-pointer",
+                                    currentTicker === item.ticker ? "bg-white/60 shadow-neumorph-sm border border-white/80" : ""
                                 )}>
                                 <td className="py-3 pl-4 rounded-l-xl">
-                                    <span className="font-bold text-primary block">{item.theme}</span>
+                                    <div className="flex flex-col">
+                                        <span className="font-bold text-primary block leading-tight">{item.theme}</span>
+                                        <span className="text-[10px] font-black text-accent tracking-widest uppercase">{item.ticker}</span>
+                                    </div>
                                 </td>
-                                <td className="py-3 text-right font-medium text-secondary tabular-nums">
+                                <td className="py-3 text-right font-bold text-slate-600 tabular-nums">
                                     {item.cps}
                                 </td>
-                                <td className="py-3 text-right font-mono font-bold text-slate-700 tabular-nums text-sm">
+                                <td className="py-3 text-right font-mono font-bold text-slate-900 tabular-nums text-sm">
                                     {item.mrg}
                                 </td>
                                 <td className="py-3 pr-4 text-right rounded-r-xl">
-                                    <div className="inline-flex items-center justify-center w-10 h-8 bg-surface shadow-neumorph-pressed rounded-lg font-bold text-primary tabular-nums">
+                                    <div className="inline-flex items-center justify-center w-10 h-8 bg-surface shadow-neumorph-sm group-hover:shadow-neumorph-pressed rounded-lg font-bold text-primary tabular-nums transition-all">
                                         {item.opp}
                                     </div>
                                 </td>

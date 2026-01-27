@@ -5,7 +5,7 @@ import { getFinancialTruth } from '../services/edgarSpine';
 import { ComposedChart, Bar, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { Loader2, AlertTriangle, CheckCircle2 } from 'lucide-react';
 
-export function FinancialTruthCard({ ticker }) {
+export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 0.8 }) {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -43,7 +43,7 @@ export function FinancialTruthCard({ ticker }) {
     return (
         <Card className="rounded-[32px] h-full min-h-[500px] flex flex-col relative overflow-hidden">
             {/* Header Section */}
-            <div className="flex items-start justify-between mb-8 px-2 relative z-10">
+            <div className="flex items-start justify-between mb-4 px-2 relative z-10">
                 <div>
                     <h2 className="text-3xl font-black text-primary tracking-tighter flex items-baseline gap-3">
                         {ticker}
@@ -53,8 +53,8 @@ export function FinancialTruthCard({ ticker }) {
                             </span>
                         )}
                     </h2>
-                    <p className="text-xs text-secondary font-bold uppercase tracking-widest mt-1 ml-1 flex items-center gap-2">
-                        Financial Truth <div className="w-1 h-1 rounded-full bg-secondary/40" /> Live SEC Data
+                    <p className="text-xs text-slate-600 font-black uppercase tracking-widest mt-1 ml-1 flex items-center gap-2">
+                        Stock Analysis <div className="w-1 h-1 rounded-full bg-slate-400" /> Live SEC Data
                     </p>
                 </div>
                 {data && (
@@ -63,6 +63,43 @@ export function FinancialTruthCard({ ticker }) {
                     </div>
                 )}
             </div>
+
+            {/* Hedge Fund Signals: Soft Glass Row */}
+            {data && !loading && !error && (
+                <div className="px-2 mb-8 relative z-10 animate-in fade-in slide-in-from-top-2 duration-700">
+                    <div className="bg-white/40 backdrop-blur-xl border border-white/60 rounded-[24px] p-5 flex items-center justify-between shadow-sm ring-1 ring-black/5">
+                        <div className="flex items-center gap-10">
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em] mb-1.5">Pricing Power</span>
+                                <div className="flex items-baseline gap-1.5">
+                                    <span className={`text-2xl font-black tracking-tighter ${pricingPower >= 0 ? "text-emerald-500" : "text-rose-500"}`}>
+                                        {pricingPower > 0 ? '+' : ''}{pricingPower}%
+                                    </span>
+                                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter opacity-70">6m Delta</span>
+                                </div>
+                            </div>
+                            <div className="w-px h-10 bg-slate-200/60" />
+                            <div className="flex flex-col">
+                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em] mb-1.5">Rev Velocity</span>
+                                <div className="flex items-baseline gap-1.5">
+                                    <span className={`text-2xl font-black tracking-tighter ${revenueAccel >= 0 ? "text-emerald-500" : "text-rose-500"}`}>
+                                        {revenueAccel > 0 ? '+' : ''}{revenueAccel}%
+                                    </span>
+                                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter opacity-70">Acceleration</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="hidden md:block">
+                            <div className="flex flex-col items-end">
+                                <Badge variant="outline" className="text-[10px] border-slate-300 text-slate-500 bg-white/60 py-0.5 px-2.5 font-black uppercase tracking-widest rounded-lg">
+                                    Hedge Fund Signals
+                                </Badge>
+                                <span className="text-[8px] font-bold text-slate-400 uppercase mt-1 tracking-tighter">Proprietary Alpha Stream</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {loading && (
                 <div className="flex-1 flex flex-col items-center justify-center text-secondary gap-4">
@@ -82,10 +119,9 @@ export function FinancialTruthCard({ ticker }) {
                 <div className="flex-1 flex flex-col space-y-8 relative z-10">
 
                     {/* Hero Grid: High Signal Metrics */}
-                    {/* Hero Grid: High Signal Metrics */}
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                         {/* Revenue */}
-                        <div className="p-6 rounded-3xl bg-surface shadow-neumorph">
+                        <div className="p-6 rounded-3xl bg-surface shadow-neumorph-sm">
                             <div className="text-xs text-secondary font-bold uppercase tracking-wider mb-2">Revenue</div>
                             <div className="text-2xl font-black text-primary mb-1">{fmtB(latestQ.revenue)}</div>
                             {previousQ && (
@@ -97,7 +133,7 @@ export function FinancialTruthCard({ ticker }) {
                         </div>
 
                         {/* Gross Margin */}
-                        <div className="p-6 rounded-3xl bg-surface shadow-neumorph">
+                        <div className="p-6 rounded-3xl bg-surface shadow-neumorph-sm">
                             <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-2">Gross</div>
                             <div className="text-2xl font-black text-slate-700 mb-1">{fmtP(latestQ.grossMargin)}</div>
                             {previousQ && (
@@ -109,7 +145,7 @@ export function FinancialTruthCard({ ticker }) {
                         </div>
 
                         {/* Operating Margin */}
-                        <div className="p-6 rounded-3xl bg-surface shadow-neumorph">
+                        <div className="p-6 rounded-3xl bg-surface shadow-neumorph-sm">
                             <div className="text-xs text-secondary font-bold uppercase tracking-wider mb-2">Operating</div>
                             <div className="text-2xl font-black text-primary mb-1">{fmtP(latestQ.opMargin)}</div>
                             {previousQ && (
@@ -121,7 +157,7 @@ export function FinancialTruthCard({ ticker }) {
                         </div>
 
                         {/* Net Margin */}
-                        <div className="p-6 rounded-3xl bg-surface shadow-neumorph flex flex-col justify-between">
+                        <div className="p-6 rounded-3xl bg-surface shadow-neumorph-sm flex flex-col justify-between">
                             <div>
                                 <div className="text-xs text-secondary font-bold uppercase tracking-wider mb-2">Net</div>
                                 <div className="text-2xl font-black text-primary mb-1">{fmtP(latestQ.netMargin)}</div>
@@ -172,6 +208,7 @@ export function FinancialTruthCard({ ticker }) {
                                     tick={{ fontSize: 12, fill: '#475569', fontWeight: 700 }}
                                     axisLine={false}
                                     tickLine={false}
+                                    tickFormatter={(val) => (val * 100).toFixed(0)}
                                     unit="%"
                                     domain={[0, 'auto']}
                                 />
@@ -269,9 +306,9 @@ export function FinancialTruthCard({ ticker }) {
                             ) : data.evidence.sentiment.includes("Low Conviction") ? (
                                 <AlertTriangle size={16} className="text-orange-500" />
                             ) : (
-                                <div className="w-1.5 h-1.5 rounded-full bg-secondary/50" />
+                                <div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
                             )}
-                            <span className="text-xs font-medium text-secondary">
+                            <span className="text-xs font-bold text-slate-600">
                                 {data.evidence.sentiment.includes("Fixing")
                                     ? "High Capex detected matching constraints."
                                     : data.evidence.sentiment.includes("Low Conviction")
@@ -283,16 +320,16 @@ export function FinancialTruthCard({ ticker }) {
                         {/* Mini Legend */}
                         <div className="flex gap-4">
                             <div className="flex items-center gap-1.5 grayscale opacity-60">
-                                <div className="w-2 h-0.5 bg-slate-400" />
-                                <span className="text-xs font-bold uppercase text-secondary">Gross</span>
+                                <div className="w-2 h-0.5 bg-slate-500" />
+                                <span className="text-xs font-black uppercase text-slate-600">Gross</span>
                             </div>
                             <div className="flex items-center gap-1.5">
-                                <div className="w-2 h-0.5 bg-sky-500" />
-                                <span className="text-xs font-bold uppercase text-sky-600">Op</span>
+                                <div className="w-2 h-0.5 bg-[#0f172a]" />
+                                <span className="text-xs font-black uppercase text-primary">Op</span>
                             </div>
                             <div className="flex items-center gap-1.5">
                                 <div className="w-2 h-1 rounded-full bg-orange-500" />
-                                <span className="text-xs font-bold uppercase text-orange-600">Net</span>
+                                <span className="text-xs font-black uppercase text-orange-600">Net</span>
                             </div>
                         </div>
                     </div>
