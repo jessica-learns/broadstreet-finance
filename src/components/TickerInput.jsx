@@ -22,7 +22,7 @@ export function TickerInput() {
         if (!period) return '';
         const [year, month] = period.split('-');
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        return `${months[parseInt(month) - 1]}'${year.slice(2)}`;
+        return `${months[parseInt(month) - 1]} '${year.slice(2)}`;
     };
 
     // Get latest quarter data for quick stats
