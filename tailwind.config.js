@@ -7,16 +7,14 @@ export default {
     theme: {
         extend: {
             colors: {
-                background: "#EFEEF3", // Soft Base Grey
-                surface: "#EFEEF3",    // Same as bg, depth comes from shadows
-                primary: "#0f172a",    // Deep Navy (Text & Active Elements)
-                secondary: "#64748B",  // Slate 500 (Muted Text)
-                accent: "#0ea5e9",     // Sky Blue 500 (Actionable Elements)
-                signal: "#0ea5e9",     // Positive momentum
-                warning: "#f97316",    // Net Margin / Warning
-                "accent-glow": "rgba(14, 165, 233, 0.15)", // Subtle shadow for accent
-                success: "#10b981",    // Emerald
-                danger: "#ef4444",     // Red
+                background: "#EFEEF3",
+                surface: "#EFEEF3",
+                primary: "#0f172a",
+                secondary: "#64748B",
+                accent: "#ff5212",
+                "accent-muted": "rgba(255, 82, 18, 0.1)",
+                "accent-glow": "rgba(255, 82, 18, 0.15)",
+                signal: "#0ea5e9",
             },
             fontFamily: {
                 sans: ["Inter", "sans-serif"],

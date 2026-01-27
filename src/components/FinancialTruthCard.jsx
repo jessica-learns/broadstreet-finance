@@ -48,7 +48,7 @@ export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 
                     <h2 className="text-3xl font-black text-primary tracking-tighter flex items-baseline gap-3">
                         {ticker}
                         {latestQ && (
-                            <span className={`text-lg font-bold tracking-tight ${latestQ.growth >= 0 ? "text-slate-700" : "text-orange-500"}`}>
+                            <span className={`text-lg font-bold tracking-tight ${latestQ.growth >= 0 ? "text-slate-700" : "text-accent"}`}>
                                 {latestQ.growth > 0 ? '+' : ''}{(latestQ.growth * 100).toFixed(1)}% QoQ
                             </span>
                         )}
@@ -58,7 +58,7 @@ export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 
                     </p>
                 </div>
                 {data && (
-                    <div className={`px-3 py-1 rounded-full text-xs font-bold border ${data.evidence.sentiment.includes("Low Conviction") ? "border-orange-500 text-orange-500 bg-orange-50/50" : "bg-primary text-white"}`}>
+                    <div className={`px-3 py-1 rounded-full text-xs font-bold border ${data.evidence.sentiment.includes("Low Conviction") ? "border-accent text-accent bg-accent/5" : "bg-primary text-white"}`}>
                         {data.evidence.sentiment}
                     </div>
                 )}
@@ -72,7 +72,7 @@ export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 
                             <div className="flex flex-col">
                                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em] mb-1.5">Pricing Power</span>
                                 <div className="flex items-baseline gap-1.5">
-                                    <span className={`text-2xl font-black tracking-tighter ${pricingPower >= 0 ? "text-emerald-500" : "text-rose-500"}`}>
+                                    <span className={`text-2xl font-black tracking-tighter ${pricingPower >= 0 ? "text-primary" : "text-slate-400"}`}>
                                         {pricingPower > 0 ? '+' : ''}{pricingPower}%
                                     </span>
                                     <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter opacity-70">6m Delta</span>
@@ -82,7 +82,7 @@ export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 
                             <div className="flex flex-col">
                                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em] mb-1.5">Rev Velocity</span>
                                 <div className="flex items-baseline gap-1.5">
-                                    <span className={`text-2xl font-black tracking-tighter ${revenueAccel >= 0 ? "text-emerald-500" : "text-rose-500"}`}>
+                                    <span className={`text-2xl font-black tracking-tighter ${revenueAccel >= 0 ? "text-primary" : "text-slate-400"}`}>
                                         {revenueAccel > 0 ? '+' : ''}{revenueAccel}%
                                     </span>
                                     <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter opacity-70">Acceleration</span>
@@ -125,7 +125,7 @@ export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 
                             <div className="text-xs text-secondary font-bold uppercase tracking-wider mb-2">Revenue</div>
                             <div className="text-2xl font-black text-primary mb-1">{fmtB(latestQ.revenue)}</div>
                             {previousQ && (
-                                <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.growth >= 0 ? "text-emerald-600" : "text-red-500"}`}>
+                                <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.growth >= 0 ? "text-accent" : "text-slate-400"}`}>
                                     {latestQ.growth > 0 ? "▲" : latestQ.growth < 0 ? "▼" : ""}
                                     {Math.abs(latestQ.growth * 100).toFixed(1)}% QoQ
                                 </div>
@@ -137,7 +137,7 @@ export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 
                             <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-2">Gross</div>
                             <div className="text-2xl font-black text-slate-700 mb-1">{fmtP(latestQ.grossMargin)}</div>
                             {previousQ && (
-                                <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.grossMargin >= previousQ.grossMargin ? "text-emerald-600" : "text-red-500"}`}>
+                                <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.grossMargin >= previousQ.grossMargin ? "text-accent" : "text-slate-400"}`}>
                                     {latestQ.grossMargin >= previousQ.grossMargin ? "▲" : "▼"}
                                     {Math.abs((latestQ.grossMargin - previousQ.grossMargin) * 10000).toFixed(0)} bps QoQ
                                 </div>
@@ -149,7 +149,7 @@ export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 
                             <div className="text-xs text-secondary font-bold uppercase tracking-wider mb-2">Operating</div>
                             <div className="text-2xl font-black text-primary mb-1">{fmtP(latestQ.opMargin)}</div>
                             {previousQ && (
-                                <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.opMargin >= previousQ.opMargin ? "text-emerald-600" : "text-red-500"}`}>
+                                <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.opMargin >= previousQ.opMargin ? "text-accent" : "text-slate-400"}`}>
                                     {latestQ.opMargin >= previousQ.opMargin ? "▲" : "▼"}
                                     {Math.abs((latestQ.opMargin - previousQ.opMargin) * 10000).toFixed(0)} bps QoQ
                                 </div>
@@ -162,7 +162,7 @@ export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 
                                 <div className="text-xs text-secondary font-bold uppercase tracking-wider mb-2">Net</div>
                                 <div className="text-2xl font-black text-primary mb-1">{fmtP(latestQ.netMargin)}</div>
                                 {previousQ && (
-                                    <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.netMargin >= previousQ.netMargin ? "text-emerald-600" : "text-red-500"}`}>
+                                    <div className={`text-xs font-bold flex items-center gap-1 ${latestQ.netMargin >= previousQ.netMargin ? "text-accent" : "text-slate-400"}`}>
                                         {latestQ.netMargin >= previousQ.netMargin ? "▲" : "▼"}
                                         {Math.abs((latestQ.netMargin - previousQ.netMargin) * 10000).toFixed(0)} bps QoQ
                                     </div>
@@ -288,10 +288,10 @@ export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 
                                     yAxisId="right"
                                     type="monotone"
                                     dataKey="netMargin"
-                                    stroke="#f97316"
+                                    stroke="#ff5212"
                                     strokeWidth={3}
-                                    dot={{ r: 4, fill: "#f97316", strokeWidth: 0 }}
-                                    activeDot={{ r: 6, fill: "#f97316", strokeWidth: 0 }}
+                                    dot={{ r: 4, fill: "#ff5212", strokeWidth: 0 }}
+                                    activeDot={{ r: 6, fill: "#ff5212", strokeWidth: 0 }}
                                 />
                             </ComposedChart>
                         </ResponsiveContainer>
@@ -304,7 +304,7 @@ export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 
                             {data.evidence.sentiment.includes("Fixing") ? (
                                 <CheckCircle2 size={16} className="text-primary" />
                             ) : data.evidence.sentiment.includes("Low Conviction") ? (
-                                <AlertTriangle size={16} className="text-orange-500" />
+                                <AlertTriangle size={16} className="text-accent" />
                             ) : (
                                 <div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
                             )}
@@ -328,8 +328,8 @@ export function FinancialTruthCard({ ticker, pricingPower = 1.2, revenueAccel = 
                                 <span className="text-xs font-black uppercase text-primary">Op</span>
                             </div>
                             <div className="flex items-center gap-1.5">
-                                <div className="w-2 h-1 rounded-full bg-orange-500" />
-                                <span className="text-xs font-black uppercase text-orange-600">Net</span>
+                                <div className="w-2 h-1 rounded-full bg-accent" />
+                                <span className="text-xs font-black uppercase text-accent">Net</span>
                             </div>
                         </div>
                     </div>
