@@ -62,40 +62,30 @@ export function TickerInput() {
             {/* Quick Stats - only show when we have data */}
             {latestQ && !loading && (
                 <div className="border-t border-primary/5 pt-4 mb-4">
-                    <div className="text-[9px] font-black text-secondary uppercase tracking-widest mb-3">Quick Stats</div>
+                    <div className="text-[11px] font-black text-secondary uppercase tracking-widest mb-3">Quick Stats</div>
                     <div className="space-y-2">
                         <div className="flex justify-between items-center">
-                            <span className="text-xs text-secondary">Rev Growth</span>
-                            <span className="text-sm font-bold text-primary">{latestQ.growth > 0 ? '+' : ''}{(latestQ.growth * 100).toFixed(1)}%</span>
+                            <span className="text-sm text-secondary">Rev Growth</span>
+                            <span className="text-base font-bold text-primary">{latestQ.growth > 0 ? '+' : ''}{(latestQ.growth * 100).toFixed(1)}%</span>
                         </div>
                         <div className="flex justify-between items-center">
-                            <span className="text-xs text-secondary">Gross</span>
-                            <span className="text-sm font-bold text-primary">{fmtPct(latestQ.grossMargin)}</span>
+                            <span className="text-sm text-secondary">Gross</span>
+                            <span className="text-base font-bold text-primary">{fmtPct(latestQ.grossMargin)}</span>
                         </div>
                         <div className="flex justify-between items-center">
-                            <span className="text-xs text-secondary">Operating</span>
-                            <span className="text-sm font-bold text-primary">{fmtPct(latestQ.opMargin)}</span>
+                            <span className="text-sm text-secondary">Operating</span>
+                            <span className="text-base font-bold text-primary">{fmtPct(latestQ.opMargin)}</span>
                         </div>
                         <div className="flex justify-between items-center">
-                            <span className="text-xs text-secondary">Net</span>
-                            <span className="text-sm font-bold text-primary">{fmtPct(latestQ.netMargin)}</span>
+                            <span className="text-sm text-secondary">Net</span>
+                            <span className="text-base font-bold text-primary">{fmtPct(latestQ.netMargin)}</span>
                         </div>
                     </div>
                 </div>
             )}
 
-            {/* Business Description - only show when we have data */}
-            {description && !loading && (
-                <div className="border-t border-primary/5 pt-4 mt-auto">
-                    <div className="text-[9px] font-black text-secondary uppercase tracking-widest mb-2">About</div>
-                    <p className="text-xs text-secondary leading-relaxed">
-                        {description}
-                    </p>
-                </div>
-            )}
-
             {/* SEC Attribution */}
-            <p className="text-[8px] text-secondary/50 text-center mt-4 uppercase tracking-wider">
+            <p className="text-[8px] text-secondary/50 text-center mt-auto uppercase tracking-wider">
                 SEC EDGAR Data
             </p>
         </Card>
