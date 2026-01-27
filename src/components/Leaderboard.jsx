@@ -1,3 +1,6 @@
+import React from 'react';
+import { Card } from './ui/Card';
+import { cn } from '../lib/utils';
 import { useDashboard } from '../context/DashboardContext';
 
 const dummyData = [

@@ -1,3 +1,8 @@
+import React, { useState } from 'react';
+import { Card } from './ui/Card';
+import { NeumorphicButton } from './ui/Button';
+import { Badge } from './ui/Badge';
+import { Sparkles, BookOpen, Share2, Download, ArrowRight } from 'lucide-react';
 import { useDashboard } from '../context/DashboardContext';
 
 export function DeepDive() {

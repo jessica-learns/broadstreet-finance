@@ -31,9 +31,9 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                             </span>
                         )}
                     </h2>
-                    <p className="text-xs text-slate-600 font-black uppercase tracking-widest mt-1 ml-1 flex items-center gap-2">
+                    <div className="text-xs text-slate-600 font-black uppercase tracking-widest mt-1 ml-1 flex items-center gap-2">
                         Stock Analysis <div className="w-1 h-1 rounded-full bg-slate-400" /> Live SEC Data
-                    </p>
+                    </div>
                 </div>
                 {data && (
                     <div className={`px-3 py-1 rounded-full text-xs font-bold border ${data.evidence.sentiment.includes("Low Conviction") ? "border-accent text-accent bg-accent/5" : "bg-primary text-white"}`}>
