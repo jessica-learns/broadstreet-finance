@@ -27,6 +27,12 @@ const NeumorphicTooltip = ({ active, payload, label, formatter }) => {
     return null;
 };
 
+const formatQuarter = (period) => {
+    const [year, month] = period.split('-');
+    const q = Math.ceil(parseInt(month) / 3);
+    return `Q${q}'${year.slice(2)}`;
+};
+
 // Mini Sparkline component
 const Sparkline = ({ data, dataKey, color }) => (
     <div className="h-8 w-16">
@@ -152,7 +158,13 @@ export function GrowthAnalysis() {
                         <div className="h-[140px]">
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart data={revenueGrowthData} margin={{ top: 10, right: 5, left: -15, bottom: 0 }}>
-                                    <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} />
+                                    <XAxis
+                                        dataKey="period"
+                                        tick={chartAxisStyle}
+                                        axisLine={false}
+                                        tickLine={false}
+                                        tickFormatter={formatQuarter}
+                                    />
                                     <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
                                     <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
                                     <ReferenceLine y={0} stroke="#64748B" strokeOpacity={0.3} />
@@ -174,7 +186,13 @@ export function GrowthAnalysis() {
                         <div className="h-[140px]">
                             <ResponsiveContainer width="100%" height="100%">
                                 <LineChart data={chartData} margin={{ top: 10, right: 5, left: -15, bottom: 0 }}>
-                                    <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} />
+                                    <XAxis
+                                        dataKey="period"
+                                        tick={chartAxisStyle}
+                                        axisLine={false}
+                                        tickLine={false}
+                                        tickFormatter={formatQuarter}
+                                    />
                                     <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(0)}%`} domain={['auto', 'auto']} />
                                     <Tooltip content={<NeumorphicTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
                                     <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeOpacity={0.4} strokeWidth={2.5} dot={{ r: 3, fill: "#0ea5e9", fillOpacity: 0.4, strokeWidth: 0 }} activeDot={{ r: 5 }} />
@@ -193,7 +211,13 @@ export function GrowthAnalysis() {
                         <div className="h-[140px]">
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart data={marginDeltas} margin={{ top: 10, right: 5, left: -15, bottom: 0 }}>
-                                    <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} />
+                                    <XAxis
+                                        dataKey="period"
+                                        tick={chartAxisStyle}
+                                        axisLine={false}
+                                        tickLine={false}
+                                        tickFormatter={formatQuarter}
+                                    />
                                     <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v > 0 ? '+' : ''}${v}`} />
                                     <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v} bps`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
                                     <ReferenceLine y={0} stroke="#64748B" strokeOpacity={0.5} />
