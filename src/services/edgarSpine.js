@@ -255,6 +255,7 @@ export async function getFinancialTruth(ticker) {
 
     let keywordCount = 0;
     let sentiment = "Neutral";
+    let businessDescription = '';
 
     if (form10kIndex !== -1) {
         const accessionNumber = recentFilings.accessionNumber[form10kIndex].replace(/-/g, '');
@@ -273,6 +274,14 @@ export async function getFinancialTruth(ticker) {
                     const matches = lowerText.match(regex);
                     if (matches) keywordCount += matches.length;
                 });
+
+                // Extract first 200 chars as business description
+                if (docText) {
+                    const textContent = docText.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+                    businessDescription = textContent.length > 200
+                        ? textContent.slice(0, 197) + '...'
+                        : textContent;
+                }
             }
         } catch (e) {
             console.warn("Failed to fetch/parse 10-K text", e);
@@ -301,7 +310,8 @@ export async function getFinancialTruth(ticker) {
             keywordCount,
             latest10K: form10kIndex !== -1,
             sentiment,
-            isRisingCapex
+            isRisingCapex,
+            businessDescription,
         },
         chartData,
         marginDeltas,
