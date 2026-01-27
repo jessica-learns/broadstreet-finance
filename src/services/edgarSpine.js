@@ -339,13 +339,13 @@ export async function getFinancialTruth(ticker) {
                                 if (sentence.length < 40) continue;
 
                                 // Add sentence if we have room
-                                if (totalLength + sentence.length < 1200) {
+                                if (totalLength + sentence.length < 2200) {
                                     collectedSentences.push(sentence);
                                     totalLength += sentence.length + 1;
                                 }
 
                                 // Stop after collecting enough
-                                if (totalLength > 1000) break;
+                                if (totalLength > 2000) break;
                             }
 
                             if (collectedSentences.length > 0) {
@@ -377,8 +377,8 @@ export async function getFinancialTruth(ticker) {
                     // Step 4: Final cleanup and truncation
                     if (bestSnippet) {
                         bestSnippet = bestSnippet.replace(/\s+/g, ' ').trim();
-                        businessDescription = bestSnippet.length > 1000
-                            ? bestSnippet.slice(0, 997) + '...'
+                        businessDescription = bestSnippet.length > 2000
+                            ? bestSnippet.slice(0, 1997) + '...'
                             : bestSnippet;
                     }
                 }
