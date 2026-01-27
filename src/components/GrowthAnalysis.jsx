@@ -123,7 +123,7 @@ export function GrowthAnalysis() {
                 </div>
                 <div className="h-[130px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                        <LineChart data={chartData} margin={{ top: 5, right: 5, left: -5, bottom: 0 }}>
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(0)}%`} domain={['auto', 'auto']} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
@@ -142,7 +142,7 @@ export function GrowthAnalysis() {
                 </div>
                 <div className="h-[130px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={marginDeltas} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                        <BarChart data={marginDeltas} margin={{ top: 5, right: 5, left: 5, bottom: 0 }}>
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(1)}%`} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(2)}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
