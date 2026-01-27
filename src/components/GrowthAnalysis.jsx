@@ -35,64 +35,78 @@ const formatPeriod = (period) => {
 export function GrowthAnalysis() {
     const { stockData, loading, error } = useDashboard();
 
-    // Loading state - return three skeleton cards
+    // Loading state - return four skeleton cards
     if (loading) {
         return (
             <>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
+                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px] flex items-center justify-center">
                     <Loader2 className="animate-spin text-primary/30" size={24} />
                 </Card>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
+                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px] flex items-center justify-center">
                     <Loader2 className="animate-spin text-primary/30" size={24} />
                 </Card>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
+                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px] flex items-center justify-center">
+                    <Loader2 className="animate-spin text-primary/30" size={24} />
+                </Card>
+                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px] flex items-center justify-center">
                     <Loader2 className="animate-spin text-primary/30" size={24} />
                 </Card>
             </>
         );
     }
 
-    // Error or no data - return error cards
+    // Error or no data
     if (error || !stockData?.chartData || stockData.chartData.length < 2) {
         return (
             <>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
-                    <span className="text-sm text-secondary font-bold uppercase tracking-wider">No Data</span>
-                </Card>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
-                    <span className="text-sm text-secondary font-bold uppercase tracking-wider">No Data</span>
-                </Card>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
-                    <span className="text-sm text-secondary font-bold uppercase tracking-wider">No Data</span>
-                </Card>
+                {[1, 2, 3, 4].map(i => (
+                    <Card key={i} className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px] flex items-center justify-center">
+                        <span className="text-sm text-secondary font-bold uppercase tracking-wider">No Data</span>
+                    </Card>
+                ))}
             </>
         );
     }
 
-    const { chartData, marginDeltas, revenueGrowthData } = stockData;
-    const chartAxisStyle = { fontSize: 11, fill: '#64748B', fontWeight: 600 };
+    const { chartData, marginDeltas, revenueGrowthData, revenueAbsoluteData } = stockData;
+    const chartAxisStyle = { fontSize: 10, fill: '#64748B', fontWeight: 600 };
 
     return (
         <>
-            {/* Chart 1: Revenue Growth */}
-            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
-                <div className="mb-4">
+            {/* Chart 1: Revenue (Absolute) */}
+            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px]">
+                <div className="mb-3">
+                    <h3 className="text-[10px] font-black text-secondary uppercase tracking-widest">Revenue</h3>
+                </div>
+                <div className="h-[130px]">
+                    <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={revenueAbsoluteData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                            <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
+                            <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v.toFixed(0)}B`} />
+                            <Tooltip content={<NeumorphicTooltip formatter={(v) => `$${v.toFixed(1)}B`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
+                            <Bar dataKey="revenue" name="Revenue" radius={[2, 2, 0, 0]} maxBarSize={20}>
+                                {revenueAbsoluteData.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill="#0ea5e9" fillOpacity={index === revenueAbsoluteData.length - 1 ? 1 : 0.5} />
+                                ))}
+                            </Bar>
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
+            </Card>
+
+            {/* Chart 2: Revenue Growth */}
+            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px]">
+                <div className="mb-3">
                     <h3 className="text-[10px] font-black text-secondary uppercase tracking-widest">Revenue Growth</h3>
                 </div>
-                <div className="h-[140px]">
+                <div className="h-[130px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={revenueGrowthData} margin={{ top: 5, right: 0, left: -25, bottom: 0 }}>
-                            <XAxis
-                                dataKey="period"
-                                tick={chartAxisStyle}
-                                axisLine={false}
-                                tickLine={false}
-                                tickFormatter={formatPeriod}
-                            />
+                        <BarChart data={revenueGrowthData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                            <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
                             <ReferenceLine y={0} stroke="#64748B" strokeOpacity={0.3} />
-                            <Bar dataKey="growth" name="Growth" radius={[2, 2, 0, 0]} maxBarSize={16}>
+                            <Bar dataKey="growth" name="Growth" radius={[2, 2, 0, 0]} maxBarSize={20}>
                                 {revenueGrowthData.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill="#0ea5e9" fillOpacity={index === revenueGrowthData.length - 1 ? 1 : 0.5} />
                                 ))}
@@ -102,52 +116,40 @@ export function GrowthAnalysis() {
                 </div>
             </Card>
 
-            {/* Chart 2: Margin Trajectory */}
-            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
-                <div className="mb-4">
-                    <h3 className="text-[10px] font-black text-secondary uppercase tracking-widest">Margin Trajectory</h3>
+            {/* Chart 3: Margin Trajectory */}
+            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px]">
+                <div className="mb-3">
+                    <h3 className="text-[10px] font-black text-secondary uppercase tracking-widest">Margin Levels</h3>
                 </div>
-                <div className="h-[140px]">
+                <div className="h-[130px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={chartData} margin={{ top: 5, right: 0, left: -25, bottom: 0 }}>
-                            <XAxis
-                                dataKey="period"
-                                tick={chartAxisStyle}
-                                axisLine={false}
-                                tickLine={false}
-                                tickFormatter={formatPeriod}
-                            />
+                        <LineChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                            <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(0)}%`} domain={['auto', 'auto']} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
-                            <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeOpacity={0.4} strokeWidth={2.5} dot={false} activeDot={{ r: 4 }} />
-                            <Line type="monotone" dataKey="opMargin" name="Operating" stroke="#0ea5e9" strokeOpacity={0.7} strokeWidth={2.5} dot={false} activeDot={{ r: 4 }} />
-                            <Line type="monotone" dataKey="netMargin" name="Net" stroke="#0ea5e9" strokeWidth={2.5} dot={false} activeDot={{ r: 4 }} />
+                            <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeOpacity={0.4} strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
+                            <Line type="monotone" dataKey="opMargin" name="Operating" stroke="#0ea5e9" strokeOpacity={0.7} strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
+                            <Line type="monotone" dataKey="netMargin" name="Net" stroke="#0ea5e9" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
             </Card>
 
-            {/* Chart 3: Margin Change */}
-            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
-                <div className="mb-4">
+            {/* Chart 4: Margin Change (in percentage points) */}
+            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px]">
+                <div className="mb-3">
                     <h3 className="text-[10px] font-black text-secondary uppercase tracking-widest">Margin Change</h3>
                 </div>
-                <div className="h-[140px]">
+                <div className="h-[130px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={marginDeltas} margin={{ top: 5, right: 0, left: -25, bottom: 0 }}>
-                            <XAxis
-                                dataKey="period"
-                                tick={chartAxisStyle}
-                                axisLine={false}
-                                tickLine={false}
-                                tickFormatter={formatPeriod}
-                            />
-                            <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v > 0 ? '+' : ''}${v}`} />
-                            <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v} bps`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
+                        <BarChart data={marginDeltas} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                            <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
+                            <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(1)}%`} />
+                            <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(2)}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
                             <ReferenceLine y={0} stroke="#64748B" strokeOpacity={0.5} />
-                            <Bar dataKey="grossDelta" name="Gross Δ" fill="#0ea5e9" fillOpacity={0.4} radius={[2, 2, 0, 0]} maxBarSize={8} />
-                            <Bar dataKey="opDelta" name="Op Δ" fill="#0ea5e9" fillOpacity={0.7} radius={[2, 2, 0, 0]} maxBarSize={8} />
-                            <Bar dataKey="netDelta" name="Net Δ" fill="#0ea5e9" radius={[2, 2, 0, 0]} maxBarSize={8} />
+                            <Bar dataKey="grossDelta" name="Gross Δ" fill="#0ea5e9" fillOpacity={0.4} radius={[2, 2, 0, 0]} maxBarSize={10} />
+                            <Bar dataKey="opDelta" name="Op Δ" fill="#0ea5e9" fillOpacity={0.7} radius={[2, 2, 0, 0]} maxBarSize={10} />
+                            <Bar dataKey="netDelta" name="Net Δ" fill="#0ea5e9" radius={[2, 2, 0, 0]} maxBarSize={10} />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
