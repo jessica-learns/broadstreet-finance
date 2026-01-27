@@ -5,9 +5,6 @@ import { NeumorphicButton } from './ui/Button';
 export function Header() {
     return (
         <div className="relative w-full z-10 mb-8">
-            {/* Backlight Glow */}
-            <div className="absolute inset-0 bg-accent/40 blur-xl rounded-full transform scale-y-150 -z-10 opacity-60"></div>
-
             {/* Main Capsule */}
             <div className="bg-surface rounded-full shadow-neumorph px-6 py-4 flex items-center justify-between">
                 {/* Left: Profile/Brand */}

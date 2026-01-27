@@ -22,9 +22,6 @@ export function DeepDive() {
 
     return (
         <Card className="rounded-[32px] relative overflow-hidden">
-            {/* Decorator Background */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/10 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
                     <div className="p-3 bg-surface shadow-neumorph-sm rounded-2xl text-primary">
