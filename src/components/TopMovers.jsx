@@ -4,8 +4,8 @@ import { Badge } from './ui/Badge';
 import { TrendingUp } from 'lucide-react';
 
 const movers = [
-    { theme: "Nuclear SMRs", delta: "+2.4", reason: "Policy Shift", tagType: "navy" },
-    { theme: "Copper Miners", delta: "+1.8", reason: "Supply Crunch", tagType: "navy" },
+    { theme: "Nuclear SMRs", delta: "+2.4", reason: "Policy Shift", tagType: "primary" },
+    { theme: "Copper Miners", delta: "+1.8", reason: "Supply Crunch", tagType: "primary" },
     { theme: "Cloud Storage", delta: "+0.6", reason: "Valuation", tagType: "default" },
 ];
 
@@ -13,7 +13,7 @@ export function TopMovers() {
     return (
         <Card className="rounded-[32px] h-fit">
             <div className="flex items-center space-x-3 mb-6">
-                <div className="p-2 bg-surface shadow-neumorph-sm rounded-full text-accent">
+                <div className="p-2 bg-surface shadow-neumorph-sm rounded-full text-signal">
                     <TrendingUp size={20} />
                 </div>
                 <h3 className="text-lg font-bold text-primary">Top Movers (24h)</h3>

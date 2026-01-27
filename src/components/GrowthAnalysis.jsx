@@ -107,17 +107,17 @@ export function GrowthAnalysis() {
                                 <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} />
                                 <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(0)}%`} domain={['auto', 'auto']} />
                                 <Tooltip content={<NeumorphicTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
-                                <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#64748b" strokeWidth={2.5} dot={{ r: 3, fill: "#64748b", strokeWidth: 0 }} activeDot={{ r: 5 }} />
-                                <Line type="monotone" dataKey="opMargin" name="Operating" stroke="#0f172a" strokeWidth={2.5} dot={{ r: 3, fill: "#0f172a", strokeWidth: 0 }} activeDot={{ r: 5 }} />
-                                <Line type="monotone" dataKey="netMargin" name="Net" stroke="#ff5212" strokeWidth={2.5} dot={{ r: 3, fill: "#ff5212", strokeWidth: 0 }} activeDot={{ r: 5 }} />
+                                <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeOpacity={0.4} strokeWidth={2.5} dot={{ r: 3, fill: "#0ea5e9", fillOpacity: 0.4, strokeWidth: 0 }} activeDot={{ r: 5 }} />
+                                <Line type="monotone" dataKey="opMargin" name="Operating" stroke="#0ea5e9" strokeOpacity={0.7} strokeWidth={2.5} dot={{ r: 3, fill: "#0ea5e9", fillOpacity: 0.7, strokeWidth: 0 }} activeDot={{ r: 5 }} />
+                                <Line type="monotone" dataKey="netMargin" name="Net" stroke="#0ea5e9" strokeWidth={2.5} dot={{ r: 3, fill: "#0ea5e9", strokeWidth: 0 }} activeDot={{ r: 5 }} />
                             </LineChart>
                         </ResponsiveContainer>
                     </div>
                     {/* Mini Legend */}
                     <div className="flex justify-center gap-4 mt-3 pt-3 border-t border-primary/5">
-                        <div className="flex items-center gap-1.5"><div className="w-2 h-0.5 bg-slate-500 rounded-full" /><span className="text-[10px] font-bold text-secondary uppercase">Gross</span></div>
-                        <div className="flex items-center gap-1.5"><div className="w-2 h-0.5 bg-primary rounded-full" /><span className="text-[10px] font-bold text-primary uppercase">Op</span></div>
-                        <div className="flex items-center gap-1.5"><div className="w-2 h-0.5 bg-[#ff5212] rounded-full" /><span className="text-[10px] font-bold text-accent uppercase">Net</span></div>
+                        <div className="flex items-center gap-1.5"><div className="w-2 h-0.5 bg-[#0ea5e9]/40 rounded-full" /><span className="text-[10px] font-bold text-secondary uppercase">Gross</span></div>
+                        <div className="flex items-center gap-1.5"><div className="w-2 h-0.5 bg-[#0ea5e9]/70 rounded-full" /><span className="text-[10px] font-bold text-secondary uppercase">Op</span></div>
+                        <div className="flex items-center gap-1.5"><div className="w-2 h-0.5 bg-[#0ea5e9] rounded-full" /><span className="text-[10px] font-bold text-primary uppercase">Net</span></div>
                     </div>
                 </Card>
 
@@ -134,17 +134,17 @@ export function GrowthAnalysis() {
                                 <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v > 0 ? '+' : ''}${v}`} />
                                 <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v} bps`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
                                 <ReferenceLine y={0} stroke="#64748B" strokeOpacity={0.5} />
-                                <Bar dataKey="grossDelta" name="Gross Δ" fill="#64748b" radius={[2, 2, 0, 0]} maxBarSize={16} />
-                                <Bar dataKey="opDelta" name="Op Δ" fill="#0f172a" radius={[2, 2, 0, 0]} maxBarSize={16} />
-                                <Bar dataKey="netDelta" name="Net Δ" fill="#ff5212" radius={[2, 2, 0, 0]} maxBarSize={16} />
+                                <Bar dataKey="grossDelta" name="Gross Δ" fill="#0ea5e9" fillOpacity={0.4} radius={[2, 2, 0, 0]} maxBarSize={16} />
+                                <Bar dataKey="opDelta" name="Op Δ" fill="#0ea5e9" fillOpacity={0.7} radius={[2, 2, 0, 0]} maxBarSize={16} />
+                                <Bar dataKey="netDelta" name="Net Δ" fill="#0ea5e9" radius={[2, 2, 0, 0]} maxBarSize={16} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
                     {/* Mini Legend */}
                     <div className="flex justify-center gap-3 mt-3 pt-3 border-t border-primary/5">
-                        <div className="flex items-center gap-1"><div className="w-2 h-2 bg-slate-500 rounded-sm" /><span className="text-[9px] font-bold text-secondary uppercase">Gross</span></div>
-                        <div className="flex items-center gap-1"><div className="w-2 h-2 bg-primary rounded-sm" /><span className="text-[9px] font-bold text-primary uppercase">Op</span></div>
-                        <div className="flex items-center gap-1"><div className="w-2 h-2 bg-[#ff5212] rounded-sm" /><span className="text-[9px] font-bold text-accent uppercase">Net</span></div>
+                        <div className="flex items-center gap-1"><div className="w-2 h-2 bg-[#0ea5e9]/40 rounded-sm" /><span className="text-[9px] font-bold text-secondary uppercase">Gross</span></div>
+                        <div className="flex items-center gap-1"><div className="w-2 h-2 bg-[#0ea5e9]/70 rounded-sm" /><span className="text-[9px] font-bold text-secondary uppercase">Op</span></div>
+                        <div className="flex items-center gap-1"><div className="w-2 h-2 bg-[#0ea5e9] rounded-sm" /><span className="text-[9px] font-bold text-primary uppercase">Net</span></div>
                     </div>
                 </Card>
             </div>

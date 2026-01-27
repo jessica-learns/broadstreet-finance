@@ -248,28 +248,30 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                                     yAxisId="right"
                                     type="monotone"
                                     dataKey="grossMargin"
-                                    stroke="#64748b"
+                                    stroke="#0ea5e9"
+                                    strokeOpacity={0.4}
                                     strokeWidth={3}
-                                    dot={{ r: 4, fill: "#64748b", strokeWidth: 0 }}
-                                    activeDot={{ r: 6, fill: "#64748b", strokeWidth: 0 }}
+                                    dot={{ r: 4, fill: "#0ea5e9", fillOpacity: 0.4, strokeWidth: 0 }}
+                                    activeDot={{ r: 6, fill: "#0ea5e9", fillOpacity: 0.4, strokeWidth: 0 }}
                                 />
                                 <Line
                                     yAxisId="right"
                                     type="monotone"
                                     dataKey="opMargin"
-                                    stroke="#0f172a"
+                                    stroke="#0ea5e9"
+                                    strokeOpacity={0.7}
                                     strokeWidth={3}
-                                    dot={{ r: 4, fill: "#0f172a", strokeWidth: 0 }}
-                                    activeDot={{ r: 6, fill: "#0f172a", strokeWidth: 0 }}
+                                    dot={{ r: 4, fill: "#0ea5e9", fillOpacity: 0.7, strokeWidth: 0 }}
+                                    activeDot={{ r: 6, fill: "#0ea5e9", fillOpacity: 0.7, strokeWidth: 0 }}
                                 />
                                 <Line
                                     yAxisId="right"
                                     type="monotone"
                                     dataKey="netMargin"
-                                    stroke="#ff5212"
+                                    stroke="#0ea5e9"
                                     strokeWidth={3}
-                                    dot={{ r: 4, fill: "#ff5212", strokeWidth: 0 }}
-                                    activeDot={{ r: 6, fill: "#ff5212", strokeWidth: 0 }}
+                                    dot={{ r: 4, fill: "#0ea5e9", strokeWidth: 0 }}
+                                    activeDot={{ r: 6, fill: "#0ea5e9", strokeWidth: 0 }}
                                 />
                             </ComposedChart>
                         </ResponsiveContainer>
@@ -298,16 +300,16 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                         {/* Mini Legend */}
                         <div className="flex gap-4">
                             <div className="flex items-center gap-1.5 grayscale opacity-60">
-                                <div className="w-2 h-0.5 bg-slate-500" />
+                                <div className="w-2 h-0.5 bg-[#0ea5e9]/40" />
                                 <span className="text-xs font-black uppercase text-slate-600">Gross</span>
                             </div>
                             <div className="flex items-center gap-1.5">
-                                <div className="w-2 h-0.5 bg-[#0f172a]" />
+                                <div className="w-2 h-0.5 bg-[#0ea5e9]/70" />
                                 <span className="text-xs font-black uppercase text-primary">Op</span>
                             </div>
                             <div className="flex items-center gap-1.5">
-                                <div className="w-2 h-1 rounded-full bg-accent" />
-                                <span className="text-xs font-black uppercase text-accent">Net</span>
+                                <div className="w-2 h-1 rounded-full bg-[#0ea5e9]" />
+                                <span className="text-xs font-black uppercase text-primary">Net</span>
                             </div>
                         </div>
                     </div>

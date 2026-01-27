@@ -23,7 +23,7 @@ export function EvidenceFeed() {
                 {evidence.map((item, idx) => (
                     <div key={idx} className="bg-surface shadow-neumorph-sm rounded-2xl p-4 transition-all duration-300 hover:shadow-neumorph hover:-translate-y-1 cursor-pointer">
                         <div className="flex justify-between items-start mb-2">
-                            <Badge variant="navy" className="tracking-wider font-bold">
+                            <Badge variant="primary" className="tracking-wider font-bold">
                                 {item.ticker}
                             </Badge>
                             <span className="text-[10px] text-slate-500 font-bold">{item.date}</span>

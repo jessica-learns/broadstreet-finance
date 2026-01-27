@@ -54,7 +54,7 @@ export function DeepDive() {
                         placeholder="Enter ticker or research question..."
                     />
                     <NeumorphicButton
-                        variant="solid"
+                        variant="accent"
                         onClick={handleGenerate}
                         disabled={loading}
                         className="flex items-center gap-2 px-3 py-1.5 text-xs hover:scale-105 active:scale-95 transition-transform duration-200"
@@ -67,7 +67,7 @@ export function DeepDive() {
                 {/* Report Section */}
                 <div className="p-6 bg-surface shadow-neumorph-sm rounded-3xl border border-white/50 group/report hover:shadow-neumorph transition-all duration-300 cursor-pointer">
                     <div className="flex justify-between items-start mb-4">
-                        <Badge variant="navy">Analyst Note</Badge>
+                        <Badge variant="primary">Analyst Note</Badge>
                         <span className="text-xs text-slate-500 font-black uppercase tracking-widest">Generated 2m ago</span>
                     </div>
                     <h3 className="text-xl font-bold text-primary mb-3">Supply Chain Constraints in CoWoS Pricing</h3>
