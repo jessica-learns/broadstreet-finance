@@ -8,7 +8,6 @@ import { FinancialTruthCard } from './components/FinancialTruthCard';
 import { DeepDive } from './components/DeepDive';
 import { RiskRadar } from './components/RiskRadar';
 import { EvidenceFeed } from './components/EvidenceFeed';
-
 import { TickerInput } from './components/TickerInput';
 
 function App() {
@@ -18,10 +17,16 @@ function App() {
         <div className="max-w-[1400px] mx-auto">
           <Header />
           <div className="space-y-8">
-            {/* Growth Analysis Section - Full Width (5 Columns) */}
+
+            {/* Growth Analysis Section - Ticker Input + 2x2 Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-              <TickerInput />
-              <div className="lg:col-span-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Ticker Input - Takes 1 column, spans 2 rows */}
+              <div className="lg:row-span-2">
+                <TickerInput />
+              </div>
+
+              {/* Charts - 2x2 grid taking 4 columns */}
+              <div className="lg:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <GrowthAnalysis />
               </div>
             </div>
