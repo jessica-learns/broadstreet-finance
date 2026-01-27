@@ -15,12 +15,19 @@ export function TickerInput() {
         }
     };
 
-    // Get latest quarter data for quick stats
-    const latestQ = stockData?.chartData?.[stockData.chartData.length - 1];
-    const description = stockData?.evidence?.businessDescription || '';
-
     // Format helpers
     const fmtPct = (val) => `${(val * 100).toFixed(1)}%`;
+
+    const formatPeriod = (period) => {
+        if (!period) return '';
+        const [year, month] = period.split('-');
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return `${months[parseInt(month) - 1]}'${year.slice(2)}`;
+    };
+
+    // Get latest quarter data for quick stats
+    const latestQ = stockData?.chartData?.[stockData.chartData.length - 1];
+    const latestPeriod = latestQ?.period ? formatPeriod(latestQ.period) : '';
 
     return (
         <Card className="rounded-[24px] p-5 shadow-neumorph-sm h-full flex flex-col">
@@ -62,7 +69,9 @@ export function TickerInput() {
             {/* Quick Stats - only show when we have data */}
             {latestQ && !loading && (
                 <div className="border-t border-primary/5 pt-4 mb-4">
-                    <div className="text-[11px] font-black text-secondary uppercase tracking-widest mb-3">Quick Stats</div>
+                    <div className="text-[11px] font-black text-secondary uppercase tracking-widest mb-3">
+                        Latest Quarter {latestPeriod && <span className="text-primary">· {latestPeriod}</span>}
+                    </div>
                     <div className="space-y-2">
                         <div className="flex justify-between items-center">
                             <span className="text-sm text-secondary">Rev Growth</span>
