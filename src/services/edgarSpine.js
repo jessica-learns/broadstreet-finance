@@ -316,7 +316,7 @@ export async function getFinancialTruth(ticker) {
                         const nextItemMatch = section.search(/item\s*1[a-c]|item\s*2/i);
                         const sectionText = nextItemMatch > 0
                             ? section.slice(0, nextItemMatch)
-                            : section.slice(0, 1000);
+                            : section.slice(0, 2000);
 
                         // Look for a real sentence (starts with capital, has verb patterns)
                         const sentences = sectionText.match(/[A-Z][^.!?]{30,}[.!?]/g);
@@ -383,8 +383,8 @@ export async function getFinancialTruth(ticker) {
                     // Step 4: Final cleanup and truncation
                     if (bestSnippet) {
                         bestSnippet = bestSnippet.replace(/\s+/g, ' ').trim();
-                        businessDescription = bestSnippet.length > 280
-                            ? bestSnippet.slice(0, 277) + '...'
+                        businessDescription = bestSnippet.length > 600
+                            ? bestSnippet.slice(0, 597) + '...'
                             : bestSnippet;
                     }
                 }
