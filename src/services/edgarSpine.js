@@ -209,6 +209,12 @@ export async function getFinancialTruth(ticker) {
         growth: Math.round(q.growth * 1000) / 10,
     }));
 
+    // Absolute revenue data (in billions for cleaner display)
+    const revenueAbsoluteData = chartData.map(q => ({
+        period: q.period,
+        revenue: q.revenue / 1e9,  // Convert to billions
+    }));
+
     // --- LOGIC: VERDICT (Uses Annual/LTM proxy for stability) ---
     // We use the most recent "Annual-like" or Quarterly snapshot for the gauge
     const latestRev = revenueSeriesAnnual[0]?.val || 0;
@@ -316,6 +322,7 @@ export async function getFinancialTruth(ticker) {
         chartData,
         marginDeltas,
         revenueGrowthData,
+        revenueAbsoluteData,
         fetchedAt: Date.now(),
     };
 
