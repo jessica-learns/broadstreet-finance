@@ -39,16 +39,16 @@ export function GrowthAnalysis() {
     if (loading) {
         return (
             <>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px] flex items-center justify-center">
+                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
                     <Loader2 className="animate-spin text-primary/30" size={24} />
                 </Card>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px] flex items-center justify-center">
+                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
                     <Loader2 className="animate-spin text-primary/30" size={24} />
                 </Card>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px] flex items-center justify-center">
+                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
                     <Loader2 className="animate-spin text-primary/30" size={24} />
                 </Card>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px] flex items-center justify-center">
+                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
                     <Loader2 className="animate-spin text-primary/30" size={24} />
                 </Card>
             </>
@@ -60,7 +60,7 @@ export function GrowthAnalysis() {
         return (
             <>
                 {[1, 2, 3, 4].map(i => (
-                    <Card key={i} className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px] flex items-center justify-center">
+                    <Card key={i} className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
                         <span className="text-sm text-secondary font-bold uppercase tracking-wider">No Data</span>
                     </Card>
                 ))}
@@ -74,11 +74,11 @@ export function GrowthAnalysis() {
     return (
         <>
             {/* Chart 1: Revenue (Absolute) */}
-            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px]">
+            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
                 <div className="mb-3">
                     <h3 className="text-xs font-black text-secondary uppercase tracking-widest">Revenue</h3>
                 </div>
-                <div className="h-[130px]">
+                <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={revenueAbsoluteData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
@@ -95,11 +95,11 @@ export function GrowthAnalysis() {
             </Card>
 
             {/* Chart 2: Revenue Growth */}
-            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px]">
+            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
                 <div className="mb-3">
                     <h3 className="text-xs font-black text-secondary uppercase tracking-widest">Revenue Growth</h3>
                 </div>
-                <div className="h-[130px]">
+                <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={revenueGrowthData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
@@ -117,13 +117,13 @@ export function GrowthAnalysis() {
             </Card>
 
             {/* Chart 3: Margin Trajectory */}
-            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px]">
+            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
                 <div className="mb-3">
                     <h3 className="text-xs font-black text-secondary uppercase tracking-widest">Margin Levels</h3>
                 </div>
-                <div className="h-[130px]">
+                <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={chartData} margin={{ top: 5, right: 5, left: -5, bottom: 0 }}>
+                        <LineChart data={chartData} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(0)}%`} domain={['auto', 'auto']} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
@@ -136,11 +136,11 @@ export function GrowthAnalysis() {
             </Card>
 
             {/* Chart 4: Margin Change (in percentage points) */}
-            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[200px]">
+            <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
                 <div className="mb-3">
                     <h3 className="text-xs font-black text-secondary uppercase tracking-widest">Margin Change</h3>
                 </div>
-                <div className="h-[130px]">
+                <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={marginDeltas} margin={{ top: 5, right: 5, left: 5, bottom: 0 }}>
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
