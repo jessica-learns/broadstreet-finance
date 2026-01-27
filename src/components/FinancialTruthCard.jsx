@@ -6,9 +6,7 @@ import { Loader2, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { useDashboard } from '../context/DashboardContext';
 
 export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
-    const { selectedTicker: ticker, stockData, loading, error } = useDashboard();
-
-    const data = stockData;
+    const { selectedTicker: ticker, stockData: data, loading, error } = useDashboard();
 
     if (!ticker) return null;
 
