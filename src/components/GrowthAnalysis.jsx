@@ -48,10 +48,10 @@ const CustomXAxisTick = ({ x, y, payload }) => {
 
     return (
         <g transform={`translate(${x},${y})`}>
-            <text x={0} y={0} dy={12} textAnchor="middle" fill="#64748B" fontSize={12} fontWeight={600}>
+            <text x={0} y={0} dy={16} textAnchor="middle" fill="#64748B" fontSize={12} fontWeight={600}>
                 {monthStr}
             </text>
-            <text x={0} y={0} dy={26} textAnchor="middle" fill="#64748B" fontSize={11} fontWeight={500}>
+            <text x={0} y={0} dy={30} textAnchor="middle" fill="#64748B" fontSize={11} fontWeight={500}>
                 {yearStr}
             </text>
         </g>
@@ -106,7 +106,7 @@ export function GrowthAnalysis() {
                 </div>
                 <div className="h-[220px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={revenueAbsoluteData} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
+                        <BarChart data={revenueAbsoluteData} margin={{ top: 10, right: 10, left: 10, bottom: 5 }}>
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={{ stroke: '#64748B', strokeOpacity: 0.3 }} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v.toFixed(0)}B`} />
@@ -128,7 +128,7 @@ export function GrowthAnalysis() {
                 </div>
                 <div className="h-[220px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={revenueGrowthData} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
+                        <BarChart data={revenueGrowthData} margin={{ top: 10, right: 10, left: 10, bottom: 5 }}>
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={{ stroke: '#64748B', strokeOpacity: 0.3 }} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
@@ -151,7 +151,7 @@ export function GrowthAnalysis() {
                 </div>
                 <div className="h-[220px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={chartData} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
+                        <LineChart data={chartData} margin={{ top: 10, right: 10, left: 10, bottom: 5 }}>
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={{ stroke: '#64748B', strokeOpacity: 0.3 }} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(1)}%`} domain={['auto', 'auto']} tickCount={4} />
@@ -171,7 +171,7 @@ export function GrowthAnalysis() {
                 </div>
                 <div className="h-[220px]">
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={marginDeltas} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
+                        <BarChart data={marginDeltas} margin={{ top: 10, right: 10, left: 10, bottom: 5 }}>
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={{ stroke: '#64748B', strokeOpacity: 0.3 }} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(1)}%`} />
