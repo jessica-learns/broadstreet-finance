@@ -44,7 +44,7 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
 
             {/* Revenue Trajectory Summary */}
             {data && !loading && !error && data.chartData && data.chartData.length >= 4 && (
-                <div className="px-2 mb-4 relative z-10">
+                <div className="px-2 mb-6 relative z-10">
                     <div className="text-xs font-black text-secondary uppercase tracking-widest mb-3">Quarterly Revenue Growth</div>
                     <div className="flex items-center gap-2">
                         {data.chartData.slice(-6).map((q, idx, arr) => {
@@ -69,7 +69,7 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                                     </div>
                                     <div className="flex flex-col items-center">
                                         <span className="text-xs font-semibold text-primary">{monthStr}</span>
-                                        <span className="text-[10px] text-secondary">'{yearStr}</span>
+                                        <span className="text-[11px] text-secondary">'{yearStr}</span>
                                     </div>
                                 </div>
                             );
