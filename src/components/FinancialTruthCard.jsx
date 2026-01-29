@@ -153,8 +153,8 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                     {/* Business Description */}
                     {data?.evidence?.businessDescription && (
                         <div className="mt-6 pt-6 border-t border-primary/5">
-                            <div className="text-[10px] font-black text-secondary uppercase tracking-widest mb-2">About {ticker}</div>
-                            <p className="text-sm text-secondary leading-relaxed">
+                            <div className="text-xs font-black text-secondary uppercase tracking-widest mb-2">About {ticker}</div>
+                            <p className="text-base text-secondary leading-relaxed line-clamp-4">
                                 {data.evidence.businessDescription}
                             </p>
                         </div>
