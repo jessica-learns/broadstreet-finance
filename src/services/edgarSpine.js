@@ -358,12 +358,22 @@ export async function getFinancialTruth(ticker) {
 
                     // Step 3: Fallback - search entire doc for company description patterns
                     if (!bestSnippet || bestSnippet.length < 50) {
+                        // Get company name from SEC submissions for dynamic matching
+                        const companyName = subData.name || '';
+                        const nameWords = companyName.split(/[\s,]+/).filter(w => w.length > 2 && !/^(Inc|Corp|LLC|Ltd|Co|Company|Holdings|Group)$/i.test(w));
+                        const primaryName = nameWords[0] || ticker; // First significant word or ticker as fallback
+
+                        // Build dynamic pattern for company name
+                        const namePattern = primaryName.length > 2
+                            ? new RegExp(`${primaryName}[^.]*(?:is|was)\\s+a[n]?\s+[^.]{30,200}\\.`, 'i')
+                            : null;
+
                         const companyPatterns = [
-                            /NVIDIA[^.]*is\s+a[n]?\s+[^.]{30,200}\./i,
+                            namePattern, // Dynamic company name pattern (e.g., "Apple is a...")
                             /(?:the\s+)?company\s+(?:is|was)\s+[^.]{30,200}\./i,
                             /we\s+are\s+a[n]?\s+[^.]{30,200}\./i,
                             /(?:designs?|develops?|manufactures?|provides?)\s+[^.]{30,150}(?:products?|solutions?|services?|platforms?)[^.]*\./i
-                        ];
+                        ].filter(Boolean); // Remove null if namePattern wasn't created
 
                         for (const pattern of companyPatterns) {
                             const match = text.match(pattern);
