@@ -45,28 +45,32 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
             {/* Revenue Trajectory Summary */}
             {data && !loading && !error && data.chartData && data.chartData.length >= 4 && (
                 <div className="px-2 mb-4 relative z-10">
-                    <div className="text-[11px] font-black text-secondary uppercase tracking-widest mb-2">Quarterly Revenue Growth</div>
-                    <div className="flex items-center gap-1">
+                    <div className="text-xs font-black text-secondary uppercase tracking-widest mb-3">Quarterly Revenue Growth</div>
+                    <div className="flex items-center gap-2">
                         {data.chartData.slice(-6).map((q, idx, arr) => {
                             const growthPct = Math.round(q.growth * 100);
                             const isPositive = growthPct >= 0;
                             const isLatest = idx === arr.length - 1;
+                            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                            const monthStr = months[parseInt(q.period.split('-')[1]) - 1];
+                            const yearStr = q.period.split('-')[0].slice(2);
+
                             return (
-                                <div key={q.period} className="flex flex-col items-center">
+                                <div key={q.period} className="flex flex-col items-center gap-1.5">
                                     <div
-                                        className={`relative flex items-center justify-center text-white font-bold text-sm min-w-[44px] h-[32px] ${isPositive
-                                            ? isLatest ? 'bg-signal' : 'bg-signal/60'
-                                            : 'bg-secondary/40'
+                                        className={`flex items-center justify-center rounded-lg px-3 py-2 min-w-[52px] font-bold text-sm transition-all ${isLatest
+                                                ? 'bg-signal text-white shadow-lg shadow-signal/25'
+                                                : isPositive
+                                                    ? 'bg-signal/15 text-signal'
+                                                    : 'bg-secondary/10 text-secondary'
                                             }`}
-                                        style={{
-                                            clipPath: isPositive
-                                                ? 'polygon(0% 50%, 15% 0%, 100% 0%, 100% 100%, 15% 100%)'
-                                                : 'polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%)'
-                                        }}
                                     >
-                                        <span className={isPositive ? 'ml-1' : 'mr-1'}>{isPositive ? '+' : ''}{growthPct}</span>
+                                        {isPositive ? '+' : ''}{growthPct}%
                                     </div>
-                                    <span className="text-xs text-secondary mt-1">{['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][parseInt(q.period.split('-')[1]) - 1]}'{q.period.split('-')[0].slice(2)}</span>
+                                    <div className="flex flex-col items-center">
+                                        <span className="text-xs font-semibold text-primary">{monthStr}</span>
+                                        <span className="text-[10px] text-secondary">'{yearStr}</span>
+                                    </div>
                                 </div>
                             );
                         })}
