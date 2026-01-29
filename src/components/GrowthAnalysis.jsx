@@ -108,7 +108,7 @@ export function GrowthAnalysis() {
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={revenueAbsoluteData} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
-                            <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
+                            <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={false} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v.toFixed(0)}B`} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `$${v.toFixed(1)}B`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
                             <Bar dataKey="revenue" name="Revenue" radius={[2, 2, 0, 0]} maxBarSize={20}>
@@ -130,7 +130,7 @@ export function GrowthAnalysis() {
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={revenueGrowthData} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
-                            <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
+                            <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={false} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
                             <ReferenceLine y={0} stroke="#64748B" strokeOpacity={0.3} />
@@ -153,7 +153,7 @@ export function GrowthAnalysis() {
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={chartData} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
-                            <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
+                            <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={false} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(1)}%`} domain={['auto', 'auto']} tickCount={4} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
                             <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeOpacity={0.4} strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
@@ -173,7 +173,7 @@ export function GrowthAnalysis() {
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={marginDeltas} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
-                            <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
+                            <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={false} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(1)}%`} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(2)}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
                             <ReferenceLine y={0} stroke="#64748B" strokeOpacity={0.5} />
