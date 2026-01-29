@@ -5,7 +5,7 @@ import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContai
 import { Loader2 } from 'lucide-react';
 
 // NeumorphicTooltip component (custom tooltip with neumorphic styling)
-const NeumorphicTooltip = ({ active, payload, label, formatter }) => {
+const ChartTooltip = ({ active, payload, label, formatter }) => {
     if (active && payload && payload.length) {
         return (
             <div className="bg-surface/95 backdrop-blur-xl shadow-neumorph-elevated border border-white/50 rounded-2xl p-4 text-sm min-w-[160px]">
@@ -110,7 +110,7 @@ export function GrowthAnalysis() {
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={{ stroke: '#64748B', strokeOpacity: 0.3 }} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v.toFixed(0)}B`} />
-                            <Tooltip content={<NeumorphicTooltip formatter={(v) => `$${v.toFixed(1)}B`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
+                            <Tooltip content={<ChartTooltip formatter={(v) => `$${v.toFixed(1)}B`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
                             <Bar dataKey="revenue" name="Revenue" radius={[2, 2, 0, 0]} maxBarSize={20}>
                                 {revenueAbsoluteData.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill="#0ea5e9" fillOpacity={index === revenueAbsoluteData.length - 1 ? 1 : 0.5} />
@@ -132,7 +132,7 @@ export function GrowthAnalysis() {
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={{ stroke: '#64748B', strokeOpacity: 0.3 }} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
-                            <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
+                            <Tooltip content={<ChartTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
                             <ReferenceLine y={0} stroke="#64748B" strokeOpacity={0.3} />
                             <Bar dataKey="growth" name="Growth" radius={[2, 2, 0, 0]} maxBarSize={20}>
                                 {revenueGrowthData.map((entry, index) => (
@@ -169,7 +169,7 @@ export function GrowthAnalysis() {
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={{ stroke: '#64748B', strokeOpacity: 0.3 }} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(1)}%`} domain={['auto', 'auto']} tickCount={4} />
-                            <Tooltip content={<NeumorphicTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
+                            <Tooltip content={<ChartTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
                             <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeOpacity={0.4} strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
                             <Line type="monotone" dataKey="opMargin" name="Operating" stroke="#0ea5e9" strokeOpacity={0.7} strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
                             <Line type="monotone" dataKey="netMargin" name="Net" stroke="#0ea5e9" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
@@ -189,7 +189,7 @@ export function GrowthAnalysis() {
                             <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={{ stroke: '#64748B', strokeOpacity: 0.3 }} tickLine={false} height={45} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(1)}%`} />
-                            <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(2)}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
+                            <Tooltip content={<ChartTooltip formatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(2)}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
                             <ReferenceLine y={0} stroke="#64748B" strokeOpacity={0.5} />
                             <Bar dataKey="grossDelta" name="Gross Δ" fill="#0ea5e9" fillOpacity={0.4} radius={[2, 2, 0, 0]} maxBarSize={10} />
                             <Bar dataKey="opDelta" name="Op Δ" fill="#0ea5e9" fillOpacity={0.7} radius={[2, 2, 0, 0]} maxBarSize={10} />
