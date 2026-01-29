@@ -23,7 +23,7 @@ export function RiskRadar() {
             <div className="space-y-3">
                 {risks.map((risk, idx) => (
                     <div key={idx} className="flex items-center justify-between px-4 py-3 bg-surface shadow-neumorph-pressed rounded-full">
-                        <span className="text-sm font-bold text-slate-600">{risk.label}</span>
+                        <span className="text-sm font-bold text-secondary">{risk.label}</span>
                         <div className={cn(
                             "w-3 h-3 rounded-full",
                             risk.status === 'high' && "bg-accent/80",
