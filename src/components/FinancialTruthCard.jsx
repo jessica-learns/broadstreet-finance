@@ -23,16 +23,16 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
             {/* Header Section */}
             <div className="flex items-start justify-between mb-4 px-2 relative z-10">
                 <div>
-                    <h2 className="text-3xl font-black text-primary tracking-tighter flex items-baseline gap-3">
+                    <h2 className="text-5xl font-black text-primary tracking-tight">
                         {ticker}
-                        {latestQ && (
-                            <span className="text-lg font-bold tracking-tight text-primary">
-                                {latestQ.growth > 0 ? '+' : ''}{(latestQ.growth * 100).toFixed(1)}% QoQ
-                            </span>
-                        )}
                     </h2>
-                    <div className="text-xs text-secondary font-black uppercase tracking-widest mt-1 ml-1 flex items-center gap-2">
-                        Stock Analysis <div className="w-1 h-1 rounded-full bg-slate-400" /> Live SEC Data
+                    {latestQ && (
+                        <div className="text-2xl font-bold text-signal mt-1">
+                            {latestQ.growth > 0 ? '+' : ''}{(latestQ.growth * 100).toFixed(1)}% QoQ
+                        </div>
+                    )}
+                    <div className="text-sm text-secondary mt-2 flex items-center gap-2">
+                        Stock Analysis <div className="w-1 h-1 rounded-full bg-secondary" /> Live SEC Data
                     </div>
                 </div>
                 {data && (
