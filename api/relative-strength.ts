@@ -289,7 +289,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         }
 
         const targets = body.targets.map(t => t.toUpperCase().trim()).filter(Boolean);
-        const asOfDate = isValidDate(body.asOfDate) ? body.asOfDate : getTodayISO();
+        const asOfDate = isValidDate(body.asOfDate) ? body.asOfDate : getYesterdayISO();
         const benchmarks = Array.isArray(body.benchmarks) && body.benchmarks.length > 0
             ? body.benchmarks.map(b => b.toUpperCase().trim())
             : [...DEFAULT_BENCHMARKS];
