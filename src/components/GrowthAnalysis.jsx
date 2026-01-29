@@ -9,7 +9,13 @@ const NeumorphicTooltip = ({ active, payload, label, formatter }) => {
     if (active && payload && payload.length) {
         return (
             <div className="bg-surface/95 backdrop-blur-xl shadow-neumorph-elevated border border-white/50 rounded-2xl p-4 text-sm min-w-[160px]">
-                <div className="font-bold text-primary mb-2 text-sm border-b border-primary/10 pb-2">{label}</div>
+                <div className="font-bold text-primary mb-2 text-sm border-b border-primary/10 pb-2">
+                    {label && label.includes('-') ? (() => {
+                        const [year, month] = label.split('-');
+                        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                        return `${months[parseInt(month) - 1]} '${year.slice(2)}`;
+                    })() : label}
+                </div>
                 <div className="space-y-1.5">
                     {payload.map((entry, index) => (
                         <div key={index} className="flex justify-between items-center gap-4">
