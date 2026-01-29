@@ -55,8 +55,8 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                                 <div key={q.period} className="flex flex-col items-center">
                                     <div
                                         className={`relative flex items-center justify-center text-white font-bold text-sm min-w-[44px] h-[32px] ${isPositive
-                                                ? isLatest ? 'bg-signal' : 'bg-signal/60'
-                                                : 'bg-secondary/40'
+                                            ? isLatest ? 'bg-signal' : 'bg-signal/60'
+                                            : 'bg-secondary/40'
                                             }`}
                                         style={{
                                             clipPath: isPositive
@@ -66,7 +66,7 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                                     >
                                         <span className={isPositive ? 'ml-1' : 'mr-1'}>{isPositive ? '+' : ''}{growthPct}</span>
                                     </div>
-                                    <span className="text-[10px] text-secondary mt-1">{q.period.split('-')[1]}/'{q.period.split('-')[0].slice(2)}</span>
+                                    <span className="text-xs text-secondary mt-1">{['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][parseInt(q.period.split('-')[1]) - 1]}'{q.period.split('-')[0].slice(2)}</span>
                                 </div>
                             );
                         })}
