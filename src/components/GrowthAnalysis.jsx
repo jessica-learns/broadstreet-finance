@@ -39,16 +39,16 @@ export function GrowthAnalysis() {
     if (loading) {
         return (
             <>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
+                <Card className="rounded-[24px] p-5 shadow-neumorph-sm h-[290px] flex items-center justify-center">
                     <Loader2 className="animate-spin text-primary/30" size={24} />
                 </Card>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
+                <Card className="rounded-[24px] p-5 shadow-neumorph-sm h-[290px] flex items-center justify-center">
                     <Loader2 className="animate-spin text-primary/30" size={24} />
                 </Card>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
+                <Card className="rounded-[24px] p-5 shadow-neumorph-sm h-[290px] flex items-center justify-center">
                     <Loader2 className="animate-spin text-primary/30" size={24} />
                 </Card>
-                <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
+                <Card className="rounded-[24px] p-5 shadow-neumorph-sm h-[290px] flex items-center justify-center">
                     <Loader2 className="animate-spin text-primary/30" size={24} />
                 </Card>
             </>
@@ -60,7 +60,7 @@ export function GrowthAnalysis() {
         return (
             <>
                 {[1, 2, 3, 4].map(i => (
-                    <Card key={i} className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px] flex items-center justify-center">
+                    <Card key={i} className="rounded-[24px] p-5 shadow-neumorph-sm h-[290px] flex items-center justify-center">
                         <span className="text-sm text-secondary font-bold uppercase tracking-wider">No Data</span>
                     </Card>
                 ))}
