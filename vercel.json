@@ -2,10 +2,5 @@
     "buildCommand": "npm run build",
     "outputDirectory": "dist",
     "framework": "vite",
-    "devCommand": "vite",
-    "functions": {
-        "api/**/*.ts": {
-            "runtime": "nodejs20.x"
-        }
-    }
+    "devCommand": "vite"
 }
