@@ -50,17 +50,17 @@ function RSRow({ benchmark, data }) {
             <div className="flex items-center gap-3">
                 {data?.rsVsMA && (
                     <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${isAboveMA
-                            ? 'bg-signal/10 text-signal'
-                            : 'bg-secondary/10 text-secondary'
+                        ? 'bg-signal/10 text-signal'
+                        : 'bg-secondary/10 text-secondary'
                         }`}>
                         {isAboveMA ? '▲ MA' : '▼ MA'}
                     </span>
                 )}
                 <span className={`text-sm font-bold tabular-nums min-w-[60px] text-right ${data?.error
-                        ? 'text-secondary'
-                        : isOutperforming
-                            ? 'text-primary'
-                            : 'text-secondary'
+                    ? 'text-secondary'
+                    : isOutperforming
+                        ? 'text-primary'
+                        : 'text-secondary'
                     }`}>
                     {rsReturnFormatted}
                 </span>
@@ -128,10 +128,10 @@ export function MomentumCard() {
                 </div>
                 {!loading && totalCount > 0 && (
                     <div className={`px-3 py-1 rounded-full text-xs font-bold ${outperformCount >= 4
-                            ? 'bg-signal/10 text-signal border border-signal/20'
-                            : outperformCount >= 2
-                                ? 'bg-primary/5 text-primary border border-primary/10'
-                                : 'bg-secondary/10 text-secondary border border-secondary/20'
+                        ? 'bg-signal/10 text-signal border border-signal/20'
+                        : outperformCount >= 2
+                            ? 'bg-primary/5 text-primary border border-primary/10'
+                            : 'bg-secondary/10 text-secondary border border-secondary/20'
                         }`}>
                         {outperformCount}/{totalCount} Outperforming
                     </div>
@@ -167,7 +167,7 @@ export function MomentumCard() {
 
             {rsData?.asOfDate && (
                 <div className="mt-4 pt-3 border-t border-primary/5">
-                    <p className="text-[9px] text-secondary/50 text-center uppercase tracking-wider">
+                    <p className="text-[10px] text-secondary/50 text-center uppercase tracking-wider">
                         As of {rsData.asOfDate} • Twelve Data
                     </p>
                 </div>

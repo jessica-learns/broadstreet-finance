@@ -13,7 +13,7 @@ export function EvidenceFeed() {
     return (
         <Card className="rounded-[32px] h-fit">
             <div className="flex items-center space-x-3 mb-6">
-                <div className="p-2 bg-surface shadow-neumorph-sm rounded-full text-slate-500">
+                <div className="p-2 bg-surface shadow-neumorph-sm rounded-full text-secondary">
                     <FileText size={20} />
                 </div>
                 <h3 className="text-lg font-bold text-primary">Fresh Evidence</h3>
@@ -26,7 +26,7 @@ export function EvidenceFeed() {
                             <Badge variant="primary" className="tracking-wider font-bold">
                                 {item.ticker}
                             </Badge>
-                            <span className="text-[10px] text-slate-500 font-bold">{item.date}</span>
+                            <span className="text-[10px] text-secondary font-bold">{item.date}</span>
                         </div>
                         <p className="text-sm font-medium text-primary leading-snug">
                             {item.summary}

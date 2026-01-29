@@ -59,10 +59,10 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                                 <div key={q.period} className="flex flex-col items-center gap-1.5">
                                     <div
                                         className={`flex items-center justify-center rounded-lg px-3 py-2 min-w-[52px] font-bold text-sm transition-all ${isLatest
-                                                ? 'bg-signal text-white shadow-lg shadow-signal/25'
-                                                : isPositive
-                                                    ? 'bg-signal/15 text-signal'
-                                                    : 'bg-secondary/10 text-secondary'
+                                            ? 'bg-signal text-white shadow-lg shadow-signal/25'
+                                            : isPositive
+                                                ? 'bg-signal/15 text-signal'
+                                                : 'bg-secondary/10 text-secondary'
                                             }`}
                                     >
                                         {isPositive ? '+' : ''}{growthPct}%
@@ -89,7 +89,7 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                                     <span className="text-2xl font-black tracking-tighter text-primary">
                                         {pricingPower > 0 ? '+' : ''}{pricingPower}%
                                     </span>
-                                    <span className="text-[9px] font-bold text-secondary/60 uppercase tracking-tighter opacity-70">6m Delta</span>
+                                    <span className="text-[10px] font-bold text-secondary/60 uppercase tracking-tighter opacity-70">6m Delta</span>
                                 </div>
                             </div>
                             <div className="w-px h-10 bg-slate-200/60" />
@@ -99,7 +99,7 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                                     <span className="text-2xl font-black tracking-tighter text-primary">
                                         {revenueAccel > 0 ? '+' : ''}{revenueAccel}%
                                     </span>
-                                    <span className="text-[9px] font-bold text-secondary/60 uppercase tracking-tighter opacity-70">Acceleration</span>
+                                    <span className="text-[10px] font-bold text-secondary/60 uppercase tracking-tighter opacity-70">Acceleration</span>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                                 <Badge variant="outline" className="text-[10px] border-slate-300 text-secondary bg-white/60 py-0.5 px-2.5 font-black uppercase tracking-widest rounded-lg">
                                     Hedge Fund Signals
                                 </Badge>
-                                <span className="text-[8px] font-bold text-secondary/60 uppercase mt-1 tracking-tighter">Proprietary Alpha Stream</span>
+                                <span className="text-[10px] font-bold text-secondary/60 uppercase mt-1 tracking-tighter">Proprietary Alpha Stream</span>
                             </div>
                         </div>
                     </div>
