@@ -10,7 +10,7 @@ export default {
                 background: "#EFEEF3",
                 surface: "#EFEEF3",
                 primary: "#0f172a",
-                secondary: "#64748B",
+                secondary: "#475569",
                 accent: "#ff5212",
                 "accent-muted": "rgba(255, 82, 18, 0.1)",
                 "accent-glow": "rgba(255, 82, 18, 0.15)",
