@@ -170,9 +170,9 @@ export function GrowthAnalysis() {
                             <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={{ stroke: '#64748B', strokeOpacity: 0.3 }} tickLine={false} height={45} interval={0} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(1)}%`} domain={['auto', 'auto']} tickCount={4} />
                             <Tooltip content={<ChartTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
-                            <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeOpacity={0.4} strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
-                            <Line type="monotone" dataKey="opMargin" name="Operating" stroke="#0ea5e9" strokeOpacity={0.7} strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
-                            <Line type="monotone" dataKey="netMargin" name="Net" stroke="#0ea5e9" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
+                            <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
+                            <Line type="monotone" dataKey="opMargin" name="Operating" stroke="#64748B" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
+                            <Line type="monotone" dataKey="netMargin" name="Net" stroke="#0f172a" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
