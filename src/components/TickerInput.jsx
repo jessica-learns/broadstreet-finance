@@ -34,7 +34,7 @@ export function TickerInput() {
             <div className="flex-1 flex flex-col">
                 {/* Header */}
                 <div className="mb-4">
-                    <h3 className="text-[10px] font-black text-secondary uppercase tracking-widest">Analyze Stock</h3>
+                    <h3 className="text-xs font-black text-secondary uppercase tracking-widest">Analyze Stock</h3>
                 </div>
 
                 {/* Input Form */}
@@ -71,7 +71,7 @@ export function TickerInput() {
                 {latestQ && !loading && (
                     <div className="border-t border-primary/5 pt-4 mb-4">
                         <div className="text-center mb-3">
-                            <div className="text-[11px] font-black text-secondary uppercase tracking-widest">Latest Quarter</div>
+                            <div className="text-xs font-black text-secondary uppercase tracking-widest">Latest Quarter</div>
                             {latestPeriod && <div className="text-sm font-black text-accent uppercase">{latestPeriod}</div>}
                         </div>
                         <div className="space-y-3">
@@ -97,7 +97,7 @@ export function TickerInput() {
             </div>
 
             {/* SEC Attribution */}
-            <p className="text-[8px] text-secondary/50 text-center uppercase tracking-wider">
+            <p className="text-[10px] text-secondary/50 text-center uppercase tracking-wider">
                 SEC EDGAR Data
             </p>
         </Card>
