@@ -1,11 +1,11 @@
 import React from 'react';
 import { cn } from '../../lib/utils';
 
-export function Card({ className, children, ...props }) {
+export function Card({ children, className, ...props }) {
     return (
         <div
             className={cn(
-                "bg-surface rounded-3xl shadow-neumorph p-6",
+                "bg-white border border-slate-200 rounded-2xl p-5 transition-shadow hover:shadow-md",
                 className
             )}
             {...props}
