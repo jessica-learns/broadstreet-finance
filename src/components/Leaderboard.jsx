@@ -46,10 +46,10 @@ export function ThemeLeaderboard() {
                                         <span className="text-[10px] font-black text-accent tracking-widest uppercase">{item.ticker}</span>
                                     </div>
                                 </td>
-                                <td className="py-3 text-right font-bold text-slate-600 tabular-nums">
+                                <td className="py-3 text-right font-bold text-secondary tabular-nums">
                                     {item.cps}
                                 </td>
-                                <td className="py-3 text-right font-mono font-bold text-slate-900 tabular-nums text-sm">
+                                <td className="py-3 text-right font-mono font-bold text-primary tabular-nums text-sm">
                                     {item.mrg}
                                 </td>
                                 <td className="py-3 pr-4 text-right rounded-r-xl">
