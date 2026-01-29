@@ -146,19 +146,19 @@ export function GrowthAnalysis() {
 
             {/* Chart 3: Margin Trajectory */}
             <Card className="rounded-[24px] p-5 shadow-neumorph-sm h-[290px]">
-                <div className="mb-3 flex items-center justify-between">
+                <div className="mb-3 text-center">
                     <h3 className="text-sm font-black text-primary uppercase tracking-widest">Margin Levels</h3>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center gap-4 mt-1">
                         <div className="flex items-center gap-1">
-                            <div className="w-3 h-0.5 bg-signal/40"></div>
+                            <div className="w-3 h-0.5 bg-signal"></div>
                             <span className="text-[10px] text-secondary">Gross</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <div className="w-3 h-0.5 bg-signal/70"></div>
+                            <div className="w-3 h-0.5 bg-secondary"></div>
                             <span className="text-[10px] text-secondary">Op</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <div className="w-3 h-0.5 bg-signal"></div>
+                            <div className="w-3 h-0.5 bg-primary"></div>
                             <span className="text-[10px] text-secondary">Net</span>
                         </div>
                     </div>
