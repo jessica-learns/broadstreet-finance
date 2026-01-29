@@ -29,7 +29,7 @@ const NeumorphicTooltip = ({ active, payload, label, formatter }) => {
 const formatPeriod = (period) => {
     const [year, month] = period.split('-');
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    return `${months[parseInt(month) - 1]}'${year.slice(2)}`;
+    return `${months[parseInt(month) - 1]}\n'${year.slice(2)}`;
 };
 
 export function GrowthAnalysis() {
