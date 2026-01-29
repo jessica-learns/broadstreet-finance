@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from './ui/Card';
 import { useDashboard } from '../context/DashboardContext';
-import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine, Cell } from 'recharts';
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine, Cell, CartesianGrid } from 'recharts';
 import { Loader2 } from 'lucide-react';
 
 // NeumorphicTooltip component (custom tooltip with neumorphic styling)
@@ -81,6 +81,7 @@ export function GrowthAnalysis() {
                 <div className="h-[220px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={revenueAbsoluteData} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
+                            <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v.toFixed(0)}B`} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `$${v.toFixed(1)}B`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
@@ -102,6 +103,7 @@ export function GrowthAnalysis() {
                 <div className="h-[220px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={revenueGrowthData} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
+                            <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${v}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
@@ -124,8 +126,9 @@ export function GrowthAnalysis() {
                 <div className="h-[220px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <LineChart data={chartData} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
+                            <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
-                            <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(1)}%`} domain={['auto', 'auto']} tickCount={5} />
+                            <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(1)}%`} domain={['auto', 'auto']} tickCount={4} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
                             <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeOpacity={0.4} strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
                             <Line type="monotone" dataKey="opMargin" name="Operating" stroke="#0ea5e9" strokeOpacity={0.7} strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
@@ -143,6 +146,7 @@ export function GrowthAnalysis() {
                 <div className="h-[220px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={marginDeltas} margin={{ top: 10, right: 10, left: 5, bottom: 20 }}>
+                            <CartesianGrid vertical={false} strokeDasharray="3 3" strokeOpacity={0.15} />
                             <XAxis dataKey="period" tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={formatPeriod} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(1)}%`} />
                             <Tooltip content={<NeumorphicTooltip formatter={(v) => `${v > 0 ? '+' : ''}${(v / 100).toFixed(2)}%`} />} cursor={{ fill: 'rgba(14, 165, 233, 0.05)' }} />
