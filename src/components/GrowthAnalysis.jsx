@@ -35,7 +35,27 @@ const NeumorphicTooltip = ({ active, payload, label, formatter }) => {
 const formatPeriod = (period) => {
     const [year, month] = period.split('-');
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    return `${months[parseInt(month) - 1]}\n'${year.slice(2)}`;
+    return `${months[parseInt(month) - 1]} '${year.slice(2)}`;
+};
+
+// Custom tick component for multi-line date labels
+const CustomXAxisTick = ({ x, y, payload }) => {
+    if (!payload || !payload.value) return null;
+    const [year, month] = payload.value.split('-');
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthStr = months[parseInt(month) - 1];
+    const yearStr = `'${year.slice(2)}`;
+
+    return (
+        <g transform={`translate(${x},${y})`}>
+            <text x={0} y={0} dy={12} textAnchor="middle" fill="#64748B" fontSize={12} fontWeight={600}>
+                {monthStr}
+            </text>
+            <text x={0} y={0} dy={26} textAnchor="middle" fill="#64748B" fontSize={11} fontWeight={500}>
+                {yearStr}
+            </text>
+        </g>
+    );
 };
 
 export function GrowthAnalysis() {
