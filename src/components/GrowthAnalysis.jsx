@@ -69,14 +69,14 @@ export function GrowthAnalysis() {
     }
 
     const { chartData, marginDeltas, revenueGrowthData, revenueAbsoluteData } = stockData;
-    const chartAxisStyle = { fontSize: 12, fill: '#64748B', fontWeight: 600 };
+    const chartAxisStyle = { fontSize: 14, fill: '#64748B', fontWeight: 600 };
 
     return (
         <>
             {/* Chart 1: Revenue (Absolute) */}
             <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
                 <div className="mb-3 text-center">
-                    <h3 className="text-xs font-black text-primary uppercase tracking-widest">Revenue</h3>
+                    <h3 className="text-sm font-black text-primary uppercase tracking-widest">Revenue</h3>
                 </div>
                 <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
@@ -97,7 +97,7 @@ export function GrowthAnalysis() {
             {/* Chart 2: Revenue Growth */}
             <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
                 <div className="mb-3 text-center">
-                    <h3 className="text-xs font-black text-primary uppercase tracking-widest">Revenue Growth</h3>
+                    <h3 className="text-sm font-black text-primary uppercase tracking-widest">Revenue Growth</h3>
                 </div>
                 <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
@@ -119,7 +119,7 @@ export function GrowthAnalysis() {
             {/* Chart 3: Margin Trajectory */}
             <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
                 <div className="mb-3 text-center">
-                    <h3 className="text-xs font-black text-primary uppercase tracking-widest">Margin Levels</h3>
+                    <h3 className="text-sm font-black text-primary uppercase tracking-widest">Margin Levels</h3>
                 </div>
                 <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
@@ -138,7 +138,7 @@ export function GrowthAnalysis() {
             {/* Chart 4: Margin Change (in percentage points) */}
             <Card className="rounded-[24px] p-4 shadow-neumorph-sm h-[220px]">
                 <div className="mb-3 text-center">
-                    <h3 className="text-xs font-black text-primary uppercase tracking-widest">Margin Change</h3>
+                    <h3 className="text-sm font-black text-primary uppercase tracking-widest">Margin Change</h3>
                 </div>
                 <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
