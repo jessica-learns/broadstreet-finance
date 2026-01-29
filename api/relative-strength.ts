@@ -265,8 +265,10 @@ function isValidDate(s: unknown): s is string {
     return typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
 }
 
-function getTodayISO(): string {
-    return new Date().toISOString().split('T')[0];
+function getYesterdayISO(): string {
+    const d = new Date();
+    d.setDate(d.getDate() - 1);
+    return d.toISOString().split('T')[0];
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
