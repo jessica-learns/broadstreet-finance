@@ -268,7 +268,7 @@ export async function getFinancialTruth(ticker) {
         const accessionNumber = recentFilings.accessionNumber[form10kIndex].replace(/-/g, '');
         const primaryDocument = recentFilings.primaryDocument[form10kIndex];
         const unpaddedCik = parseInt(cik).toString();
-        const docUrl = `/api/sec-files/Archives/edgar/data/${unpaddedCik}/${accessionNumber}/${primaryDocument}`;
+        const docUrl = secUrl(`https://www.sec.gov/Archives/edgar/data/${unpaddedCik}/${accessionNumber}/${primaryDocument}`);
 
         try {
             await delay(200);
