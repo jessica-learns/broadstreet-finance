@@ -9,6 +9,7 @@ import { DeepDive } from './components/DeepDive';
 import { RiskRadar } from './components/RiskRadar';
 import { EvidenceFeed } from './components/EvidenceFeed';
 import { TickerInput } from './components/TickerInput';
+import { MomentumCard } from './components/MomentumCard';
 
 function App() {
   return (
@@ -45,7 +46,7 @@ function App() {
             {/* Lower Section */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               <div className="lg:col-span-4">
-                <DeepDive />
+                <MomentumCard />
               </div>
               <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <RiskRadar />
