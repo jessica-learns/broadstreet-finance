@@ -1,7 +1,8 @@
 // Layer 1: Universe & Identity
-const SEC_TICKER_URL = import.meta.env.DEV ? '/api/sec-files/files/company_tickers.json' : 'https://www.sec.gov/files/company_tickers.json';
-const SEC_FACTS_URL = (cik) => import.meta.env.DEV ? `/api/sec/api/xbrl/companyfacts/CIK${cik}.json` : `https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`;
-const SEC_SUBMISSIONS_URL = (cik) => import.meta.env.DEV ? `/api/sec/submissions/CIK${cik}.json` : `https://data.sec.gov/submissions/CIK${cik}.json`;
+const secUrl = (url) => import.meta.env.DEV ? url.replace('https://www.sec.gov', '/api/sec-files').replace('https://data.sec.gov', '/api/sec') : `/api/sec-proxy?url=${encodeURIComponent(url)}`;
+const SEC_TICKER_URL = secUrl('https://www.sec.gov/files/company_tickers.json');
+const SEC_FACTS_URL = (cik) => secUrl(`https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`);
+const SEC_SUBMISSIONS_URL = (cik) => secUrl(`https://data.sec.gov/submissions/CIK${cik}.json`);
 
 const CONSTRAINT_KEYWORDS = [
     'shortage', 'backlog', 'capacity', 'supply chain', 'bottleneck'
