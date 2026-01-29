@@ -31,7 +31,7 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                             </span>
                         )}
                     </h2>
-                    <div className="text-xs text-slate-600 font-black uppercase tracking-widest mt-1 ml-1 flex items-center gap-2">
+                    <div className="text-xs text-secondary font-black uppercase tracking-widest mt-1 ml-1 flex items-center gap-2">
                         Stock Analysis <div className="w-1 h-1 rounded-full bg-slate-400" /> Live SEC Data
                     </div>
                 </div>
@@ -80,31 +80,31 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                     <div className="bg-white/40 backdrop-blur-xl border border-white/60 rounded-[24px] p-5 flex items-center justify-between shadow-sm ring-1 ring-black/5">
                         <div className="flex items-center gap-10">
                             <div className="flex flex-col">
-                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em] mb-1.5">Pricing Power</span>
+                                <span className="text-[10px] font-black text-secondary/60 uppercase tracking-[0.15em] mb-1.5">Pricing Power</span>
                                 <div className="flex items-baseline gap-1.5">
                                     <span className="text-2xl font-black tracking-tighter text-primary">
                                         {pricingPower > 0 ? '+' : ''}{pricingPower}%
                                     </span>
-                                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter opacity-70">6m Delta</span>
+                                    <span className="text-[9px] font-bold text-secondary/60 uppercase tracking-tighter opacity-70">6m Delta</span>
                                 </div>
                             </div>
                             <div className="w-px h-10 bg-slate-200/60" />
                             <div className="flex flex-col">
-                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.15em] mb-1.5">Rev Velocity</span>
+                                <span className="text-[10px] font-black text-secondary/60 uppercase tracking-[0.15em] mb-1.5">Rev Velocity</span>
                                 <div className="flex items-baseline gap-1.5">
                                     <span className="text-2xl font-black tracking-tighter text-primary">
                                         {revenueAccel > 0 ? '+' : ''}{revenueAccel}%
                                     </span>
-                                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter opacity-70">Acceleration</span>
+                                    <span className="text-[9px] font-bold text-secondary/60 uppercase tracking-tighter opacity-70">Acceleration</span>
                                 </div>
                             </div>
                         </div>
                         <div className="hidden md:block">
                             <div className="flex flex-col items-end">
-                                <Badge variant="outline" className="text-[10px] border-slate-300 text-slate-500 bg-white/60 py-0.5 px-2.5 font-black uppercase tracking-widest rounded-lg">
+                                <Badge variant="outline" className="text-[10px] border-slate-300 text-secondary bg-white/60 py-0.5 px-2.5 font-black uppercase tracking-widest rounded-lg">
                                     Hedge Fund Signals
                                 </Badge>
-                                <span className="text-[8px] font-bold text-slate-400 uppercase mt-1 tracking-tighter">Proprietary Alpha Stream</span>
+                                <span className="text-[8px] font-bold text-secondary/60 uppercase mt-1 tracking-tighter">Proprietary Alpha Stream</span>
                             </div>
                         </div>
                     </div>
@@ -144,8 +144,8 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
 
                         {/* Gross Margin */}
                         <div className="p-6 rounded-3xl bg-surface shadow-neumorph-sm">
-                            <div className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-2">Gross</div>
-                            <div className="text-2xl font-black text-slate-700 mb-1">{fmtP(latestQ.grossMargin)}</div>
+                            <div className="text-xs text-secondary font-bold uppercase tracking-wider mb-2">Gross</div>
+                            <div className="text-2xl font-black text-primary mb-1">{fmtP(latestQ.grossMargin)}</div>
                             {previousQ && (
                                 <div className="text-xs font-bold flex items-center gap-1 text-secondary">
                                     {latestQ.grossMargin >= previousQ.grossMargin ? "▲" : "▼"}
@@ -203,7 +203,7 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                             ) : (
                                 <div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
                             )}
-                            <span className="text-xs font-bold text-slate-600">
+                            <span className="text-xs font-bold text-secondary">
                                 {data.evidence.sentiment.includes("Fixing")
                                     ? "High Capex detected matching constraints."
                                     : data.evidence.sentiment.includes("Low Conviction")
@@ -216,7 +216,7 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                         <div className="flex gap-4">
                             <div className="flex items-center gap-1.5 grayscale opacity-60">
                                 <div className="w-2 h-0.5 bg-[#0ea5e9]/40" />
-                                <span className="text-xs font-black uppercase text-slate-600">Gross</span>
+                                <span className="text-xs font-black uppercase text-secondary">Gross</span>
                             </div>
                             <div className="flex items-center gap-1.5">
                                 <div className="w-2 h-0.5 bg-[#0ea5e9]/70" />
