@@ -32,7 +32,7 @@ export function DashboardProvider({ children }) {
     // Fetch initial ticker on mount
     React.useEffect(() => {
         fetchStock(selectedTicker);
-    }, []);
+    }, [fetchStock]);
 
     const value = {
         selectedTicker,
