@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from './ui/Card';
 import { Badge } from './ui/Badge';
-import { ComposedChart, Bar, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+
 import { Loader2, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import { useDashboard } from '../context/DashboardContext';
 
