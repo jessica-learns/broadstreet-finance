@@ -1,24 +1,28 @@
 // src/services/relativeStrength.js
 // Client-side service to call the relative strength API
 
-// When using `vercel dev`, API routes are on the same origin
 export const DEFAULT_BENCHMARKS = ['SPY', 'QQQ', 'SMH', 'PAVE', 'XBI', 'SETM'];
+
+// Browser-side cache (persists for session)
+const rsCache = new Map();
+const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
 
 /**
  * Fetch relative strength data for one or more tickers
- * @param {string[]} targets - Array of ticker symbols
- * @param {Object} options - Optional settings
- * @param {string} options.asOfDate - Date in YYYY-MM-DD format (defaults to today)
- * @param {string[]} options.benchmarks - Override default benchmarks
- * @returns {Promise<Object>} Relative strength results
  */
 export async function getRelativeStrength(targets, options = {}) {
     const { asOfDate, benchmarks } = options;
+    const targetArray = Array.isArray(targets) ? targets : [targets];
+    const cacheKey = targetArray.join(',');
 
-    const payload = {
-        targets: Array.isArray(targets) ? targets : [targets],
-    };
+    // Check browser cache first
+    const cached = rsCache.get(cacheKey);
+    if (cached && Date.now() - cached.fetchedAt < CACHE_TTL) {
+        console.log('RS: Using cached data for', cacheKey);
+        return cached.data;
+    }
 
+    const payload = { targets: targetArray };
     if (asOfDate) payload.asOfDate = asOfDate;
     if (benchmarks) payload.benchmarks = benchmarks;
 
@@ -33,7 +37,12 @@ export async function getRelativeStrength(targets, options = {}) {
         throw new Error(error.error || `API error: ${res.status}`);
     }
 
-    return res.json();
+    const data = await res.json();
+
+    // Cache the result
+    rsCache.set(cacheKey, { data, fetchedAt: Date.now() });
+
+    return data;
 }
 
 /**

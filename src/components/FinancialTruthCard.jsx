@@ -21,32 +21,27 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
     return (
         <Card className="rounded-[32px] h-full min-h-[500px] flex flex-col relative overflow-hidden">
             {/* Header Section */}
-            <div className="flex items-start justify-between mb-4 px-2 relative z-10">
+            <div className="flex items-start justify-between mb-6 px-2 relative z-10">
                 <div>
                     <h2 className="text-5xl font-black text-primary tracking-tight">
                         {ticker}
                     </h2>
-                    {latestQ && (
-                        <div className="text-2xl font-bold text-signal mt-1">
-                            {latestQ.growth > 0 ? '+' : ''}{(latestQ.growth * 100).toFixed(1)}% QoQ
-                        </div>
-                    )}
                     <div className="text-sm text-secondary mt-2 flex items-center gap-2">
                         Stock Analysis <div className="w-1 h-1 rounded-full bg-secondary" /> Live SEC Data
                     </div>
                 </div>
                 {data && (
-                    <div className={`px-3 py-1 rounded-full text-xs font-bold border ${data.evidence.sentiment.includes("Low Conviction") ? "border-accent text-accent bg-accent/5" : "bg-primary text-white"}`}>
+                    <div className={`px-3 py-1.5 rounded-full text-xs font-bold border ${data.evidence.sentiment.includes("Low Conviction") ? "border-accent text-accent bg-accent/5" : "bg-primary text-white border-primary"}`}>
                         {data.evidence.sentiment}
                     </div>
                 )}
             </div>
 
-            {/* Revenue Trajectory Summary */}
+            {/* Revenue Trajectory Summary - Full Width */}
             {data && !loading && !error && data.chartData && data.chartData.length >= 4 && (
-                <div className="px-2 mb-6 relative z-10">
-                    <div className="text-xs font-black text-secondary uppercase tracking-widest mb-3">Quarterly Revenue Growth</div>
-                    <div className="flex items-center gap-2">
+                <div className="mb-6 relative z-10">
+                    <div className="text-xs font-black text-secondary uppercase tracking-widest mb-3 px-2">Quarterly Revenue Growth</div>
+                    <div className="grid grid-cols-6 gap-2">
                         {data.chartData.slice(-6).map((q, idx, arr) => {
                             const growthPct = Math.round(q.growth * 100);
                             const isPositive = growthPct >= 0;
@@ -58,7 +53,7 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                             return (
                                 <div key={q.period} className="flex flex-col items-center gap-1.5">
                                     <div
-                                        className={`flex items-center justify-center rounded-lg px-3 py-2 min-w-[52px] font-bold text-sm transition-all ${isLatest
+                                        className={`w-full flex items-center justify-center rounded-xl py-2.5 font-bold text-sm transition-all ${isLatest
                                             ? 'bg-signal text-white shadow-lg shadow-signal/25'
                                             : isPositive
                                                 ? 'bg-signal/15 text-signal'
