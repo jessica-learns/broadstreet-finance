@@ -62,7 +62,9 @@ function extractMetric(facts, strategies, filterQuarterly = false) {
     const usGaap = facts.facts['us-gaap'];
     if (!usGaap) return [];
 
-    // Prioritize tags
+    // Collect data from ALL matching tags, then deduplicate
+    const allData = [];
+
     for (const tag of strategies) {
         if (usGaap[tag] && usGaap[tag].units && usGaap[tag].units['USD']) {
             const units = usGaap[tag].units['USD'];
@@ -70,29 +72,30 @@ function extractMetric(facts, strategies, filterQuarterly = false) {
             let filtered = units;
 
             if (filterQuarterly) {
-                // Precise filtration for quarterly table
-                filtered = units.filter(u => u.form === '10-Q' || u.form === '10-K'); // Ensure standard forms
-                filtered = filtered.filter(u => isQuarterly(u)); // Strict date check
+                filtered = units.filter(u => u.form === '10-Q' || u.form === '10-K');
+                filtered = filtered.filter(u => isQuarterly(u));
             } else {
-                // Fallback/Legacy for "Annual" snapshots if needed, but we prefer consistent filtered data
                 filtered = units.filter(u => u.form === '10-K' || u.form === '10-Q');
             }
 
-            // Deduplicate by end date (take the specific latest filed value)
-            const map = new Map();
-            filtered.forEach(item => {
-                if (!map.has(item.end) || new Date(item.filed) > new Date(map.get(item.end).filed)) {
-                    map.set(item.end, item);
-                }
-            });
-
-            const deduped = Array.from(map.values());
-
-            // Sort by end date descending (newest first)
-            return deduped.sort((a, b) => new Date(b.end) - new Date(a.end));
+            allData.push(...filtered);
         }
     }
-    return [];
+
+    if (allData.length === 0) return [];
+
+    // Deduplicate by end date (take the most recently filed value)
+    const map = new Map();
+    allData.forEach(item => {
+        if (!map.has(item.end) || new Date(item.filed) > new Date(map.get(item.end).filed)) {
+            map.set(item.end, item);
+        }
+    });
+
+    const deduped = Array.from(map.values());
+
+    // Sort by end date descending (newest first)
+    return deduped.sort((a, b) => new Date(b.end) - new Date(a.end));
 }
 
 // Helper to get matching value - fuzzy match within 45 days if exact match fails
