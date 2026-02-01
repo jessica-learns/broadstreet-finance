@@ -39,63 +39,101 @@ async function rateLimitedFetch(url: string): Promise<Response> {
     return fetch(url);
 }
 
-async function fetchTickerPrices(ticker: string, endDate: string, days: number = 300): Promise<PriceRow[]> {
+async function fetchMultipleTickerPrices(tickers: string[], endDate: string, days: number = 300): Promise<Map<string, PriceRow[]>> {
     const apiKey = process.env.TWELVE_DATA_API_KEY;
     if (!apiKey) {
         throw new Error('TWELVE_DATA_API_KEY environment variable not set');
     }
 
-    const cacheKey = `${ticker}:${endDate}`;
-    const cached = priceCache.get(cacheKey);
-    if (cached && Date.now() - cached.fetchedAt < CACHE_TTL) {
-        return cached.data;
+    const results = new Map<string, PriceRow[]>();
+    const tickersToFetch: string[] = [];
+
+    // Check cache first
+    for (const ticker of tickers) {
+        const cacheKey = `${ticker.toUpperCase()}:${endDate}`;
+        const cached = priceCache.get(cacheKey);
+        if (cached && Date.now() - cached.fetchedAt < CACHE_TTL) {
+            results.set(ticker.toUpperCase(), cached.data);
+        } else {
+            tickersToFetch.push(ticker.toUpperCase());
+        }
     }
 
+    // If all cached, return early
+    if (tickersToFetch.length === 0) {
+        return results;
+    }
+
+    // Batch fetch all uncached tickers in ONE API call
     const url = new URL(`${TWELVE_DATA_BASE}/time_series`);
-    url.searchParams.set('symbol', ticker);
+    url.searchParams.set('symbol', tickersToFetch.join(','));
     url.searchParams.set('interval', '1day');
     url.searchParams.set('outputsize', days.toString());
     url.searchParams.set('end_date', endDate);
     url.searchParams.set('apikey', apiKey);
 
-    const res = await rateLimitedFetch(url.toString());
-    if (!res.ok) {
-        throw new Error(`Twelve Data API error: ${res.status}`);
-    }
+    try {
+        const res = await rateLimitedFetch(url.toString());
+        if (!res.ok) {
+            throw new Error(`Twelve Data API error: ${res.status}`);
+        }
 
-    const data: TwelveDataResponse = await res.json();
-    if (data.status === 'error') {
-        throw new Error(`Twelve Data error for ${ticker}: ${data.message}`);
-    }
+        const data = await res.json();
 
-    if (!data.values || data.values.length === 0) {
-        return [];
-    }
+        // Handle single ticker response (different format)
+        if (tickersToFetch.length === 1) {
+            const ticker = tickersToFetch[0];
+            if (data.status === 'error') {
+                console.error(`Twelve Data error for ${ticker}: ${data.message}`);
+                results.set(ticker, []);
+            } else if (data.values && data.values.length > 0) {
+                const prices: PriceRow[] = data.values
+                    .map((v: TwelveDataValue) => ({
+                        ticker,
+                        date: v.datetime,
+                        adjClose: parseFloat(v.close),
+                    }))
+                    .filter((p: PriceRow) => !isNaN(p.adjClose) && p.adjClose > 0)
+                    .reverse();
+                results.set(ticker, prices);
+                priceCache.set(`${ticker}:${endDate}`, { data: prices, fetchedAt: Date.now() });
+            } else {
+                results.set(ticker, []);
+            }
+        } else {
+            // Handle batch response (object with ticker keys)
+            for (const ticker of tickersToFetch) {
+                const tickerData = data[ticker];
+                if (!tickerData || tickerData.status === 'error') {
+                    console.error(`Twelve Data error for ${ticker}: ${tickerData?.message || 'No data'}`);
+                    results.set(ticker, []);
+                    continue;
+                }
 
-    const prices: PriceRow[] = data.values
-        .map(v => ({
-            ticker: ticker.toUpperCase(),
-            date: v.datetime,
-            adjClose: parseFloat(v.close),
-        }))
-        .filter(p => !isNaN(p.adjClose) && p.adjClose > 0)
-        .reverse();
-
-    priceCache.set(cacheKey, { data: prices, fetchedAt: Date.now() });
-    return prices;
-}
-
-async function fetchMultipleTickerPrices(tickers: string[], endDate: string, days: number = 300): Promise<Map<string, PriceRow[]>> {
-    const results = new Map<string, PriceRow[]>();
-    for (const ticker of tickers) {
-        try {
-            const prices = await fetchTickerPrices(ticker, endDate, days);
-            results.set(ticker.toUpperCase(), prices);
-        } catch (err) {
-            console.error(`Failed to fetch ${ticker}:`, err);
-            results.set(ticker.toUpperCase(), []);
+                if (tickerData.values && tickerData.values.length > 0) {
+                    const prices: PriceRow[] = tickerData.values
+                        .map((v: TwelveDataValue) => ({
+                            ticker,
+                            date: v.datetime,
+                            adjClose: parseFloat(v.close),
+                        }))
+                        .filter((p: PriceRow) => !isNaN(p.adjClose) && p.adjClose > 0)
+                        .reverse();
+                    results.set(ticker, prices);
+                    priceCache.set(`${ticker}:${endDate}`, { data: prices, fetchedAt: Date.now() });
+                } else {
+                    results.set(ticker, []);
+                }
+            }
+        }
+    } catch (err) {
+        console.error('Batch fetch failed:', err);
+        // Set empty arrays for all failed tickers
+        for (const ticker of tickersToFetch) {
+            results.set(ticker, []);
         }
     }
+
     return results;
 }
 
