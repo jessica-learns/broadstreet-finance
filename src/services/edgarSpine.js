@@ -157,8 +157,14 @@ export async function getFinancialTruth(ticker) {
     // Gross Profit
     const grossProfitSeries = extractMetric(factsData, [
         'GrossProfit',
-        'GrossProfitOnSales', // Fallback
-        'Revenues' // Absolute fallback if Gross not reported (rare, but banking differs) - Handled by logic below preferably, but sticking to explicit strategies
+        'GrossProfitOnSales'
+    ], true);
+
+    // Cost of Revenue (for calculating gross profit when not directly reported)
+    const costOfRevenueSeries = extractMetric(factsData, [
+        'CostOfRevenue',
+        'CostOfGoodsAndServicesSold',
+        'CostOfGoodsSold'
     ], true);
 
     // Net Income
@@ -201,8 +207,16 @@ export async function getFinancialTruth(ticker) {
 
         // Margins
         const opC = matchMetric(opIncomeSeries, r.end);
-        const grossC = matchMetric(grossProfitSeries, r.end);
+        let grossC = matchMetric(grossProfitSeries, r.end);
         const netC = matchMetric(netIncomeSeries, r.end);
+
+        // If no direct gross profit, calculate from revenue - cost of revenue
+        if (!grossC && revVal) {
+            const costOfRev = matchMetric(costOfRevenueSeries, r.end);
+            if (costOfRev) {
+                grossC = revVal - costOfRev;
+            }
+        }
 
         chartData.unshift({ // Add to front (so array is Oldest -> Newest)
             period: r.end.substring(0, 7), // YYYY-MM
