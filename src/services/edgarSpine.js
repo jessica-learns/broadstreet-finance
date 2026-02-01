@@ -1,5 +1,5 @@
 // Layer 1: Universe & Identity
-const secUrl = (url) => import.meta.env.DEV ? url.replace('https://www.sec.gov', '/api/sec-files').replace('https://data.sec.gov', '/api/sec') : `/api/sec-proxy?url=${encodeURIComponent(url)}`;
+const secUrl = (url) => `/api/sec-proxy?url=${encodeURIComponent(url)}`;
 const SEC_TICKER_URL = secUrl('https://www.sec.gov/files/company_tickers.json');
 const SEC_FACTS_URL = (cik) => secUrl(`https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`);
 const SEC_SUBMISSIONS_URL = (cik) => secUrl(`https://data.sec.gov/submissions/CIK${cik}.json`);
