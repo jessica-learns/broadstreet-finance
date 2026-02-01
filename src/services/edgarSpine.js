@@ -95,8 +95,29 @@ function extractMetric(facts, strategies, filterQuarterly = false) {
     return [];
 }
 
-// Helper to get matching value
-const matchMetric = (series, targetEnd) => series.find(item => item.end === targetEnd)?.val || 0;
+// Helper to get matching value - fuzzy match within 45 days if exact match fails
+const matchMetric = (series, targetEnd) => {
+    // Try exact match first
+    const exact = series.find(item => item.end === targetEnd);
+    if (exact) return exact.val;
+
+    // Fall back to closest date within 45 days
+    const target = new Date(targetEnd);
+    let closest = null;
+    let closestDiff = Infinity;
+
+    for (const item of series) {
+        const itemDate = new Date(item.end);
+        const diff = Math.abs(itemDate - target);
+        const maxDiff = 45 * 24 * 60 * 60 * 1000;
+        if (diff < closestDiff && diff < maxDiff) {
+            closestDiff = diff;
+            closest = item;
+        }
+    }
+
+    return closest?.val || 0;
+};
 
 // Main Spine Function
 export async function getFinancialTruth(ticker) {
