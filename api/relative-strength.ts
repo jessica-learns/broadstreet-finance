@@ -49,7 +49,6 @@ async function fetchTickerPrices(ticker: string, endDate: string, days: number =
     const cacheKey = `${upperTicker}:${endDate}`;
     const cached = priceCache.get(cacheKey);
     if (cached && Date.now() - cached.fetchedAt < CACHE_TTL) {
-        console.log(`Cache hit for ${upperTicker}`);
         return cached.data;
     }
 

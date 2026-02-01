@@ -302,6 +302,30 @@ export async function getFinancialTruth(ticker) {
     let sentiment = "Neutral";
     let businessDescription = '';
 
+    // Extract SIC code and map to sector
+    const sicCode = subData.sic || null;
+    const sicNumber = sicCode ? parseInt(sicCode) : 0;
+
+    // Map SIC code to sector for benchmark selection
+    let sector = 'general';
+    if (sicNumber) {
+        if ((sicNumber >= 3570 && sicNumber <= 3579) ||
+            (sicNumber >= 3670 && sicNumber <= 3679) ||
+            (sicNumber >= 7370 && sicNumber <= 7379)) {
+            sector = 'technology';
+        } else if ((sicNumber >= 2833 && sicNumber <= 2836) ||
+            sicNumber === 8731) {
+            sector = 'biotech';
+        } else if ((sicNumber >= 3500 && sicNumber <= 3599 && !(sicNumber >= 3570 && sicNumber <= 3579)) ||
+            (sicNumber >= 3700 && sicNumber <= 3799)) {
+            sector = 'industrials';
+        } else if ((sicNumber >= 1000 && sicNumber <= 1499) ||
+            (sicNumber >= 1300 && sicNumber <= 1389) ||
+            sicNumber === 2911) {
+            sector = 'energy';
+        }
+    }
+
     if (form10kIndex !== -1) {
         const accessionNumber = recentFilings.accessionNumber[form10kIndex].replace(/-/g, '');
         const primaryDocument = recentFilings.primaryDocument[form10kIndex];
@@ -476,6 +500,8 @@ export async function getFinancialTruth(ticker) {
             isRisingCapex,
             businessDescription,
         },
+        sicCode,
+        sector,
         chartData,
         marginDeltas,
         revenueGrowthData,

@@ -1,7 +1,24 @@
 // src/services/relativeStrength.js
 // Client-side service to call the relative strength API
 
-export const DEFAULT_BENCHMARKS = ['SPY', 'QQQ', 'SMH', 'PAVE', 'XBI', 'SETM'];
+// Sector-to-benchmark mapping
+const SECTOR_BENCHMARKS = {
+    technology: ['SPY', 'QQQ', 'SMH'],
+    biotech: ['SPY', 'QQQ', 'XBI'],
+    industrials: ['SPY', 'QQQ', 'PAVE'],
+    energy: ['SPY', 'QQQ', 'SETM'],
+    general: ['SPY', 'QQQ'],
+};
+
+// Default benchmarks (fallback)
+export const DEFAULT_BENCHMARKS = ['SPY', 'QQQ'];
+
+/**
+ * Get relevant benchmarks for a given sector
+ */
+export function getBenchmarksForSector(sector) {
+    return SECTOR_BENCHMARKS[sector] || SECTOR_BENCHMARKS.general;
+}
 
 // Browser-side cache (persists for session)
 const rsCache = new Map();

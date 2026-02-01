@@ -1,10 +1,10 @@
 // src/components/MomentumCard.jsx
 // Displays relative strength vs benchmarks for the selected stock
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Card } from './ui/Card';
 import { useDashboard } from '../context/DashboardContext';
-import { getRelativeStrength, formatRSReturn, getRSSignal, DEFAULT_BENCHMARKS } from '../services/relativeStrength';
+import { getRelativeStrength, formatRSReturn, getRSSignal, getBenchmarksForSector } from '../services/relativeStrength';
 import { Loader2, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 
 // Benchmark display names and descriptions
@@ -75,6 +75,10 @@ export function MomentumCard() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    // Get sector-specific benchmarks based on stockData
+    const sector = stockData?.sector || 'general';
+    const benchmarks = useMemo(() => getBenchmarksForSector(sector), [sector]);
+
     useEffect(() => {
         if (!selectedTicker) return;
 
@@ -85,7 +89,8 @@ export function MomentumCard() {
             setError(null);
 
             try {
-                const result = await getRelativeStrength([selectedTicker]);
+                // Pass sector-specific benchmarks to reduce API calls
+                const result = await getRelativeStrength([selectedTicker], { benchmarks });
                 if (!cancelled) {
                     setRsData(result);
                 }
@@ -104,7 +109,7 @@ export function MomentumCard() {
         fetchRS();
 
         return () => { cancelled = true; };
-    }, [selectedTicker]);
+    }, [selectedTicker, benchmarks]);
 
     const tickerResult = rsData?.results?.find(r => r.ticker === selectedTicker);
     const benchmarkResults = tickerResult?.benchmarks || [];
@@ -117,21 +122,28 @@ export function MomentumCard() {
     const outperformCount = benchmarkResults.filter(b => b.rsReturn > 0).length;
     const totalCount = benchmarkResults.filter(b => b.rsReturn !== null).length;
 
+    // Sector display names
+    const sectorNames = {
+        technology: 'Tech',
+        biotech: 'Biotech',
+        industrials: 'Industrials',
+        energy: 'Energy',
+        general: 'General',
+    };
+
     return (
         <Card className="rounded-[32px] h-fit">
             <div className="flex items-center justify-between mb-4">
                 <div>
                     <h3 className="text-lg font-bold text-primary">Relative Strength</h3>
                     <p className="text-[10px] font-black text-secondary uppercase tracking-widest mt-0.5">
-                        252-Day vs Benchmarks
+                        252-Day • {sectorNames[sector] || 'General'} Benchmarks
                     </p>
                 </div>
                 {!loading && totalCount > 0 && (
-                    <div className={`px-3 py-1 rounded-full text-xs font-bold ${outperformCount >= 4
+                    <div className={`px-3 py-1 rounded-full text-xs font-bold ${outperformCount >= Math.ceil(totalCount / 2)
                         ? 'bg-signal/10 text-signal border border-signal/20'
-                        : outperformCount >= 2
-                            ? 'bg-primary/5 text-primary border border-primary/10'
-                            : 'bg-secondary/10 text-secondary border border-secondary/20'
+                        : 'bg-secondary/10 text-secondary border border-secondary/20'
                         }`}>
                         {outperformCount}/{totalCount} Outperforming
                     </div>
@@ -155,7 +167,7 @@ export function MomentumCard() {
                 </div>
             ) : (
                 <div className="space-y-1">
-                    {DEFAULT_BENCHMARKS.map(bmk => (
+                    {benchmarks.map(bmk => (
                         <RSRow
                             key={bmk}
                             benchmark={bmk}
