@@ -426,6 +426,20 @@ export async function getFinancialTruth(ticker) {
                     // Step 4: Final cleanup and truncation
                     if (bestSnippet) {
                         bestSnippet = bestSnippet.replace(/\s+/g, ' ').trim();
+
+                        // Remove common section headers from the beginning
+                        const headerPatterns = [
+                            /^Company Background\s*/i,
+                            /^Business Overview\s*/i,
+                            /^Overview\s*/i,
+                            /^General\s*/i,
+                            /^Introduction\s*/i,
+                            /^Business\s*/i,
+                        ];
+                        for (const pattern of headerPatterns) {
+                            bestSnippet = bestSnippet.replace(pattern, '');
+                        }
+
                         businessDescription = bestSnippet.length > 2000
                             ? bestSnippet.slice(0, 1997) + '...'
                             : bestSnippet;
