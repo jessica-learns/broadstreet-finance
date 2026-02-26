@@ -45,7 +45,7 @@ export function Header() {
                     <div className="flex items-center gap-3 pl-4 border-l border-slate-300">
                         <div className="text-right hidden sm:block">
                             <div className="text-xs font-black text-primary">Jessica Croll</div>
-                            <div className="text-[10px] text-secondary font-bold uppercase tracking-wider">Portfolio Manager</div>
+                            <div className="text-[12px] text-secondary font-bold uppercase tracking-wider">Portfolio Manager</div>
                         </div>
                         <NeumorphicButton className="p-1 w-10 h-10 flex items-center justify-center font-normal">
                             <User size={18} />

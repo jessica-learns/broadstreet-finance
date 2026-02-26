@@ -14,10 +14,10 @@ import { MomentumCard } from './components/MomentumCard';
 function App() {
   return (
     <DashboardProvider>
-      <div className="min-h-screen bg-background p-6 md:p-10 font-sans selection:bg-accent/30">
+      <div className="min-h-screen bg-background p-8 md:p-12 font-sans selection:bg-accent/30">
         <div className="max-w-[1400px] mx-auto">
           <Header />
-          <div className="space-y-8">
+          <div className="space-y-10">
 
             {/* Growth Analysis Section - Ticker Input + 2x2 Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">

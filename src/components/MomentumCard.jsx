@@ -44,12 +44,12 @@ function RSRow({ benchmark, data }) {
                 <SignalIcon signal={signal} />
                 <div>
                     <span className="text-sm font-bold text-primary">{info.name}</span>
-                    <span className="text-[10px] text-secondary ml-2">{info.desc}</span>
+                    <span className="text-[12px] text-secondary ml-2">{info.desc}</span>
                 </div>
             </div>
             <div className="flex items-center gap-3">
                 {data?.rsVsMA && (
-                    <span className={`text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${isAboveMA
+                    <span className={`text-[12px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${isAboveMA
                         ? 'bg-signal/10 text-signal'
                         : 'bg-secondary/10 text-secondary'
                         }`}>
@@ -136,7 +136,7 @@ export function MomentumCard() {
             <div className="flex items-center justify-between mb-4">
                 <div>
                     <h3 className="text-lg font-bold text-primary">Relative Strength</h3>
-                    <p className="text-[10px] font-black text-secondary uppercase tracking-widest mt-0.5">
+                    <p className="text-[12px] font-black text-secondary uppercase tracking-widest mt-0.5">
                         252-Day • {sectorNames[sector] || 'General'} Benchmarks
                     </p>
                 </div>
@@ -157,7 +157,7 @@ export function MomentumCard() {
             ) : error ? (
                 <div className="text-center py-6">
                     <p className="text-sm text-secondary">{error}</p>
-                    <p className="text-[10px] text-secondary/60 mt-2">
+                    <p className="text-[12px] text-secondary/60 mt-2">
                         Check that Twelve Data API key is configured
                     </p>
                 </div>
@@ -179,7 +179,7 @@ export function MomentumCard() {
 
             {rsData?.asOfDate && (
                 <div className="mt-4 pt-3 border-t border-primary/5">
-                    <p className="text-[10px] text-secondary/50 text-center uppercase tracking-wider">
+                    <p className="text-[12px] text-secondary/50 text-center uppercase tracking-wider">
                         As of {rsData.asOfDate} • Twelve Data
                     </p>
                 </div>

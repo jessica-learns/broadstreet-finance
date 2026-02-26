@@ -19,6 +19,17 @@ export default {
             fontFamily: {
                 sans: ["Inter", "sans-serif"],
             },
+            fontSize: {
+                'xs': ['0.8125rem', { lineHeight: '1.25rem' }],   // 13px (was 12px)
+                'sm': ['0.9375rem', { lineHeight: '1.375rem' }],  // 15px (was 14px)
+                'base': ['1.125rem', { lineHeight: '1.75rem' }],   // 18px (was 16px)
+                'lg': ['1.25rem', { lineHeight: '1.875rem' }],  // 20px (was 18px)
+                'xl': ['1.375rem', { lineHeight: '2rem' }],      // 22px (was 20px)
+                '2xl': ['1.625rem', { lineHeight: '2.25rem' }],   // 26px (was 24px)
+                '3xl': ['2rem', { lineHeight: '2.5rem' }],    // 32px (was 30px)
+                '4xl': ['2.375rem', { lineHeight: '2.75rem' }],   // 38px (was 36px)
+                '5xl': ['3.125rem', { lineHeight: '1' }],         // 50px (was 48px)
+            },
             boxShadow: {
                 // Refined Neumorphic Elevation Scale
                 "neumorph-subtle": "4px 4px 8px rgba(163,177,198,0.35), -4px -4px 8px rgba(255,255,255,0.5)",

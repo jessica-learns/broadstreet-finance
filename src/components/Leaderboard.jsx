@@ -43,7 +43,7 @@ export function ThemeLeaderboard() {
                                 <td className="py-3 pl-4 rounded-l-xl">
                                     <div className="flex flex-col">
                                         <span className="font-bold text-primary block leading-tight">{item.theme}</span>
-                                        <span className="text-[10px] font-black text-accent tracking-widest uppercase">{item.ticker}</span>
+                                        <span className="text-[12px] font-black text-accent tracking-widest uppercase">{item.ticker}</span>
                                     </div>
                                 </td>
                                 <td className="py-3 text-right font-bold text-secondary tabular-nums">

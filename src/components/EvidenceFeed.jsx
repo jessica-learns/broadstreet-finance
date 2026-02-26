@@ -26,7 +26,7 @@ export function EvidenceFeed() {
                             <Badge variant="primary" className="tracking-wider font-bold">
                                 {item.ticker}
                             </Badge>
-                            <span className="text-[10px] text-secondary font-bold">{item.date}</span>
+                            <span className="text-[12px] text-secondary font-bold">{item.date}</span>
                         </div>
                         <p className="text-sm font-medium text-primary leading-snug">
                             {item.summary}
