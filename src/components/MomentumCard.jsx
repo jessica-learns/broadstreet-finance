@@ -133,7 +133,7 @@ export function MomentumCard() {
 
     return (
         <Card className="rounded-[32px] h-fit">
-            <div className="flex items-center justify-between mb-6">
+            <div className="mb-6">
                 <div>
                     <h3 className="text-lg font-bold text-primary whitespace-nowrap">Relative Strength</h3>
                     <p className="text-[12px] font-black text-secondary uppercase tracking-widest mt-1.5 whitespace-nowrap">
@@ -141,10 +141,7 @@ export function MomentumCard() {
                     </p>
                 </div>
                 {!loading && totalCount > 0 && (
-                    <div className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap ml-3 ${outperformCount >= Math.ceil(totalCount / 2)
-                        ? 'bg-signal/10 text-signal border border-signal/20'
-                        : 'bg-secondary/10 text-secondary border border-secondary/20'
-                        }`}>
+                    <div className={`inline-block px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap mt-3 border-accent text-accent bg-accent/5 border`}>
                         {outperformCount}/{totalCount} Outperforming
                     </div>
                 )}
