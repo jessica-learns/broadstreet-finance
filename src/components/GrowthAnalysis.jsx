@@ -182,6 +182,20 @@ export function GrowthAnalysis() {
             <Card className="rounded-[24px] p-5 shadow-neumorph-sm h-[348px]">
                 <div className="mb-3 text-center">
                     <h3 className="text-sm font-black text-primary uppercase tracking-widest">Margin Change</h3>
+                    <div className="flex items-center justify-center gap-4 mt-1">
+                        <div className="flex items-center gap-1">
+                            <div className="w-3 h-0.5" style={{ backgroundColor: 'rgba(14, 165, 233, 0.4)' }}></div>
+                            <span className="text-[14px] text-secondary">Gross</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                            <div className="w-3 h-0.5" style={{ backgroundColor: 'rgba(14, 165, 233, 0.7)' }}></div>
+                            <span className="text-[14px] text-secondary">Op</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                            <div className="w-3 h-0.5 bg-signal"></div>
+                            <span className="text-[14px] text-secondary">Net</span>
+                        </div>
+                    </div>
                 </div>
                 <div className="h-[264px]">
                     <ResponsiveContainer width="100%" height="100%">
