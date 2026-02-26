@@ -135,8 +135,8 @@ export function MomentumCard() {
         <Card className="rounded-[32px] h-fit">
             <div className="flex items-center justify-between mb-6">
                 <div>
-                    <h3 className="text-lg font-bold text-primary">Relative Strength</h3>
-                    <p className="text-[12px] font-black text-secondary uppercase tracking-widest mt-1.5">
+                    <h3 className="text-lg font-bold text-primary whitespace-nowrap">Relative Strength</h3>
+                    <p className="text-[12px] font-black text-secondary uppercase tracking-widest mt-1.5 whitespace-nowrap">
                         252-Day • {sectorNames[sector] || 'General'} Benchmarks
                     </p>
                 </div>
