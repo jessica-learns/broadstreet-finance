@@ -141,7 +141,7 @@ export function MomentumCard() {
                     </p>
                 </div>
                 {!loading && totalCount > 0 && (
-                    <div className={`inline-block px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap mt-3 border-accent text-accent bg-accent/5 border`}>
+                    <div className={`inline-block px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap mt-3 border-signal text-signal bg-signal/5 border`}>
                         {outperformCount}/{totalCount} Outperforming
                     </div>
                 )}
