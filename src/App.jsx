@@ -32,21 +32,21 @@ function App() {
               </div>
             </div>
 
-            {/* Main Content Section */}
+            {/* Main Content Section - Relative Strength + NVDA Deep Dive */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              <div className="lg:col-span-4 flex flex-col gap-8">
-                <ThemeLeaderboard />
-                <TopMovers />
+              <div className="lg:col-span-4">
+                <MomentumCard />
               </div>
               <div className="lg:col-span-8">
                 <FinancialTruthCard />
               </div>
             </div>
 
-            {/* Lower Section */}
+            {/* Bottom Section - Hardcoded / Placeholder Components */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              <div className="lg:col-span-4">
-                <MomentumCard />
+              <div className="lg:col-span-4 flex flex-col gap-8">
+                <ThemeLeaderboard />
+                <TopMovers />
               </div>
               <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <RiskRadar />

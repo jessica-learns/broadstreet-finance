@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Bell, User, ChevronDown } from 'lucide-react';
+import { Search, Bell, User } from 'lucide-react';
 import { NeumorphicButton } from './ui/Button';
 
 export function Header() {
