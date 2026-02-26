@@ -6,13 +6,13 @@ export function Header() {
     return (
         <div className="relative w-full z-10 mb-8">
             {/* Main Capsule */}
-            <div className="bg-surface rounded-full shadow-neumorph px-6 py-4 flex items-center justify-between">
+            <div className="bg-surface rounded-full shadow-neumorph px-8 py-5 flex items-center justify-between">
                 {/* Left: Profile/Brand */}
                 <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-full bg-accent shadow-neumorph-sm flex items-center justify-center text-white font-black">
                         B
                     </div>
-                    <span className="font-bold text-primary tracking-tight">BROADSTREET</span>
+                    <span className="font-bold text-lg text-primary tracking-tight">BROADSTREET</span>
                 </div>
 
                 {/* Center: Context/Search */}
@@ -28,7 +28,7 @@ export function Header() {
                         <input
                             type="text"
                             placeholder="Find Intelligence..."
-                            className="bg-transparent border-none outline-none w-full text-base font-medium text-white placeholder:text-white/40 caret-white"
+                            className="bg-transparent border-none outline-none w-full text-lg font-medium text-white placeholder:text-white/40 caret-white"
                         />
                         {/* Right Action Icon in Search */}
                         <div className="ml-2 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-colors">
@@ -44,8 +44,8 @@ export function Header() {
                     </NeumorphicButton>
                     <div className="flex items-center gap-3 pl-4 border-l border-slate-300">
                         <div className="text-right hidden sm:block">
-                            <div className="text-xs font-black text-primary">Jessica Croll</div>
-                            <div className="text-[14px] text-secondary font-bold uppercase tracking-wider">Portfolio Manager</div>
+                            <div className="text-sm font-black text-primary">Jessica Croll</div>
+                            <div className="text-xs text-secondary font-bold uppercase tracking-wider">Portfolio Manager</div>
                         </div>
                         <NeumorphicButton className="p-1 w-10 h-10 flex items-center justify-center font-normal">
                             <User size={20} />
