@@ -9,8 +9,8 @@ import { Loader2, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 
 // Benchmark display names and descriptions
 const BENCHMARK_INFO = {
-    SPY: { name: 'S&P 500', desc: 'Broad market' },
-    QQQ: { name: 'Nasdaq 100', desc: 'Large-cap tech' },
+    SPY: { name: 'S&P 500', desc: '' },
+    QQQ: { name: 'Nasdaq 100', desc: '' },
     SMH: { name: 'Semiconductors', desc: 'Chip sector' },
     PAVE: { name: 'Infrastructure', desc: 'US infra' },
     XBI: { name: 'Biotech', desc: 'SMID biotech' },
@@ -43,7 +43,7 @@ function RSRow({ benchmark, data }) {
             <div className="flex items-center gap-2">
                 <SignalIcon signal={signal} />
                 <div>
-                    <span className="text-sm font-bold text-primary">{info.name}</span>
+                    <span className="text-sm font-bold text-primary whitespace-nowrap">{info.name}</span>
                     <span className="text-[14px] text-secondary ml-3 hidden md:inline">{info.desc}</span>
                 </div>
             </div>
