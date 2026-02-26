@@ -132,7 +132,7 @@ export function MomentumCard() {
     };
 
     return (
-        <Card className="rounded-[32px] h-fit">
+        <Card className="rounded-[32px] h-fit p-7">
             <div className="mb-6">
                 <div>
                     <h3 className="text-lg font-bold text-primary whitespace-nowrap">Relative Strength</h3>
