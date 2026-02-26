@@ -38,7 +38,7 @@ export function TickerInput() {
                 </div>
 
                 {/* Input Form */}
-                <form onSubmit={handleSubmit} className="space-y-3 mb-5">
+                <form onSubmit={handleSubmit} className="space-y-3 mb-10">
                     <input
                         type="text"
                         value={input}
@@ -77,7 +77,7 @@ export function TickerInput() {
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
                                 <span className="text-sm text-secondary">Rev Growth</span>
-                                <span className="text-base font-bold text-primary">{latestQ.growth > 0 ? '+' : ''}{(latestQ.growth * 100).toFixed(1)}%</span>
+                                <span className="text-base font-bold text-primary">{(latestQ.growth * 100).toFixed(1)}%</span>
                             </div>
                             <div className="flex justify-between items-center">
                                 <span className="text-sm text-secondary">Gross</span>
