@@ -4,17 +4,13 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { Card } from './ui/Card';
 import { useDashboard } from '../context/DashboardContext';
-import { getRelativeStrength, formatRSReturn, getRSSignal, getBenchmarksForSector } from '../services/relativeStrength';
+import { getRelativeStrength, formatRSReturn, getRSSignal } from '../services/relativeStrength';
 import { Loader2, TrendingUp, TrendingDown, Minus } from 'lucide-react';
 
 // Benchmark display names and descriptions
 const BENCHMARK_INFO = {
     SPY: { name: 'S&P 500', desc: '' },
     QQQ: { name: 'Nasdaq 100', desc: '' },
-    SMH: { name: 'Semiconductors', desc: 'Chip sector' },
-    PAVE: { name: 'Infrastructure', desc: 'US infra' },
-    XBI: { name: 'Biotech', desc: 'SMID biotech' },
-    SETM: { name: 'Metals & Mining', desc: 'Active miners' },
 };
 
 function SignalIcon({ signal }) {
@@ -75,9 +71,7 @@ export function MomentumCard() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Get sector-specific benchmarks based on stockData
-    const sector = stockData?.sector || 'general';
-    const benchmarks = useMemo(() => getBenchmarksForSector(sector), [sector]);
+    const benchmarks = ['SPY', 'QQQ'];
 
     useEffect(() => {
         if (!selectedTicker) return;
@@ -132,12 +126,12 @@ export function MomentumCard() {
     };
 
     return (
-        <Card className="rounded-[32px] h-fit p-7">
+        <Card className="rounded-[32px] h-fit p-7 overflow-hidden">
             <div className="mb-6">
                 <div>
                     <h3 className="text-lg font-bold text-primary whitespace-nowrap">Relative Strength</h3>
                     <p className="text-[14px] font-black text-secondary uppercase tracking-widest mt-1.5 whitespace-nowrap">
-                        252-Day • {sectorNames[sector] || 'General'} Benchmarks
+                        252-Day vs. Benchmarks
                     </p>
                 </div>
                 {!loading && totalCount > 0 && (
