@@ -150,15 +150,15 @@ export function GrowthAnalysis() {
                     <h3 className="text-sm font-black text-primary uppercase tracking-widest">Margin Levels</h3>
                     <div className="flex items-center justify-center gap-4 mt-1">
                         <div className="flex items-center gap-1">
-                            <div className="w-3 h-0.5 bg-signal"></div>
+                            <div className="w-3 h-0.5" style={{ backgroundColor: 'rgba(14, 165, 233, 0.4)' }}></div>
                             <span className="text-[14px] text-secondary">Gross</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <div className="w-3 h-0.5 bg-secondary"></div>
+                            <div className="w-3 h-0.5" style={{ backgroundColor: 'rgba(14, 165, 233, 0.7)' }}></div>
                             <span className="text-[14px] text-secondary">Op</span>
                         </div>
                         <div className="flex items-center gap-1">
-                            <div className="w-3 h-0.5 bg-primary"></div>
+                            <div className="w-3 h-0.5 bg-signal"></div>
                             <span className="text-[14px] text-secondary">Net</span>
                         </div>
                     </div>
@@ -170,9 +170,9 @@ export function GrowthAnalysis() {
                             <XAxis dataKey="period" tick={<CustomXAxisTick />} axisLine={{ stroke: '#64748B', strokeOpacity: 0.3 }} tickLine={false} height={45} interval={0} />
                             <YAxis tick={chartAxisStyle} axisLine={false} tickLine={false} tickFormatter={(v) => `${(v * 100).toFixed(1)}%`} domain={['auto', 'auto']} tickCount={4} />
                             <Tooltip content={<ChartTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
-                            <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
-                            <Line type="monotone" dataKey="opMargin" name="Operating" stroke="#64748B" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
-                            <Line type="monotone" dataKey="netMargin" name="Net" stroke="#0f172a" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
+                            <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="rgba(14, 165, 233, 0.4)" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
+                            <Line type="monotone" dataKey="opMargin" name="Operating" stroke="rgba(14, 165, 233, 0.7)" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
+                            <Line type="monotone" dataKey="netMargin" name="Net" stroke="#0ea5e9" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
