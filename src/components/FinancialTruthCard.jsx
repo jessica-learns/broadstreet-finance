@@ -196,9 +196,9 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                         {/* Dynamic Verdict Text */}
                         <div className="flex items-center gap-3">
                             {data.evidence.sentiment.includes("Fixing") ? (
-                                <CheckCircle2 size={16} className="text-primary" />
+                                <CheckCircle2 size={18} className="text-primary" />
                             ) : data.evidence.sentiment.includes("Low Conviction") ? (
-                                <AlertTriangle size={16} className="text-accent" />
+                                <AlertTriangle size={18} className="text-accent" />
                             ) : (
                                 <div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
                             )}

@@ -24,7 +24,7 @@ export function Header() {
                     {/* Floating Search Bar - Navy Pill */}
                     <div className="relative bg-[#0f172a] shadow-xl shadow-slate-900/10 rounded-full px-6 py-4 flex items-center text-white ring-1 ring-white/10 input-ring transition-all duration-300 group-hover:scale-[1.01] overflow-hidden">
 
-                        <Search size={18} className="mr-3 text-white/50" />
+                        <Search size={20} className="mr-3 text-white/50" />
                         <input
                             type="text"
                             placeholder="Find Intelligence..."
@@ -40,7 +40,7 @@ export function Header() {
                 {/* Right: Actions */}
                 <div className="flex items-center gap-4">
                     <NeumorphicButton className="p-3 w-10 h-10 flex items-center justify-center font-normal">
-                        <Bell size={18} />
+                        <Bell size={20} />
                     </NeumorphicButton>
                     <div className="flex items-center gap-3 pl-4 border-l border-slate-300">
                         <div className="text-right hidden sm:block">
@@ -48,7 +48,7 @@ export function Header() {
                             <div className="text-[12px] text-secondary font-bold uppercase tracking-wider">Portfolio Manager</div>
                         </div>
                         <NeumorphicButton className="p-1 w-10 h-10 flex items-center justify-center font-normal">
-                            <User size={18} />
+                            <User size={20} />
                         </NeumorphicButton>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ export function RiskRadar() {
         <Card className="rounded-[32px] mb-6 h-fit">
             <div className="flex items-center space-x-3 mb-6">
                 <div className="p-2 bg-surface shadow-neumorph-sm rounded-full text-primary">
-                    <ShieldAlert size={20} />
+                    <ShieldAlert size={22} />
                 </div>
                 <h3 className="text-lg font-bold text-primary">Break Risk Radar</h3>
             </div>

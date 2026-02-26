@@ -14,7 +14,7 @@ export function TopMovers() {
         <Card className="rounded-[32px] h-fit">
             <div className="flex items-center space-x-3 mb-6">
                 <div className="p-2 bg-surface shadow-neumorph-sm rounded-full text-signal">
-                    <TrendingUp size={20} />
+                    <TrendingUp size={22} />
                 </div>
                 <h3 className="text-lg font-bold text-primary">Top Movers (24h)</h3>
             </div>

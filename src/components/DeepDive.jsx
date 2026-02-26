@@ -34,10 +34,10 @@ export function DeepDive() {
                 </div>
                 <div className="flex gap-3">
                     <NeumorphicButton className="p-3">
-                        <Share2 size={18} />
+                        <Share2 size={20} />
                     </NeumorphicButton>
                     <NeumorphicButton className="p-3">
-                        <Download size={18} />
+                        <Download size={20} />
                     </NeumorphicButton>
                 </div>
             </div>
@@ -59,7 +59,7 @@ export function DeepDive() {
                         disabled={loading}
                         className="flex items-center gap-2 px-3 py-1.5 text-xs hover:scale-105 active:scale-95 transition-transform duration-200"
                     >
-                        <Sparkles size={16} className={loading ? "animate-spin" : ""} />
+                        <Sparkles size={18} className={loading ? "animate-spin" : ""} />
                         <span>{loading ? "Deep Diving..." : "Generate Report"}</span>
                     </NeumorphicButton>
                 </div>
@@ -78,7 +78,7 @@ export function DeepDive() {
 
                     <div className="flex items-center gap-2 text-accent font-bold text-sm group-hover/report:underline">
                         <span>View Sources (4 Notebooks)</span>
-                        <ArrowRight size={16} />
+                        <ArrowRight size={18} />
                     </div>
                 </div>
             </div>
