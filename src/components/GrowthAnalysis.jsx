@@ -172,7 +172,7 @@ export function GrowthAnalysis() {
                             <Tooltip content={<ChartTooltip formatter={(v) => `${(v * 100).toFixed(1)}%`} />} cursor={{ stroke: '#64748B', strokeOpacity: 0.2 }} />
                             <Line type="monotone" dataKey="grossMargin" name="Gross" stroke="#0ea5e9" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
                             <Line type="monotone" dataKey="opMargin" name="Operating" stroke="#64748B" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
-                            <Line type="monotone" dataKey="netMargin" name="Net" stroke="#ff5212" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
+                            <Line type="monotone" dataKey="netMargin" name="Net" stroke="#0f172a" strokeWidth={2} dot={false} activeDot={{ r: 3 }} />
                         </LineChart>
                     </ResponsiveContainer>
                 </div>
