@@ -64,7 +64,7 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                                     </div>
                                     <div className="flex flex-col items-center">
                                         <span className="text-xs font-semibold text-primary">{monthStr}</span>
-                                        <span className="text-[13px] text-secondary">'{yearStr}</span>
+                                        <span className="text-[15px] text-secondary">'{yearStr}</span>
                                     </div>
                                 </div>
                             );
@@ -79,31 +79,31 @@ export function FinancialTruthCard({ pricingPower = 1.2, revenueAccel = 0.8 }) {
                     <div className="bg-white/40 backdrop-blur-xl border border-white/60 rounded-[24px] p-5 flex items-center justify-between shadow-sm ring-1 ring-black/5">
                         <div className="flex items-center gap-10">
                             <div className="flex flex-col">
-                                <span className="text-[12px] font-black text-secondary/60 uppercase tracking-[0.15em] mb-1.5">Pricing Power</span>
+                                <span className="text-[14px] font-black text-secondary/60 uppercase tracking-[0.15em] mb-1.5">Pricing Power</span>
                                 <div className="flex items-baseline gap-1.5">
                                     <span className="text-2xl font-black tracking-tighter text-primary">
                                         {pricingPower > 0 ? '+' : ''}{pricingPower}%
                                     </span>
-                                    <span className="text-[12px] font-bold text-secondary/60 uppercase tracking-tighter opacity-70">6m Delta</span>
+                                    <span className="text-[14px] font-bold text-secondary/60 uppercase tracking-tighter opacity-70">6m Delta</span>
                                 </div>
                             </div>
                             <div className="w-px h-10 bg-slate-200/60" />
                             <div className="flex flex-col">
-                                <span className="text-[12px] font-black text-secondary/60 uppercase tracking-[0.15em] mb-1.5">Rev Velocity</span>
+                                <span className="text-[14px] font-black text-secondary/60 uppercase tracking-[0.15em] mb-1.5">Rev Velocity</span>
                                 <div className="flex items-baseline gap-1.5">
                                     <span className="text-2xl font-black tracking-tighter text-primary">
                                         {revenueAccel > 0 ? '+' : ''}{revenueAccel}%
                                     </span>
-                                    <span className="text-[12px] font-bold text-secondary/60 uppercase tracking-tighter opacity-70">Acceleration</span>
+                                    <span className="text-[14px] font-bold text-secondary/60 uppercase tracking-tighter opacity-70">Acceleration</span>
                                 </div>
                             </div>
                         </div>
                         <div className="hidden md:block">
                             <div className="flex flex-col items-end">
-                                <Badge variant="outline" className="text-[12px] border-slate-300 text-secondary bg-white/60 py-0.5 px-2.5 font-black uppercase tracking-widest rounded-lg">
+                                <Badge variant="outline" className="text-[14px] border-slate-300 text-secondary bg-white/60 py-0.5 px-2.5 font-black uppercase tracking-widest rounded-lg">
                                     Hedge Fund Signals
                                 </Badge>
-                                <span className="text-[12px] font-bold text-secondary/60 uppercase mt-1 tracking-tighter">Proprietary Alpha Stream</span>
+                                <span className="text-[14px] font-bold text-secondary/60 uppercase mt-1 tracking-tighter">Proprietary Alpha Stream</span>
                             </div>
                         </div>
                     </div>

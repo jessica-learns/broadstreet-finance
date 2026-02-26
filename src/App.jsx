@@ -21,13 +21,13 @@ function App() {
             {/* Main Dashboard: Two Column Layout */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
               {/* Left Column: Ticker Input + Relative Strength */}
-              <div className="lg:col-span-3 lg:sticky lg:top-6 flex flex-col gap-6">
+              <div className="lg:col-span-4 lg:sticky lg:top-6 flex flex-col gap-6">
                 <TickerInput />
                 <MomentumCard />
               </div>
 
               {/* Right Column: Charts + Financial Truth */}
-              <div className="lg:col-span-9 flex flex-col gap-6">
+              <div className="lg:col-span-8 flex flex-col gap-6">
                 {/* 2x2 Chart Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <GrowthAnalysis />

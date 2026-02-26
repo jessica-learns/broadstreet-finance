@@ -48,10 +48,10 @@ const CustomXAxisTick = ({ x, y, payload }) => {
 
     return (
         <g transform={`translate(${x},${y})`}>
-            <text x={0} y={0} dy={16} textAnchor="middle" fill="#64748B" fontSize={12} fontWeight={600}>
+            <text x={0} y={0} dy={16} textAnchor="middle" fill="#64748B" fontSize={14} fontWeight={600}>
                 {monthStr}
             </text>
-            <text x={0} y={0} dy={30} textAnchor="middle" fill="#64748B" fontSize={11} fontWeight={500}>
+            <text x={0} y={0} dy={30} textAnchor="middle" fill="#64748B" fontSize={13} fontWeight={500}>
                 {yearStr}
             </text>
         </g>
@@ -95,7 +95,7 @@ export function GrowthAnalysis() {
     }
 
     const { chartData, marginDeltas, revenueGrowthData, revenueAbsoluteData } = stockData;
-    const chartAxisStyle = { fontSize: 14, fill: '#64748B', fontWeight: 600 };
+    const chartAxisStyle = { fontSize: 16, fill: '#64748B', fontWeight: 600 };
 
     return (
         <>
@@ -151,15 +151,15 @@ export function GrowthAnalysis() {
                     <div className="flex items-center justify-center gap-4 mt-1">
                         <div className="flex items-center gap-1">
                             <div className="w-3 h-0.5 bg-signal"></div>
-                            <span className="text-[12px] text-secondary">Gross</span>
+                            <span className="text-[14px] text-secondary">Gross</span>
                         </div>
                         <div className="flex items-center gap-1">
                             <div className="w-3 h-0.5 bg-secondary"></div>
-                            <span className="text-[12px] text-secondary">Op</span>
+                            <span className="text-[14px] text-secondary">Op</span>
                         </div>
                         <div className="flex items-center gap-1">
                             <div className="w-3 h-0.5 bg-primary"></div>
-                            <span className="text-[12px] text-secondary">Net</span>
+                            <span className="text-[14px] text-secondary">Net</span>
                         </div>
                     </div>
                 </div>

@@ -97,7 +97,7 @@ export function TickerInput() {
             </div>
 
             {/* SEC Attribution */}
-            <p className="text-[12px] text-secondary/50 text-center uppercase tracking-wider">
+            <p className="text-[14px] text-secondary/50 text-center uppercase tracking-wider">
                 SEC EDGAR Data
             </p>
         </Card>
