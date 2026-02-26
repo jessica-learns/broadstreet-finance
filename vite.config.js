@@ -13,7 +13,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api\/sec-files/, ''),
         configure: (proxy, _options) => {
           proxy.on('proxyReq', (proxyReq, _req, _res) => {
-            proxyReq.setHeader('User-Agent', 'BroadstreetStudentApp contact@broadstreet.com');
+            proxyReq.setHeader('User-Agent', 'BroadstreetFinance Jessica_Croll@kenan-flagler.unc.edu');
             proxyReq.setHeader('Accept-Encoding', 'gzip, deflate');
           });
         }
@@ -25,7 +25,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api\/sec/, ''),
         configure: (proxy, _options) => {
           proxy.on('proxyReq', (proxyReq, _req, _res) => {
-            proxyReq.setHeader('User-Agent', 'BroadstreetStudentApp contact@broadstreet.com');
+            proxyReq.setHeader('User-Agent', 'BroadstreetFinance Jessica_Croll@kenan-flagler.unc.edu');
             proxyReq.setHeader('Accept-Encoding', 'gzip, deflate');
           });
         }
