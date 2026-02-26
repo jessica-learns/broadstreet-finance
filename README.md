@@ -10,13 +10,23 @@ A real-time equity analysis dashboard that pulls live financial data from the SE
 
 ## Purpose
 
-Broadstreet is built for an equity portfolio manager running a concentrated, theme-driven sleeve. Rather than tracking broad benchmarks, it focuses on identifying structurally constrained opportunities — semiconductors, energy infrastructure, biotech — where timing is uncertain but payoff asymmetry is large.
+Most financial tools are built for professionals. They assume fluency with complex dashboards, dense tables, and industry jargon. Broadstreet takes the opposite approach: it is designed for **older adults and non-specialist investors** who want to understand a stock's health without navigating the complexity of Bloomberg, Morningstar, or even Yahoo Finance.
 
-The dashboard answers three questions in real-time:
+When a user enters any U.S. public company ticker, the app pulls live data from two free, publicly available sources — SEC EDGAR (quarterly financial filings, provided at no cost by the U.S. government) and the Twelve Data free tier (daily market prices, 800 API credits/day at no charge) — and distills them into three straightforward questions:
 
-1. **Is the company growing?** Quarterly revenue trajectory, growth rates, and margin structure pulled directly from SEC filings.
-2. **Is the stock outperforming its peers?** 252-day relative strength versus sector-specific benchmarks (S&P 500, Nasdaq, and sector ETFs).
-3. **Are there supply-chain constraints or capex signals?** Keyword scanning of 10-K filings for bottleneck indicators, combined with capex intensity analysis.
+1. **Is revenue going up or down?** Six quarters of revenue shown as a simple bar chart with growth rates as colored badges. No spreadsheet required.
+2. **Are margins healthy or shrinking?** Gross, operating, and net margins plotted over time, with quarter-over-quarter changes so the user can see if the company is keeping more or less of each dollar earned.
+3. **Is the stock beating the market?** One-year relative strength versus the S&P 500 and sector-specific ETFs. A simple outperforming/underperforming count replaces technical jargon.
+
+The interface uses large fonts, high-contrast text, generous spacing, and a clean neumorphic design — intentionally optimized for readability and ease of use on screens of all sizes. All data is sourced exclusively from free, publicly available APIs. No paid data subscriptions are used.
+
+## Target Audience
+
+**Who:** Retired self-directed investors managing their own portfolios, parents and grandparents checking on their holdings, and older adults new to investing. These users are financially aware but do not specialize in technical analysis or sector-specific terminology.
+
+**How they use it:** Type a ticker symbol. Within seconds, see whether revenue is growing, whether the company's margins are stable, and whether the stock is outperforming the broader market — all on a single screen with no tabs, no menus, and no configuration.
+
+**Why Broadstreet over alternatives:** Professional terminals (Bloomberg, FactSet) cost $20,000+ per year and require training. Free tools like Yahoo Finance and Google Finance present dense tables and small text that are difficult to parse for users with low vision or limited technical comfort. Broadstreet is purpose-built for accessibility: large type, clean visuals, and only the three data points that matter most — revenue trajectory, margin health, and market-relative performance.
 
 ---
 
@@ -150,7 +160,7 @@ broadstreet-finance/
 ## Data Sources & Compliance
 
 - **SEC EDGAR:** Public API, no key required. Rate-limited per SEC guidelines. User-Agent header identifies the app per SEC policy.
-- **Twelve Data:** Free tier (800 credits/day). API key stored as a Vercel environment variable, never exposed to the client.
+- **Twelve Data:** Free tier only (800 API credits/day, no paid subscription). API key stored as a Vercel environment variable, never exposed to the client.
 - No proprietary, confidential, or NDA-protected data is used.
 
 ---
