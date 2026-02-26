@@ -10,6 +10,7 @@ import { RiskRadar } from './components/RiskRadar';
 import { EvidenceFeed } from './components/EvidenceFeed';
 import { TickerInput } from './components/TickerInput';
 import { MomentumCard } from './components/MomentumCard';
+import { Disclaimer } from './components/Disclaimer';
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
               </div>
             </div>
           </div>
+          <Disclaimer />
         </div>
       </div>
     </DashboardProvider>
