@@ -39,17 +39,17 @@ function RSRow({ benchmark, data }) {
     const isAboveMA = data?.rsVsMA === 'above';
 
     return (
-        <div className="flex items-center justify-between py-2 border-b border-primary/5 last:border-0">
+        <div className="flex items-center justify-between py-3.5 px-2 border-b border-primary/8 last:border-0">
             <div className="flex items-center gap-2">
                 <SignalIcon signal={signal} />
                 <div>
                     <span className="text-sm font-bold text-primary">{info.name}</span>
-                    <span className="text-[12px] text-secondary ml-2">{info.desc}</span>
+                    <span className="text-[12px] text-secondary ml-3 hidden md:inline">{info.desc}</span>
                 </div>
             </div>
             <div className="flex items-center gap-3">
                 {data?.rsVsMA && (
-                    <span className={`text-[12px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded ${isAboveMA
+                    <span className={`text-[12px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded whitespace-nowrap ${isAboveMA
                         ? 'bg-signal/10 text-signal'
                         : 'bg-secondary/10 text-secondary'
                         }`}>
@@ -133,15 +133,15 @@ export function MomentumCard() {
 
     return (
         <Card className="rounded-[32px] h-fit">
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-6">
                 <div>
                     <h3 className="text-lg font-bold text-primary">Relative Strength</h3>
-                    <p className="text-[12px] font-black text-secondary uppercase tracking-widest mt-0.5">
+                    <p className="text-[12px] font-black text-secondary uppercase tracking-widest mt-1.5">
                         252-Day • {sectorNames[sector] || 'General'} Benchmarks
                     </p>
                 </div>
                 {!loading && totalCount > 0 && (
-                    <div className={`px-3 py-1 rounded-full text-xs font-bold ${outperformCount >= Math.ceil(totalCount / 2)
+                    <div className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap ml-3 ${outperformCount >= Math.ceil(totalCount / 2)
                         ? 'bg-signal/10 text-signal border border-signal/20'
                         : 'bg-secondary/10 text-secondary border border-secondary/20'
                         }`}>
@@ -178,7 +178,7 @@ export function MomentumCard() {
             )}
 
             {rsData?.asOfDate && (
-                <div className="mt-4 pt-3 border-t border-primary/5">
+                <div className="mt-6 pt-4 border-t border-primary/5">
                     <p className="text-[12px] text-secondary/50 text-center uppercase tracking-wider">
                         As of {rsData.asOfDate} • Twelve Data
                     </p>
